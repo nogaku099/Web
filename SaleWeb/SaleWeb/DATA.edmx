@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SaleWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DM_CHITIETDONHANG">
+          <Key>
+            <PropertyRef Name="MACHITIETDONHANG" />
+          </Key>
+          <Property Name="MADONHANG" Type="nvarchar" MaxLength="100" />
+          <Property Name="MACHITIETDONHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" />
+          <Property Name="SOLUONG" Type="float" />
+          <Property Name="DONGIA" Type="float" />
+          <Property Name="THANHTIEN" Type="float" />
+        </EntityType>
+        <EntityType Name="DM_CHITIETKHUYENMAI">
+          <Key>
+            <PropertyRef Name="MACHITIETKHUYENMAI" />
+          </Key>
+          <Property Name="MACHITIETKHUYENMAI" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MAKHUYENMAI" Type="nvarchar" MaxLength="100" />
+          <Property Name="MANHOMSANPHAM" Type="nvarchar" MaxLength="100" />
+          <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" />
+          <Property Name="PHANTRAMGIAM" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DM_CHITIETSANPHAM">
+          <Key>
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SIZE" Type="nvarchar" MaxLength="100" />
+          <Property Name="MAU" Type="nvarchar" MaxLength="100" />
+          <Property Name="DUNGTICH" Type="nvarchar" MaxLength="100" />
+          <Property Name="DOITUONGSUDUNG" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DM_DONHANG">
+          <Key>
+            <PropertyRef Name="MADONHANG" />
+          </Key>
+          <Property Name="MADONHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NGAYLAP" Type="datetime" />
+          <Property Name="MAKHACHHANG" Type="nvarchar" MaxLength="100" />
+          <Property Name="MANGUOIXACNHAN" Type="nvarchar" MaxLength="100" />
+          <Property Name="TRANGTHAI" Type="int" />
+          <Property Name="TONGTIEN" Type="float" />
+          <Property Name="GIAMGIA" Type="float" />
+          <Property Name="MAKHUYENMAI" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DM_KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKHACHHANG" />
+          </Key>
+          <Property Name="MAKHACHHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TENKHACHHANG" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="100" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="100" />
+          <Property Name="GIOITINH" Type="bit" />
+          <Property Name="NGAYSINH" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DM_KHUYENMAI">
+          <Key>
+            <PropertyRef Name="MAKHUYENMAI" />
+          </Key>
+          <Property Name="MAKHUYENMAI" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TENKHUYENMAI" Type="nvarchar" MaxLength="100" />
+          <Property Name="CHITIETKHUYENMAI" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DM_NHOMSANPHAM">
+          <Key>
+            <PropertyRef Name="MANHOMSANPHAM" />
+          </Key>
+          <Property Name="MANHOMSANPHAM" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TENNHOMSANPHAM" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DM_SANPHAM">
+          <Key>
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TENSANPHAM" Type="nvarchar" MaxLength="100" />
+          <Property Name="MANHOM" Type="nvarchar" MaxLength="100" />
+          <Property Name="GIA1" Type="float" />
+          <Property Name="GIA2" Type="float" />
+          <Property Name="DONVI" Type="nvarchar" MaxLength="100" />
+          <Property Name="MACHITIETSANPHAM" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DM_TAIKHOAN">
+          <Key>
+            <PropertyRef Name="TENDANGNHAP" />
+          </Key>
+          <Property Name="TENDANGNHAP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MATKHAU" Type="nvarchar" MaxLength="100" />
+          <Property Name="CHUCVU" Type="nvarchar" MaxLength="100" />
+          <Property Name="MAKHACHHANG" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityContainer Name="SaleWebModelStoreContainer">
+          <EntitySet Name="DM_CHITIETDONHANG" EntityType="Self.DM_CHITIETDONHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_CHITIETKHUYENMAI" EntityType="Self.DM_CHITIETKHUYENMAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_CHITIETSANPHAM" EntityType="Self.DM_CHITIETSANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_DONHANG" EntityType="Self.DM_DONHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_KHACHHANG" EntityType="Self.DM_KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_KHUYENMAI" EntityType="Self.DM_KHUYENMAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_NHOMSANPHAM" EntityType="Self.DM_NHOMSANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_SANPHAM" EntityType="Self.DM_SANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_TAIKHOAN" EntityType="Self.DM_TAIKHOAN" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SaleWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DM_CHITIETDONHANG">
+          <Key>
+            <PropertyRef Name="MACHITIETDONHANG" />
+          </Key>
+          <Property Name="MADONHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MACHITIETDONHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MASANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SOLUONG" Type="Double" />
+          <Property Name="DONGIA" Type="Double" />
+          <Property Name="THANHTIEN" Type="Double" />
+        </EntityType>
+        <EntityType Name="DM_CHITIETKHUYENMAI">
+          <Key>
+            <PropertyRef Name="MACHITIETKHUYENMAI" />
+          </Key>
+          <Property Name="MACHITIETKHUYENMAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MAKHUYENMAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MANHOMSANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MASANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PHANTRAMGIAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_CHITIETSANPHAM">
+          <Key>
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="MASANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SIZE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DUNGTICH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DOITUONGSUDUNG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_DONHANG">
+          <Key>
+            <PropertyRef Name="MADONHANG" />
+          </Key>
+          <Property Name="MADONHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NGAYLAP" Type="DateTime" Precision="3" />
+          <Property Name="MAKHACHHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MANGUOIXACNHAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TRANGTHAI" Type="Int32" />
+          <Property Name="TONGTIEN" Type="Double" />
+          <Property Name="GIAMGIA" Type="Double" />
+          <Property Name="MAKHUYENMAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKHACHHANG" />
+          </Key>
+          <Property Name="MAKHACHHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TENKHACHHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GIOITINH" Type="Boolean" />
+          <Property Name="NGAYSINH" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DM_KHUYENMAI">
+          <Key>
+            <PropertyRef Name="MAKHUYENMAI" />
+          </Key>
+          <Property Name="MAKHUYENMAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TENKHUYENMAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CHITIETKHUYENMAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_NHOMSANPHAM">
+          <Key>
+            <PropertyRef Name="MANHOMSANPHAM" />
+          </Key>
+          <Property Name="MANHOMSANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TENNHOMSANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_SANPHAM">
+          <Key>
+            <PropertyRef Name="MASANPHAM" />
+          </Key>
+          <Property Name="MASANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TENSANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MANHOM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GIA1" Type="Double" />
+          <Property Name="GIA2" Type="Double" />
+          <Property Name="DONVI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MACHITIETSANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_TAIKHOAN">
+          <Key>
+            <PropertyRef Name="TENDANGNHAP" />
+          </Key>
+          <Property Name="TENDANGNHAP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MATKHAU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CHUCVU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAKHACHHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="SaleWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DM_CHITIETDONHANG" EntityType="Self.DM_CHITIETDONHANG" />
+          <EntitySet Name="DM_CHITIETKHUYENMAI" EntityType="Self.DM_CHITIETKHUYENMAI" />
+          <EntitySet Name="DM_CHITIETSANPHAM" EntityType="Self.DM_CHITIETSANPHAM" />
+          <EntitySet Name="DM_DONHANG" EntityType="Self.DM_DONHANG" />
+          <EntitySet Name="DM_KHACHHANG" EntityType="Self.DM_KHACHHANG" />
+          <EntitySet Name="DM_KHUYENMAI" EntityType="Self.DM_KHUYENMAI" />
+          <EntitySet Name="DM_NHOMSANPHAM" EntityType="Self.DM_NHOMSANPHAM" />
+          <EntitySet Name="DM_SANPHAM" EntityType="Self.DM_SANPHAM" />
+          <EntitySet Name="DM_TAIKHOAN" EntityType="Self.DM_TAIKHOAN" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SaleWebModelStoreContainer" CdmEntityContainer="SaleWebEntities">
+          <EntitySetMapping Name="DM_CHITIETDONHANG">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_CHITIETDONHANG">
+              <MappingFragment StoreEntitySet="DM_CHITIETDONHANG">
+                <ScalarProperty Name="MADONHANG" ColumnName="MADONHANG" />
+                <ScalarProperty Name="MACHITIETDONHANG" ColumnName="MACHITIETDONHANG" />
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+                <ScalarProperty Name="THANHTIEN" ColumnName="THANHTIEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_CHITIETKHUYENMAI">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_CHITIETKHUYENMAI">
+              <MappingFragment StoreEntitySet="DM_CHITIETKHUYENMAI">
+                <ScalarProperty Name="MACHITIETKHUYENMAI" ColumnName="MACHITIETKHUYENMAI" />
+                <ScalarProperty Name="MAKHUYENMAI" ColumnName="MAKHUYENMAI" />
+                <ScalarProperty Name="MANHOMSANPHAM" ColumnName="MANHOMSANPHAM" />
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="PHANTRAMGIAM" ColumnName="PHANTRAMGIAM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_CHITIETSANPHAM">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_CHITIETSANPHAM">
+              <MappingFragment StoreEntitySet="DM_CHITIETSANPHAM">
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="SIZE" ColumnName="SIZE" />
+                <ScalarProperty Name="MAU" ColumnName="MAU" />
+                <ScalarProperty Name="DUNGTICH" ColumnName="DUNGTICH" />
+                <ScalarProperty Name="DOITUONGSUDUNG" ColumnName="DOITUONGSUDUNG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_DONHANG">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_DONHANG">
+              <MappingFragment StoreEntitySet="DM_DONHANG">
+                <ScalarProperty Name="MADONHANG" ColumnName="MADONHANG" />
+                <ScalarProperty Name="NGAYLAP" ColumnName="NGAYLAP" />
+                <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
+                <ScalarProperty Name="MANGUOIXACNHAN" ColumnName="MANGUOIXACNHAN" />
+                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
+                <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
+                <ScalarProperty Name="GIAMGIA" ColumnName="GIAMGIA" />
+                <ScalarProperty Name="MAKHUYENMAI" ColumnName="MAKHUYENMAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_KHACHHANG">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_KHACHHANG">
+              <MappingFragment StoreEntitySet="DM_KHACHHANG">
+                <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
+                <ScalarProperty Name="TENKHACHHANG" ColumnName="TENKHACHHANG" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
+                <ScalarProperty Name="NGAYSINH" ColumnName="NGAYSINH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_KHUYENMAI">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_KHUYENMAI">
+              <MappingFragment StoreEntitySet="DM_KHUYENMAI">
+                <ScalarProperty Name="MAKHUYENMAI" ColumnName="MAKHUYENMAI" />
+                <ScalarProperty Name="TENKHUYENMAI" ColumnName="TENKHUYENMAI" />
+                <ScalarProperty Name="CHITIETKHUYENMAI" ColumnName="CHITIETKHUYENMAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_NHOMSANPHAM">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_NHOMSANPHAM">
+              <MappingFragment StoreEntitySet="DM_NHOMSANPHAM">
+                <ScalarProperty Name="MANHOMSANPHAM" ColumnName="MANHOMSANPHAM" />
+                <ScalarProperty Name="TENNHOMSANPHAM" ColumnName="TENNHOMSANPHAM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_SANPHAM">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_SANPHAM">
+              <MappingFragment StoreEntitySet="DM_SANPHAM">
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="TENSANPHAM" ColumnName="TENSANPHAM" />
+                <ScalarProperty Name="MANHOM" ColumnName="MANHOM" />
+                <ScalarProperty Name="GIA1" ColumnName="GIA1" />
+                <ScalarProperty Name="GIA2" ColumnName="GIA2" />
+                <ScalarProperty Name="DONVI" ColumnName="DONVI" />
+                <ScalarProperty Name="MACHITIETSANPHAM" ColumnName="MACHITIETSANPHAM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_TAIKHOAN">
+            <EntityTypeMapping TypeName="SaleWebModel.DM_TAIKHOAN">
+              <MappingFragment StoreEntitySet="DM_TAIKHOAN">
+                <ScalarProperty Name="TENDANGNHAP" ColumnName="TENDANGNHAP" />
+                <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
+                <ScalarProperty Name="CHUCVU" ColumnName="CHUCVU" />
+                <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
