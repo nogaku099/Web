@@ -7,15 +7,21 @@
     <title>HomePage</title>
     <link rel="stylesheet" href="../CSS/BOOTSTRAP/animate.css" />
     <link rel="stylesheet" href="../CSS/BOOTSTRAP/bootstrap.min.css" />
+    <link rel="stylesheet" href="../CSS/USER DEFINE/alert.css" />
 
-    <script src="../SCRIPT/BOOTSTRAP/accounting.js"></script>
-    <script src="../SCRIPT/BOOTSTRAP/bootstrap.min.js"></script>
-    <script src="../SCRIPT/BOOTSTRAP/jquery.min.js"></script>
+     <script src="../SCRIPT/BOOTSTRAP/jquery-1.12.4.js" type="text/javascript"></script>
+    <script src="../SCRIPT/BOOTSTRAP/jquery-ui.js" type="text/javascript"></script>
+    <script src="../SCRIPT/BOOTSTRAP/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../SCRIPT/BOOTSTRAP/bootstrap-dialog.js" type="text/javascript"></script>
+    <script src="../SCRIPT/USER DEFINE/HomePage.js" type="text/javascript"></script>
+    
+
 </head>
 <body>
     <form id="form1" runat="server">
     <div >
-        DEMO
+      
+
     </div>
     </form>
 </body>
