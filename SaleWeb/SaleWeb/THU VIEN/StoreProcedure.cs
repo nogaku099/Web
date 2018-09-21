@@ -36,6 +36,14 @@ namespace SaleWeb.THU_VIEN
             this.getConnect();
         }
 
+        public StoreProcedure(string server, string data, string sUser, string sPwd)
+        {
+            chuoi_ket_noi = chuoi_ket_noi.Replace("@Server", server);
+            chuoi_ket_noi = chuoi_ket_noi.Replace("@Database", data);
+            chuoi_ket_noi = chuoi_ket_noi.Replace("@uid", sUser);
+            chuoi_ket_noi = chuoi_ket_noi.Replace("@Password", sPwd);
+        }
+
         private void getConnect()
         {
             if (File.Exists(ten_file))

@@ -20,8 +20,7 @@
 <body>
     <form id="form1" runat="server">
     <div >
-      
-
+        <asp:Button runat="server" ID="btn" Text="a" OnClick="btn_Click" />
     </div>
     </form>
 </body>
