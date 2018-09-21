@@ -1,0 +1,20 @@
+﻿.toolbar {
+    background-color: lightcoral;
+    height:30px;
+}
+.coltoolbar{
+    margin-right:15px;
+}
+.coltoolbar9{
+    width:60%;
+}
+.searchbar{
+     background-color: aqua;
+     height:100px;
+}
+.btn-menu{
+    width:100px;
+    margin-left:20px;
+    color:black;
+    background-color:white;
+}

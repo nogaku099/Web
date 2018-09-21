@@ -103,23 +103,13 @@
   <ItemGroup>
     <Content Include="CSS\BOOTSTRAP\animate.css" />
     <Content Include="CSS\BOOTSTRAP\bootstrap.min.css" />
-    <Content Include="DATA.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DATA.Context.cs</LastGenOutput>
-    </Content>
     <Content Include="CSS\USER DEFINE\alert.css" />
+    <Content Include="CSS\USER DEFINE\HomePage.css" />
     <Content Include="FRONT-END\HomePage.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="DATA.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DATA.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="DATA.edmx.diagram">
-      <DependentUpon>DATA.edmx</DependentUpon>
-    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -143,16 +133,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DATA.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DATA.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DATA.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DATA.edmx</DependentUpon>
-    </Compile>
     <Compile Include="FRONT-END\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
