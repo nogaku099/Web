@@ -103,13 +103,45 @@
   <ItemGroup>
     <Content Include="CSS\BOOTSTRAP\animate.css" />
     <Content Include="CSS\BOOTSTRAP\bootstrap.min.css" />
-    <Content Include="CSS\USER DEFINE\alert.css" />
-    <Content Include="CSS\USER DEFINE\HomePage.css" />
-    <Content Include="FRONT-END\HomePage.aspx" />
+    <Content Include="CSS\BOOTSTRAP\font-awesome.min.css" />
+    <Content Include="CSS\USERDEFINE\Alert.css" />
+    <Content Include="CSS\USERDEFINE\HomePage.css" />
+    <Content Include="DB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB.edmx</DependentUpon>
+      <LastGenOutput>DB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DB.edmx</DependentUpon>
+      <LastGenOutput>DB.cs</LastGenOutput>
+    </Content>
+    <Content Include="CSS\fonts\fontawesome-webfont.svg" />
+    <Content Include="PAGES\HomePage.aspx" />
+    <Content Include="IMAGES\cart.png" />
+    <Content Include="IMAGES\icons8-about-50.png" />
+    <Content Include="IMAGES\icons8-customer-32.png" />
+    <Content Include="IMAGES\icons8-query-50.png" />
+    <Content Include="IMAGES\logo.png" />
+    <Content Include="IMAGES\product.jpg" />
+    <Content Include="IMAGES\quangcao.gif" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="DB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DB.edmx.diagram">
+      <DependentUpon>DB.edmx</DependentUpon>
+    </Content>
+    <Content Include="CSS\fonts\fontawesome-webfont.eot" />
+    <Content Include="CSS\fonts\fontawesome-webfont.ttf" />
+    <Content Include="CSS\fonts\fontawesome-webfont.woff" />
+    <Content Include="CSS\fonts\fontawesome-webfont.woff2" />
+    <Content Include="CSS\fonts\FontAwesome.otf" />
+    <Content Include="vssver2.scc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -119,8 +151,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="scripts\ai.0.22.9-build00167.js" />
-    <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="SCRIPT\scripts\ai.0.22.9-build00167.js" />
+    <Content Include="SCRIPT\scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="SCRIPT\BOOTSTRAP\bootstrap-dialog.js" />
     <Content Include="SCRIPT\BOOTSTRAP\bootstrap.min.js" />
     <Content Include="SCRIPT\BOOTSTRAP\jquery-1.12.4.js" />
@@ -128,16 +160,65 @@
     <Content Include="SCRIPT\BOOTSTRAP\jquery-ui.js" />
     <Content Include="SCRIPT\BOOTSTRAP\jquery.mobile-1.4.5.min.js" />
     <Content Include="SCRIPT\BOOTSTRAP\modernizr-2.8.3.min.js" />
-    <Content Include="SCRIPT\USER DEFINE\bootstrap.min.js" />
-    <Content Include="SCRIPT\USER DEFINE\HomePage.js" />
-    <Content Include="Web.config" />
+    <Content Include="SCRIPT\USERDEFINE\HomePage.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FRONT-END\HomePage.aspx.cs">
+    <Compile Include="DB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DM_DONHANG.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_DONHANG_CHITIET.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_DONHANG_HINHTHUCTHANHTOAN.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_DONHANG_TRANGTHAI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_KHACHHANG.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_KM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_KM_CT.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_KM_HINHTHUC.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_SANPHAM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_SANPHAM_NHOM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_TAIKHOAN.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAGES\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FRONT-END\HomePage.aspx.designer.cs">
+    <Compile Include="PAGES\HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -148,7 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BACK-END\" />
     <Folder Include="MODELS\" />
   </ItemGroup>
   <ItemGroup>

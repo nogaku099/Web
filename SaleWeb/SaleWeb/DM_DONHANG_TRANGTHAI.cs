@@ -12,14 +12,9 @@ namespace SaleWeb
     using System;
     using System.Collections.Generic;
     
-    public partial class DM_KHACHHANG
+    public partial class DM_DONHANG_TRANGTHAI
     {
-        public string MAKHACHHANG { get; set; }
-        public string TENKHACHHANG { get; set; }
-        public string SODIENTHOAI { get; set; }
-        public Nullable<bool> GIOITINH { get; set; }
-        public Nullable<System.DateTime> NGAYSINH { get; set; }
-        public string EMAIL { get; set; }
-        public string TENDANGNHAP { get; set; }
+        public string MATRANGTHAI { get; set; }
+        public string TENTRANGTHAI { get; set; }
     }
 }

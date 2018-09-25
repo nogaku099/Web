@@ -15,11 +15,7 @@ namespace SaleWeb
     public partial class DM_SANPHAM
     {
         public string MASANPHAM { get; set; }
-        public string TENSANPHAM { get; set; }
         public string MANHOM { get; set; }
-        public Nullable<double> GIA1 { get; set; }
-        public Nullable<double> GIA2 { get; set; }
-        public string DONVI { get; set; }
-        public string MACHITIETSANPHAM { get; set; }
+        public string TENSANPHAM { get; set; }
     }
 }

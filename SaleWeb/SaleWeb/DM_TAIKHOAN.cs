@@ -17,6 +17,5 @@ namespace SaleWeb
         public string TENDANGNHAP { get; set; }
         public string MATKHAU { get; set; }
         public string CHUCVU { get; set; }
-        public string MAKHACHHANG { get; set; }
     }
 }
