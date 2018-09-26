@@ -1,0 +1,53 @@
+﻿body {
+    background-color:whitesmoke;
+}
+
+.backgroundRow {
+    background-color: white;
+    border-radius: 5px 5px;
+    height: 30px;
+    text-align: center;
+    margin: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+   
+    
+}
+
+.backgroundRowSanPham {
+    background-color: white;
+    border-radius: 5px 5px;
+    height: 50px;
+    text-align: center;
+    margin: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+@media only screen and (max-width: 991px) {
+    .backgroundRowSanPham {
+        background-color: white;
+        border-radius: 5px 5px;
+        height: 50px;
+        text-align: center;
+        font-size: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+   
+    }
+
+    .backgroundRow {
+        background-color: white;
+        border-radius: 5px 5px;
+        height: 30px;
+        text-align: center;
+        font-size:8px;
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+    }
+    
+}
