@@ -105,6 +105,7 @@
     <Content Include="CSS\BOOTSTRAP\bootstrap.min.css" />
     <Content Include="CSS\BOOTSTRAP\font-awesome.min.css" />
     <Content Include="CSS\USERDEFINE\Alert.css" />
+    <Content Include="CSS\USERDEFINE\CartPage.css" />
     <Content Include="CSS\USERDEFINE\HomePage.css" />
     <Content Include="DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -142,6 +143,7 @@
     <Content Include="CSS\fonts\fontawesome-webfont.woff" />
     <Content Include="CSS\fonts\fontawesome-webfont.woff2" />
     <Content Include="CSS\fonts\FontAwesome.otf" />
+    <Content Include="SCRIPT\USERDEFINE\CartPage.js" />
     <Content Include="vssver2.scc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

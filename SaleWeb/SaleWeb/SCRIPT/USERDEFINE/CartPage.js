@@ -42,7 +42,7 @@
 
         lstsp += "<br />";
         //for hien thi san pham
-
+        lstsp += "<div style='overflow-y:scroll;height:400px' >";
         for (var i = 0; i < 7; i++) {
             
             lstsp += "<div class='row backgroundRowSanPham'>";
@@ -94,8 +94,10 @@
             lstsp += "</div>";
             lstsp += "</div>";
             lstsp += "<hr style='margin-top:2px;margin-bottom:2px;background-color:#e00d0df2;border-color:#e00d0df2;margin-left:20px;margin-right:20px;'/>"
-        }
 
+            
+        }
+        lstsp += "</div>";
         document.getElementById('hienGioHang').innerHTML = lstsp;
 
     }
