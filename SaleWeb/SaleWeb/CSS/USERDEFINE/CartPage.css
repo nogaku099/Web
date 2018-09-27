@@ -3,11 +3,13 @@
 }
 
 .backgroundRow {
-    background-color: white;
+    background-color: #960b0b;
+    color:white;
     border-radius: 5px 5px;
-    height: 30px;
+    height: 60px;
     text-align: center;
-    margin: 20px;
+     margin-left: 20px;
+    margin-right: 20px;
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -18,9 +20,12 @@
 .backgroundRowSanPham {
     background-color: white;
     border-radius: 5px 5px;
-    height: 50px;
+    height: 60px;
     text-align: center;
-    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+   
+    margin-bottom: 0px;
     display: flex;
     justify-content: center; 
     align-items: center; 

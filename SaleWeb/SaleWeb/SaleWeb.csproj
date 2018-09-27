@@ -117,6 +117,7 @@
       <LastGenOutput>DB.cs</LastGenOutput>
     </Content>
     <Content Include="CSS\fonts\fontawesome-webfont.svg" />
+    <Content Include="PAGES\CartPage.aspx" />
     <Content Include="PAGES\HomePage.aspx" />
     <Content Include="IMAGES\cart.png" />
     <Content Include="IMAGES\icons8-about-50.png" />
@@ -213,6 +214,13 @@
     </Compile>
     <Compile Include="DM_TAIKHOAN.cs">
       <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAGES\CartPage.aspx.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PAGES\CartPage.aspx.designer.cs">
+      <DependentUpon>CartPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="PAGES\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
