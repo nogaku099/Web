@@ -104,4 +104,9 @@ function fShowDangNhap() {
     }
 }
 
+function fshowgiohang() {
+    document.getElementById('hdfMuaHang').value = "1";
+    window.location.replace("CartPage.aspx");
+}
+
 

@@ -162,7 +162,8 @@
                 </div>
 
                 <div class="col-xs-3" style="text-align: center; margin-top: 10px;">
-                    <img width="30px" height="30px" src="../Images/cart.png" />
+                    <img runat="server" onclick="fshowgiohang();" style="width:30px;height:30px;" src="../Images/cart.png"  />
+                   
                 </div>
             </div>
 
@@ -299,6 +300,7 @@
 
     <!-- HiddenField -->
         <asp:HiddenField id="hdfDangNhap" runat="server" ClientIDMode="Static" Value="0"/>
+         <asp:HiddenField id="hdfMuaHang" runat="server" ClientIDMode="Static" Value="0"/>
     </form>
 </body>
 </html>

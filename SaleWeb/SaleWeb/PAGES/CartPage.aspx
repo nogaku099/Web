@@ -17,11 +17,13 @@
     <script src="../SCRIPT/BOOTSTRAP/bootstrap-dialog.js" type="text/javascript"></script>
     <script src="../SCRIPT/USERDEFINE/CartPage.js" type="text/javascript"></script>
 </head>
-<body onload="loadGioHang('true')">
+<body >
+
+    
     <form id="form1" runat="server">
         <!--Div header -->
         <div>
-
+            
         </div>
         
 
