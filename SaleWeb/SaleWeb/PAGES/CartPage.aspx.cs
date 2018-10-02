@@ -24,5 +24,10 @@ namespace SaleWeb.PAGES
                 //HttpContext.Current.Session["GIOHANG"] = 
             }
         }
+
+        protected void btnMenuTaiKhoan_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
