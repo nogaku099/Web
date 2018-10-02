@@ -36,5 +36,7 @@ namespace SaleWeb
         public DbSet<DM_SANPHAM> DM_SANPHAM { get; set; }
         public DbSet<DM_SANPHAM_NHOM> DM_SANPHAM_NHOM { get; set; }
         public DbSet<DM_TAIKHOAN> DM_TAIKHOAN { get; set; }
+        public DbSet<DM_KHACHHANG_DIACHI> DM_KHACHHANG_DIACHI { get; set; }
+        public DbSet<DM_SANPHAM_CHITIET> DM_SANPHAM_CHITIET { get; set; }
     }
 }

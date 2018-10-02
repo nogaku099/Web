@@ -163,7 +163,7 @@
 
                 <div class="col-xs-3" style="text-align: center; margin-top: 10px;">
                     <img runat="server" onclick="fshowgiohang();" style="width:30px;height:30px;" src="../Images/cart.png"  />
-                   
+                    <label id="lblSoLuong" class="labelSL">10</label>
                 </div>
             </div>
 
@@ -174,116 +174,106 @@
 
             <!-- row4 -->
             <div class="row " style="text-align: center; margin-left: 10px; margin-right: 10px;margin-bottom:10px;">
-                <div class="col-xs-4 " style="padding-left: 0px; padding-right: 0px;">
-                    <label class="btn nhom active-nhom" id="btnGiayDep"onclick="fChonNhomHang('1');">Giày dép</label>
+                <div class="col-xs-2 " style="padding-left: 0px; padding-right: 0px;">
+                    <label class="btn nhom active-nhom" id="btnDongHo"onclick="fChonNhomHang('NHH_001');">Đồng hồ</label>
                 </div>
 
-                <div class="col-xs-4" style="padding-left: 0px; padding-right: 0px;">
-                    <label class="btn nhom" id="btnQuanAo"onclick="fChonNhomHang('2');">Quần áo</label>
+                <div class="col-xs-2" style="padding-left: 0px; padding-right: 0px;">
+                    <label class="btn nhom" id="btnQuanAo"onclick="fChonNhomHang('NHH_003');">Quần áo</label>
                 </div>
 
-                <div class="col-xs-4" style="padding-left: 0px; padding-right: 0px;">
-                    <label class="btn nhom" id="btnNuocHoa"onclick="fChonNhomHang('3');">Nước hoa</label>
+                <div class="col-xs-2" style="padding-left: 0px; padding-right: 0px;">
+                    <label class="btn nhom" id="btnGiayDep"onclick="fChonNhomHang('NHH_002');">Giày dép</label>
+                </div>
+
+                <div class="col-xs-2" style="padding-left: 0px; padding-right: 0px;">
+                    <label class="btn nhom" id="btnNuocHoa"onclick="fChonNhomHang('NHH_005');">Nước hoa</label>
+                </div>
+
+                <div class="col-xs-2" style="padding-left: 0px; padding-right: 0px;">
+                    <label class="btn nhom" id="btnTuiXach"onclick="fChonNhomHang('NHH_004');">Túi xách</label>
+                </div>
+
+                <div class="col-xs-2" style="padding-left: 0px; padding-right: 0px;">
+                    <label class="btn nhom" id="btnKhac"onclick="fChonNhomHang('NHH_004');">Khác</label>
                 </div>
             </div>
 
             <!-- row5 -->
-            <div class="row" style="margin-left: 10px; margin-right: 10px; text-align: center;">
+            <div class="row" style=" margin-right: 10px;">
                 <asp:Panel runat="server" ScrollBars="Both" Width="100%" Height="500px">
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
+
+                    <div class="col-xs-2 productCard">
+                        <div class="row cardProductHeader" >
+                            <img src="../IMAGES/DONGHO/HH_0000001.png" style="width:100px; height:100px; transform:rotate(50deg);margin-left:30px;"  />
+                        </div>
+
+                        <div class="row cardProductBody" >
+                            <div class="row ProductName">
+                               <label style="width:100%;" >ABCDEFGH</label>
+                            </div>
+
+                            <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;font-weight:bold;">Size</div>
+                            
+                            <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;">
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label id="sizeXS" class="productSize" onclick="fChonSize('XS');">XS</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="sizeS"  class="productSize" onclick="fChonSize('S');">S</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="sizeM"  class="productSize" onclick="fChonSize('M');">M</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="sizeL" class="productSize" onclick="fChonSize('L');">L</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="sizeXL" class="productSize" onclick="fChonSize('XL');">XL</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="sizeXXL" class="productSize" onclick="fChonSize('XXL');">XXL</label>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;font-weight:bold;">Màu</div>
+                            
+                            <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;">
+                                 <div class="col-xs-2"style="text-align:center;">
+                                    <label id="mau1" class="productColor" style="background-color:aliceblue;" onclick="fChonMau('aliceblue');">aliceblue</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="mau2"  class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="mau3"  class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="mau4" class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="mau5" class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                </div>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
+                                    <label  id="mau6" class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
+                    <div class="col-xs-2" style="text-align: center">
+                        <div class="row cardProductHeader" >
+                            <img src="../IMAGES/DONGHO/HH_0000001.png" style="width:30px; height:30px; transform:rotate(50deg);margin-left:30px;"  />
+                        </div>
+
+                        <div class="row cardProductBody" >
+                            
                         </div>
                     </div>
 
+                   
 
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-3" style="text-align: center">
-                        <div class="w3-card-4 cardProduct" >
-                            <img src="../Images/product.jpg" alt="Norway" style="width: 100%" />
-                            <div class="w3-container w3-center">
-                                <p>The Italian / Austrian Alps</p>
-                                <p>100,000d</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    
                 </asp:Panel>
-
             </div>
 
             <!-- row6 -->

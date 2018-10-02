@@ -118,6 +118,16 @@
       <LastGenOutput>DB.cs</LastGenOutput>
     </Content>
     <Content Include="CSS\fonts\fontawesome-webfont.svg" />
+    <Content Include="IMAGES\DONGHO\HH_0000001.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000002.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000003.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000004.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000005.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000006.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000007.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000008.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000009.png" />
+    <Content Include="IMAGES\DONGHO\HH_0000010.png" />
     <Content Include="PAGES\CartPage.aspx" />
     <Content Include="PAGES\HomePage.aspx" />
     <Content Include="IMAGES\cart.png" />
@@ -199,6 +209,9 @@
     <Compile Include="DM_KHACHHANG.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DM_KHACHHANG_DIACHI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DM_KM.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -209,6 +222,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="DM_SANPHAM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DM_SANPHAM_CHITIET.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="DM_SANPHAM_NHOM.cs">
@@ -239,6 +255,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="IMAGES\GIAYDEP\" />
+    <Folder Include="IMAGES\NUOCHOA\" />
+    <Folder Include="IMAGES\QUANAO\" />
+    <Folder Include="IMAGES\TUIXACH\" />
     <Folder Include="MODELS\" />
   </ItemGroup>
   <ItemGroup>

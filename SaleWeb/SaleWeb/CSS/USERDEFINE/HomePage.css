@@ -49,18 +49,58 @@
     background-color: #862b2b;
     color:white;
 }
-.cardProduct{
-    width: 50%; 
+
+.productCard{
+    margin-left:25px;
+    margin-right:10px;
+    padding-left:0px;
+    padding-right:0px;
+    border-radius:5px;
+    box-shadow:5px 5px 10px grey
+}
+.cardProductHeader{
+    width: 100%; 
     text-align: center;
     margin:auto;
+    background-color:#960b0b;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
 }
+
+.cardProductBody{
+    width: 100%; 
+   
+    margin:auto;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+}
+.ProductName{
+    text-align:left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.productSize{
+    font-size:10px;
+   
+    border:20px;
+    width:100%;
+    border-radius:12px;
+}
+.productColor{
+    font-size:2px;
+    border:20px;
+    width:100%;
+    border-radius:12px;
+    height:10px;
+}
+
 .active-nhom{
     color:#862b2b;
     border-bottom: solid 3px #862b2b;
 }
 .parallax{
     min-height: 500px; 
-    background-image: url("../../Images/quangcao.gif");
+    /*background-image: url("../../Images/quangcao.gif");*/
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -69,6 +109,9 @@
     background-size: cover;
   
 }
-.hidden{
-    display:none;
+.labelSL{
+    color:#960b0b;
+    background-color:white;
+    border-radius:10px;
+    width: 20px;
 }

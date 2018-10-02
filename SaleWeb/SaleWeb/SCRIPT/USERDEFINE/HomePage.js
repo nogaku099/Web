@@ -64,38 +64,213 @@ function fonclick() {
 }
 
 function fChonNhomHang(ma) {
-    if (ma == '1') {
-        $("btnGiayDep").removeClass("active-nhom");
-        document.getElementById("btnGiayDep").style.color = "#862b2b";
-        document.getElementById("btnGiayDep").style.borderBottom = "solid 3px #862b2b";
+    if (ma == 'NHH_001') {
+        $("btnDongHo").removeClass("active-nhom");
+        document.getElementById("btnDongHo").style.color = "#862b2b";
+        document.getElementById("btnDongHo").style.borderBottom = "solid 3px #862b2b";
 
         document.getElementById("btnQuanAo").style.color = "black";
         document.getElementById("btnQuanAo").style.border = "solid 1px gray";
 
         document.getElementById("btnNuocHoa").style.color = "black";
         document.getElementById("btnNuocHoa").style.border = "solid 1px gray";
-    } else if (ma == '2') {
-        $("btnGiayDep").removeClass("active-nhom");
+
+        document.getElementById("btnGiayDep").style.color = "black";
+        document.getElementById("btnGiayDep").style.border = "solid 1px gray";
+
+        document.getElementById("btnTuiXach").style.color = "black";
+        document.getElementById("btnTuiXach").style.border = "solid 1px gray";
+
+        fHienThiHangHoa(ma);
+
+    } else if (ma == 'NHH_002') {
+        $("btnDongHo").removeClass("active-nhom");
+        document.getElementById("btnGiayDep").style.color = "#862b2b";
+        document.getElementById("btnGiayDep").style.borderBottom = "solid 3px #862b2b";
+
+        document.getElementById("btnDongHo").style.color = "black";
+        document.getElementById("btnDongHo").style.border = "solid 1px gray";
+
+        document.getElementById("btnNuocHoa").style.color = "black";
+        document.getElementById("btnNuocHoa").style.border = "solid 1px gray";
+
+        document.getElementById("btnQuanAo").style.color = "black";
+        document.getElementById("btnQuanAo").style.border = "solid 1px gray";
+
+        document.getElementById("btnTuiXach").style.color = "black";
+        document.getElementById("btnTuiXach").style.border = "solid 1px gray";
+    } else if(ma == 'NHH_003') {
+        $("btnDongHo").removeClass("active-nhom");
         document.getElementById("btnQuanAo").style.color = "#862b2b";
         document.getElementById("btnQuanAo").style.borderBottom = "solid 3px #862b2b";
 
         document.getElementById("btnGiayDep").style.color = "black";
         document.getElementById("btnGiayDep").style.border = "solid 1px gray";
 
+        document.getElementById("btnDongHo").style.color = "black";
+        document.getElementById("btnDongHo").style.border = "solid 1px gray";
+
+        document.getElementById("btnTuiXach").style.color = "black";
+        document.getElementById("btnTuiXach").style.border = "solid 1px gray";
+
         document.getElementById("btnNuocHoa").style.color = "black";
         document.getElementById("btnNuocHoa").style.border = "solid 1px gray";
-    } else {
-        $("btnGiayDep").removeClass("active-nhom");
-        document.getElementById("btnNuocHoa").style.color = "#862b2b";
-        document.getElementById("btnNuocHoa").style.borderBottom = "solid 3px #862b2b";
+    } else if (ma == 'NHH_004') {
+        document.getElementById("btnTuiXach").style.color = "#862b2b";
+        document.getElementById("btnTuiXach").style.borderBottom = "solid 3px #862b2b";
+
+        document.getElementById("btnGiayDep").style.color = "black";
+        document.getElementById("btnGiayDep").style.border = "solid 1px gray";
+
+        document.getElementById("btnDongHo").style.color = "black";
+        document.getElementById("btnDongHo").style.border = "solid 1px gray";
 
         document.getElementById("btnQuanAo").style.color = "black";
         document.getElementById("btnQuanAo").style.border = "solid 1px gray";
 
+        document.getElementById("btnNuocHoa").style.color = "black";
+        document.getElementById("btnNuocHoa").style.border = "solid 1px gray";
+    } else {
+        document.getElementById("btnNuocHoa").style.color = "#862b2b";
+        document.getElementById("btnNuocHoa").style.borderBottom = "solid 3px #862b2b";
+
         document.getElementById("btnGiayDep").style.color = "black";
         document.getElementById("btnGiayDep").style.border = "solid 1px gray";
+
+        document.getElementById("btnDongHo").style.color = "black";
+        document.getElementById("btnDongHo").style.border = "solid 1px gray";
+
+        document.getElementById("btnQuanAo").style.color = "black";
+        document.getElementById("btnQuanAo").style.border = "solid 1px gray";
+
+        document.getElementById("btnTuiXach").style.color = "black";
+        document.getElementById("btnTuiXach").style.border = "solid 1px gray";
     }
 }
+
+function fChonSize(size) {
+    if (size == "XS") {
+        document.getElementById("sizeXS").style.backgroundColor = "orangered";
+        document.getElementById("sizeXS").style.color = "white";
+
+        document.getElementById("sizeS").style.backgroundColor = "white";
+        document.getElementById("sizeS").style.color = "black";
+
+        document.getElementById("sizeM").style.backgroundColor = "white";
+        document.getElementById("sizeM").style.color = "black";
+
+        document.getElementById("sizeL").style.backgroundColor = "white";
+        document.getElementById("sizeL").style.color = "black";
+
+        document.getElementById("sizeXL").style.backgroundColor = "white";
+        document.getElementById("sizeXL").style.color = "black";
+
+        document.getElementById("sizeXXL").style.backgroundColor = "white";
+        document.getElementById("sizeXXL").style.color = "black";
+
+        // save hidden
+
+
+    } else if (size == "S") {
+        document.getElementById("sizeS").style.backgroundColor = "orangered";
+        document.getElementById("sizeS").style.color = "white";
+
+        document.getElementById("sizeXS").style.backgroundColor = "white";
+        document.getElementById("sizeXS").style.color = "black";
+
+        document.getElementById("sizeM").style.backgroundColor = "white";
+        document.getElementById("sizeM").style.color = "black";
+
+        document.getElementById("sizeL").style.backgroundColor = "white";
+        document.getElementById("sizeL").style.color = "black";
+
+        document.getElementById("sizeXL").style.backgroundColor = "white";
+        document.getElementById("sizeXL").style.color = "black";
+
+        document.getElementById("sizeXXL").style.backgroundColor = "white";
+        document.getElementById("sizeXXL").style.color = "black";
+
+    } else if (size == "M") {
+        document.getElementById("sizeM").style.backgroundColor = "orangered";
+        document.getElementById("sizeM").style.color = "white";
+
+        document.getElementById("sizeS").style.backgroundColor = "white";
+        document.getElementById("sizeS").style.color = "black";
+
+        document.getElementById("sizeXS").style.backgroundColor = "white";
+        document.getElementById("sizeXS").style.color = "black";
+
+        document.getElementById("sizeL").style.backgroundColor = "white";
+        document.getElementById("sizeL").style.color = "black";
+
+        document.getElementById("sizeXL").style.backgroundColor = "white";
+        document.getElementById("sizeXL").style.color = "black";
+
+        document.getElementById("sizeXXL").style.backgroundColor = "white";
+        document.getElementById("sizeXXL").style.color = "black";
+
+    } else if (size == "L") {
+        document.getElementById("sizeL").style.backgroundColor = "orangered";
+        document.getElementById("sizeL").style.color = "white";
+
+        document.getElementById("sizeXS").style.backgroundColor = "white";
+        document.getElementById("sizeXS").style.color = "black";
+
+        document.getElementById("sizeS").style.backgroundColor = "white";
+        document.getElementById("sizeS").style.color = "black";
+
+        document.getElementById("sizeM").style.backgroundColor = "white";
+        document.getElementById("sizeM").style.color = "black";
+
+        document.getElementById("sizeXL").style.backgroundColor = "white";
+        document.getElementById("sizeXL").style.color = "black";
+
+        document.getElementById("sizeXXL").style.backgroundColor = "white";
+        document.getElementById("sizeXXL").style.color = "black";
+
+    } else if (size == "XL") {
+        document.getElementById("sizeXL").style.backgroundColor = "orangered";
+        document.getElementById("sizeXL").style.color = "white";
+
+        document.getElementById("sizeS").style.backgroundColor = "white";
+        document.getElementById("sizeS").style.color = "black";
+
+        document.getElementById("sizeM").style.backgroundColor = "white";
+        document.getElementById("sizeM").style.color = "black";
+
+        document.getElementById("sizeL").style.backgroundColor = "white";
+        document.getElementById("sizeL").style.color = "black";
+
+        document.getElementById("sizeXS").style.backgroundColor = "white";
+        document.getElementById("sizeXS").style.color = "black";
+
+        document.getElementById("sizeXXL").style.backgroundColor = "white";
+        document.getElementById("sizeXXL").style.color = "black";
+    } else {
+        document.getElementById("sizeXXL").style.backgroundColor = "orangered";
+        document.getElementById("sizeXXL").style.color = "white";
+
+        document.getElementById("sizeS").style.backgroundColor = "white";
+        document.getElementById("sizeS").style.color = "black";
+
+        document.getElementById("sizeM").style.backgroundColor = "white";
+        document.getElementById("sizeM").style.color = "black";
+
+        document.getElementById("sizeL").style.backgroundColor = "white";
+        document.getElementById("sizeL").style.color = "black";
+
+        document.getElementById("sizeXL").style.backgroundColor = "white";
+        document.getElementById("sizeXL").style.color = "black";
+
+        document.getElementById("sizeXS").style.backgroundColor = "white";
+        document.getElementById("sizeXS").style.color = "black";
+    }
+}
+
+function fChonMau(mau) {
+
+}
+
 function fShowDangNhap() {
     if (document.getElementById("hdfDangNhap").value == "0") {
         $("#modalDangNhap").modal();
@@ -107,6 +282,12 @@ function fShowDangNhap() {
 function fshowgiohang() {
     document.getElementById('hdfMuaHang').value = "1";
     window.location.replace("CartPage.aspx");
+}
+
+function fHienThiHangHoa(manhom) {
+    
+
+
 }
 
 
