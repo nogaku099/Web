@@ -267,8 +267,51 @@ function fChonSize(size) {
     }
 }
 
-function fChonMau(mau) {
+function fChonMau(id,mau) {
+    if (id == "mau1") {
+        document.getElementById("mau1").style.border = "solid 2px green";
+        document.getElementById("mau2").style.border = "none";
+        document.getElementById("mau3").style.border = "none";
+        document.getElementById("mau4").style.border = "none";
+        document.getElementById("mau5").style.border = "none";
+        document.getElementById("mau6").style.border = "none";
 
+    } else if (id == "mau2") {
+        document.getElementById("mau2").style.border = "solid 2px green";
+        document.getElementById("mau1").style.border = "none";
+        document.getElementById("mau3").style.border = "none";
+        document.getElementById("mau4").style.border = "none";
+        document.getElementById("mau5").style.border = "none";
+        document.getElementById("mau6").style.border = "none";
+    } else if (id == "mau3") {
+        document.getElementById("mau3").style.border = "solid 2px green";
+        document.getElementById("mau2").style.border = "none";
+        document.getElementById("mau1").style.border = "none";
+        document.getElementById("mau4").style.border = "none";
+        document.getElementById("mau5").style.border = "none";
+        document.getElementById("mau6").style.border = "none";
+    } else if (id == "mau4") {
+        document.getElementById("mau4").style.border = "solid 2px green";
+        document.getElementById("mau2").style.border = "none";
+        document.getElementById("mau3").style.border = "none";
+        document.getElementById("mau1").style.border = "none";
+        document.getElementById("mau5").style.border = "none";
+        document.getElementById("mau6").style.border = "none";
+    } else if (id == "mau5") {
+        document.getElementById("mau5").style.border = "solid 2px green";
+        document.getElementById("mau2").style.border = "none";
+        document.getElementById("mau3").style.border = "none";
+        document.getElementById("mau4").style.border = "none";
+        document.getElementById("mau1").style.border = "none";
+        document.getElementById("mau6").style.border = "none";
+    } else {
+        document.getElementById("mau6").style.border = "solid 2px green";
+        document.getElementById("mau2").style.border = "none";
+        document.getElementById("mau3").style.border = "none";
+        document.getElementById("mau4").style.border = "none";
+        document.getElementById("mau5").style.border = "none";
+        document.getElementById("mau1").style.border = "none";
+    }
 }
 
 function fShowDangNhap() {
@@ -282,6 +325,10 @@ function fShowDangNhap() {
 function fshowgiohang() {
     document.getElementById('hdfMuaHang').value = "1";
     window.location.replace("CartPage.aspx");
+}
+
+function fLoadSanPham() {
+   
 }
 
 function fHienThiHangHoa(manhom) {
