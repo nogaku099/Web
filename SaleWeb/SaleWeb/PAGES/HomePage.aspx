@@ -200,19 +200,19 @@
             </div>
 
             <!-- row5 -->
-            <div class="row" style=" margin-right: 10px;">
-                <asp:Panel runat="server" ScrollBars="Both" Width="100%" Height="500px">
+            <div class="row" style=" margin-right: 10px;" >
+                <asp:Panel ID="pnlSanPham" runat="server" ScrollBars="Both" Width="100%" Height="500px" OnLoad="pnlSanPham_Load">
 
-                    <div class="col-xs-2 productCard">
+                    <div class="col-xs-2 productCard animated bounceIn">
                         <div class="row cardProductHeader" >
-                            <img src="../IMAGES/DONGHO/HH_0000001.png" style="width:100px; height:100px; transform:rotate(50deg);margin-left:30px;"  />
+                            <img src="../IMAGES/DONGHO/HH_0000001.png" class="productImage"   />
                         </div>
 
                         <div class="row cardProductBody" >
                             <div class="row ProductName">
-                               <label style="width:100%;" >ABCDEFGH</label>
+                               <label style="width:100%;font-size:18px;white-space:pre-wrap;" >ABCDEFGH</label>
                             </div>
-
+                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:20px;margin-right:20px;"/>
                             <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;font-weight:bold;">Size</div>
                             
                             <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;">
@@ -239,37 +239,33 @@
                             <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;font-weight:bold;">Màu</div>
                             
                             <div class="row" style="margin-left:10px;margin-right:10px;text-align:left;">
-                                 <div class="col-xs-2"style="text-align:center;">
-                                    <label id="mau1" class="productColor" style="background-color:aliceblue;" onclick="fChonMau('aliceblue');">aliceblue</label>
+                                 <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;">
+                                    <label id="mau1" class="productColor" style="background-color:aliceblue;" onclick="fChonMau('mau1','aliceblue');">aliceblue</label>
                                 </div>
-                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
-                                    <label  id="mau2"  class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;">
+                                    <label  id="mau2"  class="productColor" style="background-color:#862b2b;" onclick="fChonMau('mau2','#862b2b');">#862b2b</label>
                                 </div>
-                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
-                                    <label  id="mau3"  class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;">
+                                    <label  id="mau3"  class="productColor" style="background-color:yellow;" onclick="fChonMau('mau3','#862b2b');">#862b2b</label>
                                 </div>
-                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
-                                    <label  id="mau4" class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;">
+                                    <label  id="mau4" class="productColor" style="background-color:black;" onclick="fChonMau('mau4','#862b2b');">#862b2b</label>
                                 </div>
-                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
-                                    <label  id="mau5" class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;">
+                                    <label  id="mau5" class="productColor" style="background-color:pink;" onclick="fChonMau('mau5','#862b2b');">#862b2b</label>
                                 </div>
-                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;">
-                                    <label  id="mau6" class="productColor" style="background-color:#862b2b;" onclick="fChonMau('#862b2b');">#862b2b</label>
+                                <div class="col-xs-2"style="text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;">
+                                    <label  id="mau6" class="productColor" style="background-color:blue;" onclick="fChonMau('mau6','#862b2b');">#862b2b</label>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <button class="btn btn-success productPrice animated bounceInLeft" >100000 VND</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-2" style="text-align: center">
-                        <div class="row cardProductHeader" >
-                            <img src="../IMAGES/DONGHO/HH_0000001.png" style="width:30px; height:30px; transform:rotate(50deg);margin-left:30px;"  />
-                        </div>
-
-                        <div class="row cardProductBody" >
-                            
-                        </div>
-                    </div>
+                   
 
                    
 

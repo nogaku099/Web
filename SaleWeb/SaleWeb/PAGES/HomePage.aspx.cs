@@ -54,12 +54,18 @@ namespace SaleWeb.FRONT_END
 
         protected void btnDangNhap_Click(object sender, EventArgs e)
         {
+            
             DataTable temp = sp.getDataTable("SP_DANGNHAP", new string[] { "@flag", "@ten", "@matkhau" }, new object[] { 1, txtTenDangNhap.Value,txtMatKhau.Value });
             if (temp.Rows.Count > 0)
             {
                 HttpContext.Current.Session["DANGNHAP"] = temp.Rows[0]["TENDANGNHAP"].ToString();
                 Response.Redirect("~/PAGES/HomePage.aspx");
             }
+        }
+
+        protected void pnlSanPham_Load(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "fLoadSanPham()", true);
         }
     }
 }
