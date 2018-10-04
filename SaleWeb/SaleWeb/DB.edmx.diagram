@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="WEB_DATAModel.DM_DONHANG_CHITIET" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WEB_DATAModel.DM_DONHANG_HINHTHUCTHANHTOAN" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WEB_DATAModel.DM_DONHANG_TRANGTHAI" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_DATAModel.DM_KHACHHANG" Width="1.5" PointX="2.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEB_DATAModel.DM_KHACHHANG" Width="1.5" PointX="1.625" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="WEB_DATAModel.DM_KM" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WEB_DATAModel.DM_KM_CT" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WEB_DATAModel.DM_KM_HINHTHUC" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />

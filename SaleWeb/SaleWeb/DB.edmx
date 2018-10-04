@@ -25,10 +25,15 @@
           <Property Name="MADONHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MACHITIETDONHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" />
-          <Property Name="SOLUONG" Type="nvarchar" MaxLength="100" />
+          <Property Name="TENSANPHAM" Type="nvarchar" MaxLength="100" />
+          <Property Name="SOLUONG" Type="float" />
           <Property Name="DONGIA" Type="float" />
-          <Property Name="SALE" Type="float" />
           <Property Name="THANHTIEN" Type="float" />
+          <Property Name="SIZE" Type="nvarchar" MaxLength="100" />
+          <Property Name="MAU" Type="nvarchar" MaxLength="100" />
+          <Property Name="DUNGTICH" Type="nvarchar" MaxLength="100" />
+          <Property Name="LOAI" Type="nvarchar" MaxLength="100" />
+          <Property Name="SALE" Type="float" />
         </EntityType>
         <EntityType Name="DM_DONHANG_HINHTHUCTHANHTOAN">
           <Key>
@@ -62,7 +67,7 @@
             <PropertyRef Name="DIACHI" />
           </Key>
           <Property Name="MAKHACHHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="DIACHI" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="DM_KM">
           <Key>
@@ -103,11 +108,10 @@
         <EntityType Name="DM_SANPHAM_CHITIET">
           <Key>
             <PropertyRef Name="MASANPHAM" />
-            <PropertyRef Name="TENSANPHAM" />
             <PropertyRef Name="SIZE" />
+            <PropertyRef Name="TENSANPHAM" />
           </Key>
           <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="TENSANPHAM" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="DONVITINH" Type="nvarchar" MaxLength="100" />
           <Property Name="GIA1" Type="float" />
           <Property Name="GIA2" Type="float" />
@@ -117,6 +121,7 @@
           <Property Name="LOAI" Type="nvarchar" MaxLength="100" />
           <Property Name="GIOITINH" Type="bit" />
           <Property Name="SALE" Type="float" />
+          <Property Name="TENSANPHAM" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="DM_SANPHAM_NHOM">
           <Key>
@@ -172,10 +177,15 @@
           <Property Name="MADONHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MACHITIETDONHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MASANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SOLUONG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SOLUONG" Type="Double" />
           <Property Name="DONGIA" Type="Double" />
           <Property Name="SALE" Type="Double" />
           <Property Name="THANHTIEN" Type="Double" />
+          <Property Name="TENSANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SIZE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DUNGTICH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LOAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_DONHANG_HINHTHUCTHANHTOAN">
           <Key>
@@ -275,7 +285,7 @@
             <PropertyRef Name="DIACHI" />
           </Key>
           <Property Name="MAKHACHHANG" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DIACHI" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_SANPHAM_CHITIET">
           <Key>
@@ -284,7 +294,7 @@
             <PropertyRef Name="SIZE" />
           </Key>
           <Property Name="MASANPHAM" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TENSANPHAM" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TENSANPHAM" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DONVITINH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="GIA1" Type="Double" />
           <Property Name="GIA2" Type="Double" />
@@ -317,6 +327,11 @@
           <EntitySetMapping Name="DM_DONHANG_CHITIET">
             <EntityTypeMapping TypeName="WEB_DATAModel.DM_DONHANG_CHITIET">
               <MappingFragment StoreEntitySet="DM_DONHANG_CHITIET">
+                <ScalarProperty Name="LOAI" ColumnName="LOAI" />
+                <ScalarProperty Name="DUNGTICH" ColumnName="DUNGTICH" />
+                <ScalarProperty Name="MAU" ColumnName="MAU" />
+                <ScalarProperty Name="SIZE" ColumnName="SIZE" />
+                <ScalarProperty Name="TENSANPHAM" ColumnName="TENSANPHAM" />
                 <ScalarProperty Name="MADONHANG" ColumnName="MADONHANG" />
                 <ScalarProperty Name="MACHITIETDONHANG" ColumnName="MACHITIETDONHANG" />
                 <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />

@@ -17,9 +17,14 @@ namespace SaleWeb
         public string MADONHANG { get; set; }
         public string MACHITIETDONHANG { get; set; }
         public string MASANPHAM { get; set; }
-        public string SOLUONG { get; set; }
+        public Nullable<double> SOLUONG { get; set; }
         public Nullable<double> DONGIA { get; set; }
         public Nullable<double> SALE { get; set; }
         public Nullable<double> THANHTIEN { get; set; }
+        public string TENSANPHAM { get; set; }
+        public string SIZE { get; set; }
+        public string MAU { get; set; }
+        public string DUNGTICH { get; set; }
+        public string LOAI { get; set; }
     }
 }
