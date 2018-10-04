@@ -55,14 +55,15 @@
             lstsp += "</div>";
 
             lstsp += "<div class='col-xs-8' style='text-align:left'>";
-            lstsp += "Nước hoa qưeifqipfjqiofhnqoebnoqeghioqhgioqhgiqo";
+            lstsp += "<span id='lblTenSanPham'>Nước hoa qưeifqipfjqiofhnqoebnoqeghioqhgioqhgiqo</span>";
             lstsp += "</div>";
             lstsp += "</div>";
             lstsp += "</div>";
             lstsp += "<div class='col-xs-6'>";
             lstsp += "<div class='row'>";
             lstsp += "<div class ='col-xs-3'style='margin-top:5px;'>";
-            lstsp += "1.550.000";
+            lstsp += "<span id='lblGiaSanPham'>1.550.000</span>";
+            
             lstsp += "</div>";
             lstsp += "<div class ='col-xs-3'style='padding-left:0px;padding-right:0px;'>";
             //lstsp += "<div class='row'>";
@@ -85,7 +86,8 @@
             lstsp += "</div>";
 
             lstsp += "<div class ='col-xs-3'style='margin-top:5px;'>";
-            lstsp += "1.550.000";
+            lstsp += "<span id='lblThanhTienSanPham'>1.550.000</span>";
+            
             lstsp += "</div>";
 
             lstsp += "<div class ='col-xs-3'style='margin-top:5px;'>";
@@ -98,30 +100,30 @@
             
 
         }
-        lstsp += "</div>";
-        lstsp += "<div class='row' style='height:100px;background-color:red'></div>";
+        lstsp+="</div>"
+        
+       
+       
         lstsp += "<br />";
 
         //Hien thi tong tien
-        //lstsp += "<div class='row backgroundRow'>";
-        //lstsp += "<div class='col-xs-1'>";
-        //lstsp += "</div>";
-        //lstsp += "<div class='col-xs-11' style='text-align: right'>";
-        //lstsp += "Tổng Tiền (";
-        //lstsp += "<span id='lblTongSanPham'>";
-        //lstsp+="2";
-        //lstsp+="</span>";
-        //lstsp += "sản phẩm):";
-        //lstsp += "<span id='lblTongTien'>";
-        //lstsp += "50.000.000";
-        //lstsp += "</span>";
-        //lstsp += "<button class='btn btn-success' style='color:white;height:50px;width:150px;font-size:large'>";
-        //lstsp += "Mua hàng";
-        //lstsp += "</button>";
-        //lstsp += "</div>";
-        //lstsp += "</div>";
+        lstsp += "<div class='row backgroundRow'>";
+        lstsp += "<div class='col-xs-12' style='text-align: right'>";
+        lstsp += "Tổng Tiền (";
+        lstsp += "<span id='lblTongSanPham'>";
+        lstsp+="2";
+        lstsp+="</span>";
+        lstsp += " sản phẩm):";
+        lstsp += "<span id='lblTongTien'>";
+        lstsp += "50.000.000";
+        lstsp += "</span>";
+        lstsp += "<button class='btn btn-success customButtonMuaHang'>";
+        lstsp += "Mua hàng";
+        lstsp += "</button>";
+        lstsp += "</div>";
+        lstsp += "</div>";
 
-        //lstsp += "</div>";
+        lstsp += "</div>";
 
         document.getElementById('hienGioHang').innerHTML = lstsp;
 
@@ -132,17 +134,7 @@
 
 }
 
-function hienMenuTaiKhoan() {
 
-    var temp = "";
-    temp += "<div class='dropdown'><button on";
-
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-    </div>
+function abc() {
+    alert("abc");
 }

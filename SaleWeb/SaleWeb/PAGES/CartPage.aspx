@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <title>CartPage</title>
     <link rel="stylesheet" href="../CSS/BOOTSTRAP/animate.css" />
@@ -17,6 +18,8 @@
     <script src="../SCRIPT/BOOTSTRAP/bootstrap.min.js" type="text/javascript"></script>
     <script src="../SCRIPT/BOOTSTRAP/bootstrap-dialog.js" type="text/javascript"></script>
     <script src="../SCRIPT/USERDEFINE/CartPage.js" type="text/javascript"></script>
+    
+
 </head>
 
 
@@ -44,9 +47,9 @@
 
                         </li>
                         <li>
-                            <div class="dropdown show dropdownTaiKhoan">
+                            <div class="dropdown show">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuTaiKhoan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    style="color: white; padding-top: 15px; background-color: #960b0b">Menu Tài Khoản
+                                    style="color: white;padding-top:15px; background-color: #960b0b" runat="server">Menu Tài Khoản
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #e42424">
@@ -57,6 +60,7 @@
                                     <a class="dropdown-item" href="#" style="color: white; background-color: #e42424; margin-left: 10px">Đăng xuất
                                          <i class="fa fa-sign-out"></i>
                                     </a>
+                                   
                                 </div>
                             </div>
 

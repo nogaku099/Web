@@ -14,9 +14,11 @@ namespace SaleWeb.PAGES
         public static StoreProcedure sp;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (HttpContext.Current.Session["GIOHANG"] != null && HttpContext.Current.Session["GIOHANG"].ToString() != "")
+            if (HttpContext.Current.Session["GIOHANG"] != null && HttpContext.Current.Session["GIOHANG"].ToString() != "" &&
+                HttpContext.Current.Session["DANGNHAP"] != null && HttpContext.Current.Session["DANGNHAP"].ToString() != "" )
             {
-
+                dropdownMenuTaiKhoan.InnerHtml = HttpContext.Current.Session["DANGNHAP"].ToString();
+                ScriptManager.RegisterClientScriptBlock(this, Page.GetType(), "script", "loadGioHang('true')", true);
             }
             else
             {
