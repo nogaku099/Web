@@ -37,8 +37,8 @@
 
 .nhom {
     color: black;
-    background-color: whitesmoke;
-    border: solid 1px gray;
+    background-color: white;
+    border: solid 1px rgba(95, 93, 93, 0.29);
     width: 100%;
     border-radius: 0px;
     font-size:larger;
@@ -97,6 +97,7 @@
     width:70%;
     border-radius:12px;
     height:20px;
+    border: solid 1px rgba(128, 128, 128, 0.30);
 }
 .productImage{
     margin-bottom: -10px;
@@ -138,4 +139,5 @@
     background-color:white;
     border-radius:10px;
     width: 20px;
+    display:none;
 }
