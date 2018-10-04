@@ -135,6 +135,3 @@
 }
 
 
-function abc() {
-    alert("abc");
-}
