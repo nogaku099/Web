@@ -22,13 +22,13 @@ namespace SaleWeb.FRONT_END {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lblTenDangNhap control.
+        /// lblDangNhap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor lblTenDangNhap;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDangNhap;
         
         /// <summary>
         /// txtTenDangNhap control.
