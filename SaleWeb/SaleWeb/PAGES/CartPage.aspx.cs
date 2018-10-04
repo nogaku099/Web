@@ -16,8 +16,8 @@ namespace SaleWeb.PAGES
         {
             if (HttpContext.Current.Session["DANGNHAP"] != null && HttpContext.Current.Session["DANGNHAP"].ToString() != "" )
             {
-                dropdownMenuTaiKhoan.InnerHtml = HttpContext.Current.Session["DANGNHAP"].ToString();
-                //ScriptManager.RegisterClientScriptBlock(this, Page.GetType(), "script", "loadGioHang('true')", true);
+                dropdownMenuTaiKhoan.InnerHtml = HttpContext.Current.Session["DANGNHAP"].ToString() + " <i class='fa fa-sign-in'></i>";
+               // ScriptManager.RegisterClientScriptBlock(this, Page.GetType(), "script", "loadGioHang('true')", true);
             }
             else
             {
