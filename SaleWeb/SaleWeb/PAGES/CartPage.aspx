@@ -52,7 +52,7 @@
                                     style="color: white;padding-top:15px; background-color: #960b0b" runat="server">Menu Tài Khoản
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #e42424">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #e42424;position:relative">
                                     <a class="dropdown-item" href="#" style="color: white; background-color: #e42424; margin-left: 10px">Quản lý tài khoản
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                     </a>
