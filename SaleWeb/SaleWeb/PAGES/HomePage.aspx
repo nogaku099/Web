@@ -25,10 +25,10 @@
         <div>
             <!-- nav  -->
 
-            <nav class="navbar navbar-default narcustom">
+            <nav class="navbar  navbar-fixed-top navbar-default narcustom">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#" style="color: white;">TRUONGHUNG.com</a>
+                        <a class="navbar-brand" href="#" style="color: white;">WEBSALE.com</a>
                     </div>
                     <ul class="nav navbar-nav" style="float: right;">
                         <li><a href="#" style="color: white;">Thông báo
@@ -103,7 +103,6 @@
                                             <input type="password" runat="server" id="txtMatKhau" required="required" style="border-radius: 5px; border: solid 1px gray; width: 100%; margin-top: 2px; height: 28px; padding-right: 5px;" />
                                         </div>
                                     </div>
-
                                     <div class="row">
                                     </div>
 
@@ -118,6 +117,7 @@
                                 </div>
 
                                 <div class="col-xs-4">
+
                                     <div class="row" style="text-align: center; margin-top: 10px;">
                                         <label>Bạn chưa có tài khoản ?</label>
                                     </div>
@@ -127,7 +127,7 @@
                                     </div>
 
                                     <div class="row" style="margin-left: 10px; margin-right: 10px; text-align: center; margin-top: 5px;">
-                                        <label style="width: 100%; color: gray;">__________HOẶC___________</label>
+                                        <label style="width: 100%; color: gray;">__________HOẶC__________</label>
                                     </div>
 
                                     <div class="row" style="text-align: center; margin-left: 10px; margin-right: 10px;">
@@ -182,7 +182,7 @@
                 </div>
 
                 <div class="col-xs-3" style="text-align: center; margin-top: 10px;">
-                    <img runat="server" onclick="fshowgiohang();" style="width: 30px; height: 30px;" src="../Images/cart.png" />
+                    <img runat="server" onclick="fshowgiohang();" style="cursor:pointer; width: 30px; height: 30px;" src="../Images/cart.png" />
                     <label id="lblSoLuong" class="labelSL"></label>
                 </div>
             </div>
@@ -303,6 +303,8 @@
         <!-- HiddenField -->
         <asp:HiddenField ID="hdfDangNhap" runat="server" ClientIDMode="Static" Value="0" />
         <asp:HiddenField ID="hdfMuaHang" runat="server" ClientIDMode="Static" Value="0" />
+        
+        
     </form>
 </body>
 </html>

@@ -74,20 +74,78 @@ namespace SaleWeb.FRONT_END
         [WebMethod]
         public static string fGetSoLuong()
         {
-            //if(null != HttpContext.Current.Session["GIOHANG"] && !HttpContext.Current.Session["GIOHANG"].ToString().Equals(""))
-            //{
+            if(null != HttpContext.Current.Session["GIOHANG"] && !HttpContext.Current.Session["GIOHANG"].ToString().Equals(""))
+            {
                 string SoLuong = "0";
-                DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@session" }, new object[] { 2, 1 });
+                DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@session" }, new object[] { 2, HttpContext.Current.Session["GIOHANG"].ToString() });
                 if(dt_temp.Rows.Count > 0)
                 {
                     SoLuong = dt_temp.Rows[0]["SOLUONG"].ToString();
                 }
                 return /*HttpContext.Current.Session["GIOHANG"].ToString() + "_" +*/ SoLuong;
-            //}
-            //else
-            //    return "0";
+            }
+            else
+                return "0";
             //{
             //}
+        }
+
+        [WebMethod]
+        public static string fMuaHang(string madon,string makhach, string masanpham, string soluong, string size,string mau)
+        {
+            if(null == HttpContext.Current.Session["DANGNHAP"] || HttpContext.Current.Session["DANGNHAP"].ToString().Equals(""))
+            {
+                return "LOGIN";
+            }
+
+            // kiem tra session gio hang
+            if(null != HttpContext.Current.Session["GIOHANG"] && !HttpContext.Current.Session["GIOHANG"].ToString().Equals(""))
+            {
+                
+                madon = HttpContext.Current.Session["GIOHANG"].ToString();
+
+            }
+            else
+            {
+                // tao ma don hang
+                DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@makhach" }, new object[] { 3, makhach });
+                if (dt_temp.Rows.Count > 0)
+                {
+                    madon = dt_temp.Rows[0]["MADONHANG"].ToString();
+                    HttpContext.Current.Session["GIOHANG"] = madon;
+                }
+                //
+            }
+            //
+
+            int result = sp.updateTable("SP_HOMEPAGE", new string[] { "@flag", "@madonhang", "@makhach", "@masanpham", "@soluong", "@size", "@mau" }
+                                          , new object[] { 4, madon, makhach, masanpham, float.Parse(soluong), size, mau });
+            if(result > -1)
+            {
+                return "OK";
+            }else
+            {
+                return "FAIL";
+            }
+
+        }
+
+        [WebMethod]
+        public static string[] fLoadMau(string mahang, string size)
+        {
+            List<string> lst = new List<string>();
+            DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@masanpham", "@size" }, new object[] { 5, mahang, size });
+            if(dt_temp.Rows.Count > 0)
+            {
+                int length = dt_temp.Rows.Count;
+                if (length > 5)
+                    length = 5;
+                for (int i = 0; i < length; i++)
+                {
+                    lst.Add(dt_temp.Rows[i]["MAU"].ToString());
+                }
+            }
+            return lst.ToArray();
         }
         #endregion
 
