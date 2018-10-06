@@ -11,6 +11,11 @@
     height: 60px;
     margin-left:0px;
     margin-right:0px; 
+    margin-top:50px; 
+    width:100%;
+    position:fixed;
+    z-index:10;
+    box-shadow: 0px 5px 20px;
 }
 
 .searchtext {
@@ -138,6 +143,7 @@
     color:#960b0b;
     background-color:white;
     border-radius:10px;
-    width: 20px;
+    width: 25px;
+    text-align:center;
     display:none;
 }
