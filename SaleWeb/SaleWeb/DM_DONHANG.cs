@@ -19,7 +19,7 @@ namespace SaleWeb
         public Nullable<System.DateTime> NGAYLAP { get; set; }
         public string MATRANGTHAI { get; set; }
         public string MAXACNHAN { get; set; }
-        public string TONGTIEN { get; set; }
+        public Nullable<double> TONGTIEN { get; set; }
         public string MAHINHTHUCTHANHTOAN { get; set; }
     }
 }

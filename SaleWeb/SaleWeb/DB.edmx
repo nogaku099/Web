@@ -14,23 +14,25 @@
           <Property Name="NGAYLAP" Type="datetime" />
           <Property Name="MATRANGTHAI" Type="nvarchar" MaxLength="100" />
           <Property Name="MAXACNHAN" Type="nvarchar" MaxLength="100" />
-          <Property Name="TONGTIEN" Type="nvarchar" MaxLength="100" />
+          <Property Name="TONGTIEN" Type="float" />
           <Property Name="MAHINHTHUCTHANHTOAN" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DM_DONHANG_CHITIET">
           <Key>
             <PropertyRef Name="MADONHANG" />
-            <PropertyRef Name="MACHITIETDONHANG" />
+            <PropertyRef Name="MASANPHAM" />
+            <PropertyRef Name="SIZE" />
+            <PropertyRef Name="MAU" />
           </Key>
           <Property Name="MADONHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MACHITIETDONHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" />
+          <Property Name="MASANPHAM" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TENSANPHAM" Type="nvarchar" MaxLength="100" />
           <Property Name="SOLUONG" Type="float" />
           <Property Name="DONGIA" Type="float" />
           <Property Name="THANHTIEN" Type="float" />
-          <Property Name="SIZE" Type="nvarchar" MaxLength="100" />
-          <Property Name="MAU" Type="nvarchar" MaxLength="100" />
+          <Property Name="SIZE" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MAU" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DUNGTICH" Type="nvarchar" MaxLength="100" />
           <Property Name="LOAI" Type="nvarchar" MaxLength="100" />
           <Property Name="SALE" Type="float" />
@@ -166,24 +168,26 @@
           <Property Name="NGAYLAP" Type="DateTime" Precision="3" />
           <Property Name="MATRANGTHAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MAXACNHAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TONGTIEN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TONGTIEN" Type="Double" />
           <Property Name="MAHINHTHUCTHANHTOAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_DONHANG_CHITIET">
           <Key>
             <PropertyRef Name="MADONHANG" />
-            <PropertyRef Name="MACHITIETDONHANG" />
+            <PropertyRef Name="MASANPHAM" />
+            <PropertyRef Name="SIZE" />
+            <PropertyRef Name="MAU" />
           </Key>
           <Property Name="MADONHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MACHITIETDONHANG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MASANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MASANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SOLUONG" Type="Double" />
           <Property Name="DONGIA" Type="Double" />
           <Property Name="SALE" Type="Double" />
           <Property Name="THANHTIEN" Type="Double" />
           <Property Name="TENSANPHAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SIZE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MAU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SIZE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MAU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DUNGTICH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LOAI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
