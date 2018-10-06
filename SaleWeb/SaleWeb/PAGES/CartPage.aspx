@@ -24,13 +24,13 @@
 
 
 
-<body onload="loadGioHang('true')">
+<body>
     <form id="form1" runat="server">
         <!--Div header -->
         <div>
             <!-- nav  -->
 
-            <nav class="navbar navbar-default narcustom">
+            <nav class="navbar navbar-fixed-top navbar-default narcustom">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#" style="color: white;">TRUONGHUNG.com</a>
@@ -78,7 +78,7 @@
             <!-- end nav -->
 
             <!-- row2 -->
-            <div class="row SearchArea" style="margin-left: 0px; margin-right: 0px;">
+            <div class="row SearchArea" style="margin-left: 0px; margin-right: 0px;margin-top:-70px;">
                 <div class="col-xs-3" style="text-align: center">
                     <img width="60px" height="60px" src="../Images/logo.png" />
                 </div>
@@ -106,7 +106,7 @@
 
 
         <%--Div noi dung--%>
-        <div class="container" id="hienGioHang">
+        <div runat="server" class="container" id="hienGioHang" style="margin-top:120px;">
             <%--Row Thông tin--%>
             <div class="row backgroundRow">
                 <div class="col-xs-6">
@@ -121,7 +121,7 @@
                             Số lượng
                         </div>
                         <div class="col-xs-3">
-                            Số tiền
+                            Thành tiền
                         </div>
                         <div class="col-xs-3">
                             Thao tác
@@ -131,48 +131,9 @@
             </div>
             <br />
             <%--Row SanPham--%>
-            <div class="row backgroundRowSanPham">
-                <div class="col-xs-6">
-                    <div class="row">
-                        <%--Hinh san pham--%>
-                        <div class="col-xs-4">
-                            <img src="../IMAGES/product.jpg" height="40px" />
-                        </div>
-                        <%--Ten san pham--%>
-                        <div class="col-xs-8" style="text-align: left">
-                            Nước hoa qưeifqipfjqiofhnqoebnoqeghioqhgioqhgiqo
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            1.550.000
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <button class="btn">-</button>
-                                </div>
-                                <div class="col-xs-4">
-                                    1
-                                </div>
-                                <div class="col-xs-4">
-                                    <button class="btn">+</button>
-                                </div>
+            <asp:Panel id="gioHangODa"  OnLoad="gioHangODay_Load" runat="server" Width="100%">
 
-                            </div>
-
-                        </div>
-                        <div class="col-xs-3">
-                            1.550.000
-                        </div>
-                        <div class="col-xs-3">
-                            Xoá
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </asp:Panel>
 
             <br />
             <%--Row Tong Tien--%>
@@ -196,6 +157,8 @@
                 </div>
 
             </div>
+
+
         </div>
     </form>
 </body>
