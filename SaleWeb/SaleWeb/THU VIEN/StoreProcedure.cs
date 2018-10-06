@@ -236,6 +236,11 @@ namespace SaleWeb.THU_VIEN
                 }
                 else
                   //  MessageBox.Show("ERROR: " + store_name + " " + ex.Message);
+
+                    
+
+
+
                 result = -1;
             }
             finally
