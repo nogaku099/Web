@@ -1,6 +1,6 @@
 ﻿
 $(document).ready(function () {
-    var myVar = setInterval(myTimer, 1000);
+    var myVar = setInterval(myTimer, 2000);
 
     function myTimer() {
 
@@ -18,8 +18,18 @@ $(document).ready(function () {
             data : bien,
             url: 'HomePage.aspx/fGetSoLuong',
             success: function (result) {
-                document.getElementById("lblSoLuong").style.display = 'inline';
-                document.getElementById("lblSoLuong").innerHTML = result.d;
+               
+                if (result.d.toString() != "0") {
+                    document.getElementById('hdfMuaHang').value = "1";
+                    document.getElementById("lblSoLuong").style.display = 'inline-block';
+                    document.getElementById("lblSoLuong").innerHTML = result.d;
+                    
+                } else {
+                    document.getElementById('hdfMuaHang').value = "0";
+                    document.getElementById("lblSoLuong").style.display = 'none';
+                    document.getElementById("lblSoLuong").innerHTML = result.d;
+                }
+               
             }, error: function (result) {
                 alert("ERROR: fGetSoLuong");
             }
@@ -184,7 +194,16 @@ function fChonNhomHang(ma) {
     }
 }
 
-function fChonSize(size,mahang) {
+function fChonSize(size, mahang) {
+
+        document.getElementById("mau2" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau3" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau4" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau5" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau6" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau1" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau_" + mahang).innerHTML = "";
+
     if (size == "XS") {
         document.getElementById("sizeXS" + "_" + mahang).style.backgroundColor = "orangered";
         document.getElementById("sizeXS" + "_" + mahang).style.color = "white";
@@ -205,7 +224,9 @@ function fChonSize(size,mahang) {
         document.getElementById("sizeXXL" + "_" + mahang).style.color = "black";
 
         // save hidden
+        document.getElementById("size_" + mahang).innerHTML = "XS";
 
+        fLoadMau(mahang, size);
 
     } else if (size == "S") {
         document.getElementById("sizeS" + "_" + mahang).style.backgroundColor = "orangered";
@@ -226,6 +247,10 @@ function fChonSize(size,mahang) {
         document.getElementById("sizeXXL" + "_" + mahang).style.backgroundColor = "white";
         document.getElementById("sizeXXL" + "_" + mahang).style.color = "black";
 
+        document.getElementById("size_" + mahang).innerHTML = "S";
+
+        fLoadMau(mahang, size);
+
     } else if (size == "M") {
         document.getElementById("sizeM" + "_" + mahang).style.backgroundColor = "orangered";
         document.getElementById("sizeM" + "_" + mahang).style.color = "white";
@@ -244,6 +269,9 @@ function fChonSize(size,mahang) {
 
         document.getElementById("sizeXXL" + "_" + mahang).style.backgroundColor = "white";
         document.getElementById("sizeXXL" + "_" + mahang).style.color = "black";
+
+        document.getElementById("size_" + mahang).innerHTML = "M";
+        fLoadMau(mahang, size);
 
     } else if (size == "L") {
         document.getElementById("sizeL" + "_" + mahang).style.backgroundColor = "orangered";
@@ -264,6 +292,9 @@ function fChonSize(size,mahang) {
         document.getElementById("sizeXXL" + "_" + mahang).style.backgroundColor = "white";
         document.getElementById("sizeXXL" + "_" + mahang).style.color = "black";
 
+        document.getElementById("size_" + mahang).innerHTML = "M";
+        fLoadMau(mahang, size);
+
     } else if (size == "XL") {
         document.getElementById("sizeXL" + "_" + mahang).style.backgroundColor = "orangered";
         document.getElementById("sizeXL" + "_" + mahang).style.color = "white";
@@ -282,6 +313,9 @@ function fChonSize(size,mahang) {
 
         document.getElementById("sizeXXL" + "_" + mahang).style.backgroundColor = "white";
         document.getElementById("sizeXXL" + "_" + mahang).style.color = "black";
+
+        document.getElementById("size_" + mahang).innerHTML = "XL";
+        fLoadMau(mahang, size);
     } else {
         document.getElementById("sizeXXL" + "_" + mahang).style.backgroundColor = "orangered";
         document.getElementById("sizeXXL" + "_" + mahang).style.color = "white";
@@ -300,17 +334,25 @@ function fChonSize(size,mahang) {
 
         document.getElementById("sizeXS" + "_" + mahang).style.backgroundColor = "white";
         document.getElementById("sizeXS" + "_" + mahang).style.color = "black";
+
+        document.getElementById("size_" + mahang).innerHTML = "XXL";
+        fLoadMau(mahang, size);
     }
 }
 
 function fChonMau(id, mau,mahang) {
-    if (id =="mau1") {
+    if (id == "mau1") {
+
+       // alert(id + "" + mahang+""+mau);
+
         document.getElementById(id+"_"+mahang).style.border = "solid 3px green";
         document.getElementById("mau2" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau3" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau4" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau5" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau6" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+
+        document.getElementById("mau_" + mahang).innerHTML = mau;
 
     } else if (id=="mau2") {
         document.getElementById(id + "_" + mahang).style.border = "solid 3px green";
@@ -319,6 +361,7 @@ function fChonMau(id, mau,mahang) {
         document.getElementById("mau4" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau5" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau6" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau_" + mahang).innerHTML = mau;
     } else if (id=="mau3") {
         document.getElementById(id + "_" + mahang).style.border = "solid 3px green";
         document.getElementById("mau2" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
@@ -326,6 +369,7 @@ function fChonMau(id, mau,mahang) {
         document.getElementById("mau4" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau5" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau6" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau_" + mahang).innerHTML = mau;
     } else if (id=="mau4") {
         document.getElementById(id + "_" + mahang).style.border = "solid 3px green";
         document.getElementById("mau2" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
@@ -333,6 +377,7 @@ function fChonMau(id, mau,mahang) {
         document.getElementById("mau1" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau5" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau6" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau_" + mahang).innerHTML = mau;
     } else if (id=="mau5") {
         document.getElementById(id + "_" + mahang).style.border = "solid 3px green";
         document.getElementById("mau2" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
@@ -340,6 +385,7 @@ function fChonMau(id, mau,mahang) {
         document.getElementById("mau4" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau1" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau6" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau_" + mahang).innerHTML = mau;
     } else {
         document.getElementById(id + "_" + mahang).style.border = "solid 3px green";
         document.getElementById("mau2" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
@@ -347,7 +393,68 @@ function fChonMau(id, mau,mahang) {
         document.getElementById("mau4" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau5" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
         document.getElementById("mau1" + "_" + mahang).style.border = "solid 1px rgba(128, 128, 128, 0.30)";
+        document.getElementById("mau_" + mahang).innerHTML = mau;
     }
+}
+
+function fLoadMau(mahang, size) {
+
+    var bien = "{mahang:'" + mahang + "'";
+    bien += ",size:'" + size + "'}";
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data:bien,
+        url: 'HomePage.aspx/fLoadMau',
+        success:function(result){
+            if (result.d.length > 0) {
+                try {
+                    for (i = 0 ; i < result.d.length; i++) {
+
+                       // alert(result.d[i]);
+                        document.getElementById("mau" + (i + 1) + "_" + mahang).style.backgroundColor = result.d[i];
+                        document.getElementById("col_mau" + (i + 1) + "_" + mahang).style.display = 'inline';
+                        document.getElementById("mau" + (i + 1) + "_" + mahang).innerHTML = result.d[i];
+                        var id = "mau" + (i + 1) + "";
+                        var mau = result.d[i];
+                        document.getElementById("mau" + (i + 1) + "_" + mahang).onclick = function () { fChonMau(id, mau, mahang) };
+
+                    }
+                    //document.getElementById("mau2" + "_" + mahang).style.backgroundColor = result.d[1];
+                    //document.getElementById("col_mau2" + "_" + mahang).style.display = 'inline';
+                    //document.getElementById("mau2" + "_" + mahang).innerHTML = result.d[1];
+                    //document.getElementById("mau2" + "_" + mahang).onclick = "fChonMau(" + '"mau2"' + "," + '"' + result.d[1] + '"' + "," + '"' + mahang + '"' + ")";
+
+
+                    //document.getElementById("mau3" + "_" + mahang).style.backgroundColor = result.d[2];
+                    //document.getElementById("col_mau3" + "_" + mahang).style.display = 'inline';
+                    //document.getElementById("mau3" + "_" + mahang).innerHTML = result.d[2];
+                    //document.getElementById("mau3" + "_" + mahang).onclick = "fChonMau(" + '"mau3"' + "," + '"' + result.d[2] + '"' + "," + '"' + mahang + '"' + ")";
+
+
+                    //document.getElementById("mau4" + "_" + mahang).style.backgroundColor = result.d[3];
+                    //document.getElementById("col_mau4" + "_" + mahang).style.display = 'inline';
+                    //document.getElementById("mau4" + "_" + mahang).innerHTML = result.d[3];
+                    //document.getElementById("mau4" + "_" + mahang).onclick = "fChonMau(" + '"mau4"' + "," + '"' + result.d[3] + '"' + "," + '"' + mahang + '"' + ")";
+
+                    //document.getElementById("mau5" + "_" + mahang).style.backgroundColor = result.d[4];
+                    //document.getElementById("col_mau5" + "_" + mahang).style.display = 'inline';
+                    //document.getElementById("mau5" + "_" + mahang).innerHTML = result.d[4];
+                    //document.getElementById("mau5" + "_" + mahang).onclick = "fChonMau(" + '"mau5"' + "," + '"' + result.d[4] + '"' + "," + '"' + mahang + '"' + ")";
+
+                    //document.getElementById("mau6" + "_" + mahang).style.backgroundColor = result.d[5];
+                    //document.getElementById("ol_mau6" + "_" + mahang).style.display = 'inline';
+                    //document.getElementById("mau6" + "_" + mahang).innerHTML = result.d[5];
+                    //document.getElementById("mau6" + "_" + mahang).onclick = "fChonMau(" + '"mau6"' + "," + '"' + result.d[5] + '"' + "," + '"' + mahang + '"' + ")";
+                } catch (e) {
+                    alert("a");
+                }
+            }
+        }, error: function (result) {
+
+        }
+    });
 }
 
 function fShowDangNhap() {
@@ -363,8 +470,12 @@ function fShowDangXuat() {
 }
 
 function fshowgiohang() {
-    document.getElementById('hdfMuaHang').value = "1";
-    window.location.replace("CartPage.aspx");
+
+    if (document.getElementById('hdfMuaHang').value == "1") {
+        window.location.replace("CartPage.aspx");
+    } else {
+        alertCustom("Thong bao", "Gio hang dang trong");
+    }
 }
 
 function fLoadSanPham(manhom) {
@@ -531,71 +642,76 @@ function fLoadSanPham(manhom) {
 
                             lstDanhSachSanPham += "<div class='row' style='margin-left:10px;margin-right:10px;text-align:left;'>";
 
-                            if (arrColor[0] != "0") {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
-                                lstDanhSachSanPham += "<label id='mau1_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[0] + ";' onclick='fChonMau(" + '"mau1"' + "," + '"' + arrColor[0] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[0] + "</label>";
+                            //if (arrColor[0] != "0") {
+                            //    lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //    lstDanhSachSanPham += "<label id='mau1_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[0] + ";' onclick='fChonMau(" + '"mau1"' + "," + '"' + arrColor[0] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[0] + "</label>";
+                            //    lstDanhSachSanPham += "</div>";
+                            //} else {
+                                lstDanhSachSanPham += "<div id='col_mau1_" + result.d[i].MASANPHAM + "'" + " class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
+                                lstDanhSachSanPham += "<label id='mau1_" + result.d[i].MASANPHAM + "'" + " class='productColor' ></label>";
                                 lstDanhSachSanPham += "</div>";
-                            } else {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
-                                lstDanhSachSanPham += "<label id='mau1_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[0] + ";' onclick='fChonMau(" + '"mau1"' + "," + '"' + arrColor[0] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[0] + "</label>";
-                                lstDanhSachSanPham += "</div>";
-                            }
+                            //}
 
 
-                            if (arrColor[1] != "0") {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //if (arrColor[1] != "0") {
+                            //    lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //    lstDanhSachSanPham += "<label id='mau2_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[1] + ";' onclick='fChonMau(" + '"mau2"' + "," + '"' + arrColor[1] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[1] + "</label>";
+                            //    lstDanhSachSanPham += "</div>";
+                            //} else {
+                                lstDanhSachSanPham += "<div id='col_mau2_" + result.d[i].MASANPHAM + "'" + " class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
                                 lstDanhSachSanPham += "<label id='mau2_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[1] + ";' onclick='fChonMau(" + '"mau2"' + "," + '"' + arrColor[1] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[1] + "</label>";
                                 lstDanhSachSanPham += "</div>";
-                            } else {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
-                                lstDanhSachSanPham += "<label id='mau2_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[1] + ";' onclick='fChonMau(" + '"mau2"' + "," + '"' + arrColor[1] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[1] + "</label>";
-                                lstDanhSachSanPham += "</div>";
-                            }
+                            //}
 
 
-                            if (arrColor[2] != "0") {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //if (arrColor[2] != "0") {
+                            //    lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //    lstDanhSachSanPham += "<label id='mau3_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[2] + ";' onclick='fChonMau(" + '"mau3"' + "," + '"' + arrColor[2] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[2] + "</label>";
+                            //    lstDanhSachSanPham += "</div>";
+                            //} else {
+                                lstDanhSachSanPham += "<div id='col_mau3_" + result.d[i].MASANPHAM + "'" + " class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
                                 lstDanhSachSanPham += "<label id='mau3_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[2] + ";' onclick='fChonMau(" + '"mau3"' + "," + '"' + arrColor[2] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[2] + "</label>";
                                 lstDanhSachSanPham += "</div>";
-                            } else {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
-                                lstDanhSachSanPham += "<label id='mau3_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[2] + ";' onclick='fChonMau(" + '"mau3"' + "," + '"' + arrColor[2] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[2] + "</label>";
-                                lstDanhSachSanPham += "</div>";
-                            }
+                            //}
 
-                            if (arrColor[3] != "0") {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //if (arrColor[3] != "0") {
+                            //    lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //    lstDanhSachSanPham += "<label id='mau4_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[3] + ";' onclick='fChonMau(" + '"mau4"' + "," + '"' + arrColor[3] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[3] + "</label>";
+                            //    lstDanhSachSanPham += "</div>";
+                            //} else {
+                                lstDanhSachSanPham += "<div id='col_mau4_" + result.d[i].MASANPHAM + "'" + " class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
                                 lstDanhSachSanPham += "<label id='mau4_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[3] + ";' onclick='fChonMau(" + '"mau4"' + "," + '"' + arrColor[3] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[3] + "</label>";
                                 lstDanhSachSanPham += "</div>";
-                            } else {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
-                                lstDanhSachSanPham += "<label id='mau4_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[3] + ";' onclick='fChonMau(" + '"mau4"' + "," + '"' + arrColor[3] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[3] + "</label>";
-                                lstDanhSachSanPham += "</div>";
-                            }
+                            //}
 
-                            if (arrColor[4] != "0") {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //if (arrColor[4] != "0") {
+                            //    lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //    lstDanhSachSanPham += "<label id='mau5_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[4] + ";' onclick='fChonMau(" + '"mau5"' + "," + '"' + arrColor[4] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[4] + "</label>";
+                            //    lstDanhSachSanPham += "</div>";
+                            //} else {
+                                lstDanhSachSanPham += "<div id='col_mau5_" + result.d[i].MASANPHAM + "'" + " class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
                                 lstDanhSachSanPham += "<label id='mau5_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[4] + ";' onclick='fChonMau(" + '"mau5"' + "," + '"' + arrColor[4] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[4] + "</label>";
                                 lstDanhSachSanPham += "</div>";
-                            } else {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
-                                lstDanhSachSanPham += "<label id='mau5_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[4] + ";' onclick='fChonMau(" + '"mau5"' + "," + '"' + arrColor[4] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[4] + "</label>";
-                                lstDanhSachSanPham += "</div>";
-                            }
+                           // }
 
-                            if (arrColor[5] != "0") {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
-                                lstDanhSachSanPham += "<label id='mau6_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[5] + ";' onclick='fChonMau(" + '"mau6"' + "," + '"' + arrColor[5] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[5] + "</label>";
+                            //if (arrColor[5] != "0") {
+                            //    lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;'>";
+                            //    lstDanhSachSanPham += "<label id='mau6_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[5] + ";' onclick='fChonMau(" + '"mau6"' + "," + '"' + arrColor[5] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[5] + "</label>";
+                            //    lstDanhSachSanPham += "</div>";
+                            //} else {
+                                lstDanhSachSanPham += "<div id='col_mau6_" + result.d[i].MASANPHAM + "'" + " class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
+                                lstDanhSachSanPham += "<label  id='mau6_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[5] + ";' onclick='fChonMau(" + '"mau6"' + "," + '"' + arrColor[5] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[5] + "</label>";
                                 lstDanhSachSanPham += "</div>";
-                            } else {
-                                lstDanhSachSanPham += "<div class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
-                                lstDanhSachSanPham += "<label id='mau6_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[5] + ";' onclick='fChonMau(" + '"mau6"' + "," + '"' + arrColor[5] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[5] + "</label>";
-                                lstDanhSachSanPham += "</div>";
-                            }
+                           // }
                             lstDanhSachSanPham += "</div>";
 
                             lstDanhSachSanPham += " <div class='row'>";
-                            lstDanhSachSanPham += "<button type='button' id='btnMuaHang-" + result.d[i].MASANPHAM + "-" + result.d[i].SIZE+"-"+result.d[i].MAU+"-"+result.d[i].DUNGTICH + "' onclick='fMuaHang();' class='btn btn-success productPrice animated bounceInLeft' >" + result.d[i].GIA1 + " VND</button>";
+                            lstDanhSachSanPham += "<button type='button' id='btnMuaHang-" + result.d[i].MASANPHAM + "-" + result.d[i].SIZE+"-"+result.d[i].MAU+"-"+result.d[i].DUNGTICH + "' onclick='fMuaHang("+'"'+result.d[i].MASANPHAM+'"'+","+'"'+result.d[i].SIZE+'"'+","+'"'+result.d[i].MAU+'"'+","+'"'+result.d[i].DUNGTICH+'"'+");' class='btn btn-success productPrice animated bounceInLeft' >" + result.d[i].GIA1 + " VND</button>";
+                            // hidden input
+                            lstDanhSachSanPham += "<label style='display:none;' id='size_" + result.d[i].MASANPHAM + "'></label>";
+                            lstDanhSachSanPham += "<label style='display:none;' id='mau_" + result.d[i].MASANPHAM + "'></label>";
+                            lstDanhSachSanPham += "<label style='display:none;' id='dungtich_" + result.d[i].MASANPHAM + "'></label>";
+                            //
                             lstDanhSachSanPham += "</div>";
                             lstDanhSachSanPham += "</div>";
                             lstDanhSachSanPham += "</div>";
@@ -629,8 +745,43 @@ function fLoadSanPham(manhom) {
         });
 }
 
-function fMuaHang() {
-    alert('a');
+function fMuaHang(mahang, size, mau, dungtich) {
+    // kiem tra dang nhap
+
+    //
+
+    
+
+    var s = document.getElementById("size_" + mahang).innerHTML;
+    var m = document.getElementById("mau_" + mahang).innerHTML;
+    if (s == "" || m == "") {
+        alertCustom("Thong bao", "Ban chua chon size/mau");
+    } else {
+
+        var bien = "{madon:'" + 1 + "'"; // session don hang
+        bien += ",makhach:'" + 2 + "'"; // session dang nhap
+        bien += ",masanpham:'" + mahang + "'";
+        bien += ",soluong:'" + 1 + "'";
+        bien += ",size:'" + s + "'";
+        bien += ",mau:'" + m + "'}";
+
+        $.ajax({
+            type : 'POST',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            data: bien,
+            url: 'HomePage.aspx/fMuaHang',
+            success: function (result) {
+                if (result.d == "OK") {
+                    alert("Da them vao gio hang");
+                } else if (result.d == "LOGIN") {
+                    $("#modalDangNhap").modal();
+                }
+            }, error: function (result) {
+
+            }
+        });
+    }
 }
 
 
