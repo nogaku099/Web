@@ -189,7 +189,7 @@
 
             <!-- row3 -->
             <div class="row parallax" style="text-align: center; margin-left: 0px; margin-right: 0px;">
-                <%-- <img width="100%" alt="quang cao" src="../Images/quangcao.gif" />--%>
+                 <img width="100%" alt="quang cao" src="../Images/quangcao.gif" />
             </div>
 
             <!-- row4 -->
