@@ -292,7 +292,7 @@ function fChonSize(size, mahang) {
         document.getElementById("sizeXXL" + "_" + mahang).style.backgroundColor = "white";
         document.getElementById("sizeXXL" + "_" + mahang).style.color = "black";
 
-        document.getElementById("size_" + mahang).innerHTML = "M";
+        document.getElementById("size_" + mahang).innerHTML = "L";
         fLoadMau(mahang, size);
 
     } else if (size == "XL") {
