@@ -160,6 +160,13 @@
 
 
         </div>
+
+
+
+        <!-- HiddenField -->
+        <asp:HiddenField ID="hdfMaNhom" runat="server" ClientIDMode="Static"/>
+        
+        <button id="test" class="btn">a</button>
     </form>
 </body>
 </html>

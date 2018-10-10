@@ -14,6 +14,8 @@ namespace SaleWeb.PAGES
     public partial class CartPage : System.Web.UI.Page
     {
         public static StoreProcedure sp;
+
+        public static string maNhom = "";
         protected void Page_Load(object sender, EventArgs e)
         {
           
@@ -64,6 +66,8 @@ namespace SaleWeb.PAGES
             StoreProcedure sp = new StoreProcedure(server, data, user, pass);
             return sp;
         }
+
+        
 
         protected void btnMenuTaiKhoan_Click(object sender, EventArgs e)
         {
@@ -146,7 +150,11 @@ namespace SaleWeb.PAGES
                 {
                     return null;
                 }
-                else return ketQua;
+                else
+                {
+                    maNhom = ketQua;
+                    return ketQua;
+                }
                 
             }
             return null;
