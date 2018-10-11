@@ -90,10 +90,17 @@ function loadGioHang() {
                                 lstHtml += "<div class ='col-xs-3'style='padding-left:0px;padding-right:0px;'>";
                                 //lstHtml += "<div class='row'>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
-                                lstHtml += "<button class='btn' onclick='' style='width:100%;' id='btnMinus"
-                                    + formatItem + "'> ";
-                                lstHtml += "-";
-                                lstHtml += "</button>";
+
+                                //"<input type='button'" + " id='btnDelete" + formatItem + "'"
+                                //+ "value = 'Delete' class='buttonDelete' style = 'background-color:white;width:100%;border:none;' /> ";
+                                lstHtml += "<input type='button' onclick='minusQuantity(this.id)' style='width:100%;padding:0px;margin-top:5px' id='btnMinus"
+                                    + formatItem + "' value='-'/> ";
+
+
+                                //lstHtml += "<button class='btn' onclick='minusQuantity()' style='width:100%;' id='btnMinus"
+                                //    + formatItem + "'> ";
+                                //lstHtml += "-";
+                                //lstHtml += "</button>";
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
 
@@ -103,10 +110,12 @@ function loadGioHang() {
                                 //document.getElementById('lblSoLuong').InnerHtml = result.d[i].SOLUONG;
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
-                                lstHtml += "<button class='btn'style='width:100%;' id='btnPlus"
-                                    + formatItem + "'> ";
-                                lstHtml += "+";
-                                lstHtml += "</button>";
+                                //lstHtml += "<button class='btn' onclick='plusQuantity()' style='width:100%;' id='btnPlus"
+                                //    + formatItem + "'> ";
+                                //lstHtml += "+";
+                                //lstHtml += "</button>";
+                                lstHtml += "<input type='button' onclick='plusQuantity(this.id)' style='width:100%;padding:0px;margin-top:5px' id='btnPlus"
+                                    + formatItem + "' value='+'/> ";
                                 lstHtml += "</div>";
 
                                 //lstHtml += "</div>";
@@ -227,14 +236,55 @@ function alertConfirmCustom(title, mess, yes, no) {
         }]
     });
 }
-
-function minusQuantity() {
-
+function getQuantity(str, type) {
+    var tempID = "";
+    if (type == "-") {
+        tempID = str.substring(8, str.len);
+        tempID = "lblQuantity" + tempID;
+    }
+    if (type == "+") {
+        tempID = str.substring(7, str.len);
+        tempID = "lblQuantity" + tempID;
+    }
+    var currentQuantity = document.getElementById(tempID).value;
+   
+    return [currentQuantity,tempID];
+    
 }
 
-function plustQuantity() {
+function minusQuantity(id) {
+
+    var [quantity,idQuantity] =[0," "];
+
+    [quantity, idQuantity] = getQuantity(id, "-");
+
+    if (quantity > 1) {
+        quantity--;
+        document.getElementById(idQuantity).value = quantity;
+    }
+    else {
+        alert("Ko the giam");
+    }
+}
+
+function plusQuantity(id) {
+    var [quantity, idQuantity] = [0, " "];
+
+    [quantity, idQuantity] = getQuantity(id, "+");
+   
+    quantity++;
+    //handle display quantity
+
+    document.getElementById(idQuantity).value = quantity;
+    
+
+
 
 }
 function deleteProduct (){
 
+}
+
+function getButtonID(obj) {
+    return obj;
 }
