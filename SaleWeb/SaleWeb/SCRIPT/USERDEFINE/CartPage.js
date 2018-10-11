@@ -68,7 +68,9 @@ function loadGioHang() {
                                 else if (groupCode == "NHH_006") {
                                     imageFolder = "KHAC";
                                 }
-
+                                var formatItem = "";
+                                formatItem = "_" + result.d[i].MASANPHAM.toString()
+                                    + "_" + result.d[i].SIZE.toString() + "_" + result.d[i].MAU.toString();
                                 lstHtml += "<img src='../IMAGES/" + imageFolder + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
 
                                 lstHtml += "</div>";
@@ -82,23 +84,27 @@ function loadGioHang() {
                                 lstHtml += "<div class='row'>";
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
 
-                                lstHtml += "<span id='lblGiaSanPham'>" + number_format(parseFloat(result.d[i].DONGIA).toString(), 0).toString() + "</span>";
+                                lstHtml += "<span id='lblUnitPrice" + formatItem + "'>" + number_format(parseFloat(result.d[i].DONGIA).toString(), 0).toString() + "</span>";
                                 //document.getElementById('lblGiaSanPham').InnerHtml = result.d[i].DONGIA;
                                 lstHtml += "</div>";
                                 lstHtml += "<div class ='col-xs-3'style='padding-left:0px;padding-right:0px;'>";
                                 //lstHtml += "<div class='row'>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
-                                lstHtml += "<button class='btn' style='width:100%;'>";
+                                lstHtml += "<button class='btn' onclick='' style='width:100%;' id='btnMinus"
+                                    + formatItem + "'> ";
                                 lstHtml += "-";
                                 lstHtml += "</button>";
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
-                                lstHtml += "<input type='text' id='lblSoLuong' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
+
+                                lstHtml += "<input type='text' id='lblQuantity" + formatItem
+                                    + "' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
                                 totalQuantity += parseFloat(result.d[i].SOLUONG.toString());
                                 //document.getElementById('lblSoLuong').InnerHtml = result.d[i].SOLUONG;
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
-                                lstHtml += "<button class='btn'style='width:100%;'>";
+                                lstHtml += "<button class='btn'style='width:100%;' id='btnPlus"
+                                    + formatItem + "'> ";
                                 lstHtml += "+";
                                 lstHtml += "</button>";
                                 lstHtml += "</div>";
@@ -108,14 +114,15 @@ function loadGioHang() {
                                 lstHtml += "</div>";
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
-                                lstHtml += "<span id='lblThanhTienSanPham'>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
+                                lstHtml += "<span id='lblTotalPrice" + formatItem + " '>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
                                 //document.getElementById('lblThanhTienSanPham').InnerHtml = result.d[i].THANHTIEN;
                                 total += parseFloat(result.d[i].THANHTIEN.toString());
                                 //alert(total.toString());
                                 lstHtml += "</div>";
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
-                                lstHtml += "<input type='button' value='Delete' class='buttonDelete' style='background-color:white;width:100%;border:none;'/>";
+                                lstHtml += "<input type='button'" + " id='btnDelete" + formatItem + "'"
+                                + "value = 'Delete' class='buttonDelete' style = 'background-color:white;width:100%;border:none;' /> ";
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
@@ -219,4 +226,15 @@ function alertConfirmCustom(title, mess, yes, no) {
             }
         }]
     });
+}
+
+function minusQuantity() {
+
+}
+
+function plustQuantity() {
+
+}
+function deleteProduct (){
+
 }
