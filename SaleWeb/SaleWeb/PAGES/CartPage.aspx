@@ -41,7 +41,7 @@
                         </a>
 
                         </li>
-                        <li><a href="#" style="color: white;">Hỗ trợ
+                        <li><a href="#" style="color: white;">Support
                             <i class="fa fa-car"></i>
                         </a>
 
@@ -110,21 +110,21 @@
             <%--Row Thông tin--%>
             <div class="row backgroundRow">
                 <div class="col-xs-6">
-                    Sản phẩm
+                    Product
                 </div>
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3">
-                            Đơn giá
+                            Unit Price
                         </div>
                         <div class="col-xs-3">
-                            Số lượng
+                            Quantity
                         </div>
                         <div class="col-xs-3">
-                            Thành tiền
+                            Total Price
                         </div>
                         <div class="col-xs-3">
-                            Thao tác
+                            Actions
                         </div>
                     </div>
                 </div>
@@ -143,16 +143,16 @@
                 </div>
                 <div class="col-xs-11" style="text-align: right">
 
-                    Tổng Tiền (
-                    <span id="lblTongSanPham">
+                    Total (
+                    <span id="lblTotalQuantity">
                         12
                     </span>
-                    sản phẩm):
-                    <span id="lblTongTien">
+                    product):
+                    <span id="lblTotal">
                         50.000.000
                     </span>
                     <button class="btn btn-success" style="color:white;height:50px;width:150px;font-size:large">
-                        Mua hàng
+                        Buy
                     </button>
                 </div>
 
@@ -166,7 +166,7 @@
         <!-- HiddenField -->
         <asp:HiddenField ID="hdfMaNhom" runat="server" ClientIDMode="Static"/>
         
-        <button id="test" class="btn">a</button>
+        
     </form>
 </body>
 </html>

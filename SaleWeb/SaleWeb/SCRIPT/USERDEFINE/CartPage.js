@@ -1,17 +1,17 @@
 ﻿
 function loadGioHang() {
     
-    var lstsp = "";
-    var tongTien = 0;
-    var tongSoLuong = 0;
-    lstsp += "<br/>";
-    var temp = "{maDonHang:'" + 1 + "'}";
+    var lstHtml = "";
+    var total = 0;
+    var totalQuantity = 0;
+    lstHtml += "<br/>";
+    var tempOrderId = "{maDonHang:'" + 1 + "'}";
     
     $.ajax({
         type: 'POST',
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
-        data: temp,
+        data: tempOrderId,
         url: 'CartPage.aspx/fGetDanhSachChiTietDonHang',
         success: function (result) {
             if (result.d == null) {
@@ -20,13 +20,13 @@ function loadGioHang() {
             }
             
             if (result.d.length > 0) {
-                alert("ok");
-                var maSP = "{maSanPham:'" + result.d[0].MASANPHAM.toString() + "'}";
+                //alert("ok");
+                var productCode = "{maSanPham:'" + result.d[0].MASANPHAM.toString() + "'}";
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json;charset=utf-8',
                     dataType: 'json',
-                    data: maSP,
+                    data: productCode,
                     url: 'CartPage.aspx/fGetMaNhom',
                     success: function (ketQua) {
                         if (ketQua.d == null) {
@@ -34,107 +34,101 @@ function loadGioHang() {
 
                         }
                         if (ketQua.d.length > 0) {
-                            var maNhom = ketQua.d;
+                            var groupCode = ketQua.d;
                             //alert(maNhom);
                             for (var i = 0; i < result.d.length; i++) {
-                                lstsp += "<div class='row backgroundRowSanPham'>";
-                                lstsp += "<div class='col-xs-6'>";
-                                lstsp += "<div class='row'>";
+                                lstHtml += "<div class='row backgroundRowProduct'>";
+                                lstHtml += "<div class='col-xs-6'>";
+                                lstHtml += "<div class='row'>";
 
-                                lstsp += "<div class='col-xs-4'>";
-                                var tenThuMucHinh = "";
-
-
-
-
-
+                                lstHtml += "<div class='col-xs-4'>";
+                                var imageFolder = "";
+                                
                                 //Lay ma nhom 
-
-
-
+                                
                                 //alert(maNhom);
                                 //alert(document.getElementById("hdfMaNhom").value);
                                 //maNhom = document.getElementById("hdfMaNhom").value.toString();
 
-                                if (maNhom == "NHH_001") {
-                                    tenThuMucHinh = "DONGHO";
+                                if (groupCode == "NHH_001") {
+                                    imageFolder = "DONGHO";
                                 }
-                                else if (maNhom == "NHH_002") {
-                                    tenThuMucHinh = "GIAYDEP";
+                                else if (groupCode == "NHH_002") {
+                                    imageFolder = "GIAYDEP";
                                 }
-                                else if (maNhom == "NHH_003") {
-                                    tenThuMucHinh = "QUANAO";
+                                else if (groupCode == "NHH_003") {
+                                    imageFolder = "QUANAO";
                                 }
-                                else if (maNhom == "NHH_004") {
-                                    tenThuMucHinh = "TUIXACH";
+                                else if (groupCode == "NHH_004") {
+                                    imageFolder = "TUIXACH";
                                 }
-                                else if (maNhom == "NHH_005") {
-                                    tenThuMucHinh = "NUOCHOA";
+                                else if (groupCode == "NHH_005") {
+                                    imageFolder = "NUOCHOA";
                                 }
-                                else if (maNhom == "NHH_006") {
-                                    tenThuMucHinh = "KHAC";
+                                else if (groupCode == "NHH_006") {
+                                    imageFolder = "KHAC";
                                 }
 
-                                lstsp += "<img src='../IMAGES/" + tenThuMucHinh + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
+                                lstHtml += "<img src='../IMAGES/" + imageFolder + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
 
-                                lstsp += "</div>";
-                                lstsp += "<div class='col-xs-8' style='text-align:left'>";
-                                //lstsp += "<span id='lblTenSanPham'></span>";
-                                lstsp += result.d[i].TENSANPHAM.toString();
-                                lstsp += "</div>";
-                                lstsp += "</div>";
-                                lstsp += "</div>";
-                                lstsp += "<div class='col-xs-6'>";
-                                lstsp += "<div class='row'>";
-                                lstsp += "<div class ='col-xs-3'style='margin-top:5px;'>";
+                                lstHtml += "</div>";
+                                lstHtml += "<div class='col-xs-8' style='text-align:left'>";
+                                //lstHtml += "<span id='lblTenSanPham'></span>";
+                                lstHtml += result.d[i].TENSANPHAM.toString();
+                                lstHtml += "</div>";
+                                lstHtml += "</div>";
+                                lstHtml += "</div>";
+                                lstHtml += "<div class='col-xs-6'>";
+                                lstHtml += "<div class='row'>";
+                                lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
 
-                                lstsp += "<span id='lblGiaSanPham'>" + number_format(parseFloat(result.d[i].DONGIA).toString(), 0).toString() + "</span>";
+                                lstHtml += "<span id='lblGiaSanPham'>" + number_format(parseFloat(result.d[i].DONGIA).toString(), 0).toString() + "</span>";
                                 //document.getElementById('lblGiaSanPham').InnerHtml = result.d[i].DONGIA;
-                                lstsp += "</div>";
-                                lstsp += "<div class ='col-xs-3'style='padding-left:0px;padding-right:0px;'>";
-                                //lstsp += "<div class='row'>";
-                                lstsp += "<div class='col-xs-4'style='padding:0px;'>";
-                                lstsp += "<button class='btn' style='width:100%;'>";
-                                lstsp += "-";
-                                lstsp += "</button>";
-                                lstsp += "</div>";
-                                lstsp += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
-                                lstsp += "<input type='text' id='lblSoLuong' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
-                                tongSoLuong += parseFloat(result.d[i].SOLUONG.toString());
+                                lstHtml += "</div>";
+                                lstHtml += "<div class ='col-xs-3'style='padding-left:0px;padding-right:0px;'>";
+                                //lstHtml += "<div class='row'>";
+                                lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
+                                lstHtml += "<button class='btn' style='width:100%;'>";
+                                lstHtml += "-";
+                                lstHtml += "</button>";
+                                lstHtml += "</div>";
+                                lstHtml += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
+                                lstHtml += "<input type='text' id='lblSoLuong' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
+                                totalQuantity += parseFloat(result.d[i].SOLUONG.toString());
                                 //document.getElementById('lblSoLuong').InnerHtml = result.d[i].SOLUONG;
-                                lstsp += "</div>";
-                                lstsp += "<div class='col-xs-4'style='padding:0px;'>";
-                                lstsp += "<button class='btn'style='width:100%;'>";
-                                lstsp += "+";
-                                lstsp += "</button>";
-                                lstsp += "</div>";
+                                lstHtml += "</div>";
+                                lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
+                                lstHtml += "<button class='btn'style='width:100%;'>";
+                                lstHtml += "+";
+                                lstHtml += "</button>";
+                                lstHtml += "</div>";
 
-                                //lstsp += "</div>";
+                                //lstHtml += "</div>";
 
-                                lstsp += "</div>";
+                                lstHtml += "</div>";
 
-                                lstsp += "<div class ='col-xs-3'style='margin-top:5px;'>";
-                                lstsp += "<span id='lblThanhTienSanPham'>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
+                                lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
+                                lstHtml += "<span id='lblThanhTienSanPham'>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
                                 //document.getElementById('lblThanhTienSanPham').InnerHtml = result.d[i].THANHTIEN;
-                                tongTien += parseFloat(result.d[i].THANHTIEN.toString());
-                                //alert(tongTien.toString());
-                                lstsp += "</div>";
+                                total += parseFloat(result.d[i].THANHTIEN.toString());
+                                //alert(total.toString());
+                                lstHtml += "</div>";
 
-                                lstsp += "<div class ='col-xs-3'style='margin-top:5px;'>";
-                                lstsp += "Xoá";
-                                lstsp += "</div>";
-                                lstsp += "</div>";
-                                lstsp += "</div>";
-                                lstsp += "</div>";
-                                lstsp += "<hr style='margin-top:2px;margin-bottom:2px;background-color:#e00d0df2;border-color:#e00d0df2;margin-left:20px;margin-right:20px;'/>";
+                                lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
+                                lstHtml += "<input type='button' value='Delete' class='buttonDelete' style='background-color:white;width:100%;border:none;'/>";
+                                lstHtml += "</div>";
+                                lstHtml += "</div>";
+                                lstHtml += "</div>";
+                                lstHtml += "</div>";
+                                lstHtml += "<hr style='margin-top:2px;margin-bottom:2px;background-color:#e00d0df2;border-color:#e00d0df2;margin-left:20px;margin-right:20px;'/>";
 
                             }
-                            lstsp += "<br />";
-                            lstsp += "</div>";
+                            lstHtml += "<br />";
+                            lstHtml += "</div>";
 
-                            document.getElementById('gioHangODa').innerHTML = lstsp;
-                            document.getElementById('lblTongTien').innerHTML = number_format(tongTien, 0).toString();
-                            document.getElementById('lblTongSanPham').innerHTML = tongSoLuong.toString();
+                            document.getElementById('gioHangODa').innerHTML = lstHtml;
+                            document.getElementById('lblTotal').innerHTML = number_format(total, 0).toString();
+                            document.getElementById('lblTotalQuantity').innerHTML = totalQuantity.toString();
 
                         }
                         //console.log(ketQua.d.toString());
@@ -198,4 +192,31 @@ function number_format(number, decimals, dec_point, thousands_sep) {
     var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
 
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+}
+
+function alertCustom(title, mess) {
+    BootstrapDialog.show({
+        title: title,
+        message: mess
+    });
+}
+
+
+function alertConfirmCustom(title, mess, yes, no) {
+    BootstrapDialog.show({
+        title: title,
+        message: mess,
+        buttons: [{
+            label: yes,
+            cssClass: 'demo',
+            action: function (Itself) {
+                alertCustom('bam', 'yes');
+            }
+        }, {
+            label: no,
+            action: function (Itself) {
+                alertCustom('bam', 'no');
+            }
+        }]
+    });
 }
