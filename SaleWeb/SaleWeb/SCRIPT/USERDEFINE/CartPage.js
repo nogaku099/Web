@@ -30,9 +30,10 @@ function loadGioHang() {
                     url: 'CartPage.aspx/fGetGroup',
                     success: function (ketQua) {
                         if (ketQua.d == null) {
-                            alert("ma nhom rong");
+                            alert("Cant get group code");
 
                         }
+                        //Get group code of each product to assign folder name for load product's image
                         if (ketQua.d.length > 0) {
                             var groupCode = ketQua.d;
                             //alert(maNhom);
@@ -43,13 +44,7 @@ function loadGioHang() {
 
                                 lstHtml += "<div class='col-xs-4'>";
                                 var imageFolder = "";
-                                
-                                //Lay ma nhom 
-                                
-                                //alert(maNhom);
-                                //alert(document.getElementById("hdfMaNhom").value);
-                                //maNhom = document.getElementById("hdfMaNhom").value.toString();
-
+                               
                                 if (groupCode == "NHH_001") {
                                     imageFolder = "DONGHO";
                                 }
@@ -162,35 +157,7 @@ function loadGioHang() {
 
 }
 
-function changeMaNhom(retString) {
-    maNhom = retString;
-    document.getElementById('hdfMaNhom').value = maNhom;
-    alert(document.getElementById('hdfMaNhom').value.toString());
-    
-}
 
-function getMaNhom(maSanPham) {
-    return 
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json;charset=utf-8',
-        dataType: 'json',
-        data: maSanPham,
-        url: 'CartPage.aspx/fGetDanhSachChiTietDonHang',
-        success: function (response) {
-            if (response.d == null) {
-                //alert("ma nhom rong");
-                changeMaNhom("NULL");
-            }
-            if (response.d.length > 0) {
-                changeMaNhom(response);
-            }
-
-            
-        }
-    });
-    
-}
 function number_format(number, decimals, dec_point, thousands_sep) {
     // http://kevin.vanzonneveld.net
     // + original by: Jonas Raoni Soares Silva (http://www.jsfromhell.com)

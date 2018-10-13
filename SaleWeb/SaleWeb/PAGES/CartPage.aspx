@@ -166,7 +166,7 @@
         <!-- HiddenField -->
         <asp:HiddenField ID="hdfMaNhom" runat="server" ClientIDMode="Static"/>
         
-        
+        <asp:HiddenField ID="language" runat="server" ClientIDMode="Static" />
     </form>
 </body>
 </html>

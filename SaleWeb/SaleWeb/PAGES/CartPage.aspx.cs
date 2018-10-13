@@ -28,6 +28,8 @@ namespace SaleWeb.PAGES
                 dropdownMenuTaiKhoan.InnerHtml = HttpContext.Current.Session["DANGNHAP"].ToString() + " <i class='fa fa-sign-in'></i>";
 
                 string key= System.Configuration.ConfigurationManager.AppSettings["language"];
+
+
             }
             else
             {
