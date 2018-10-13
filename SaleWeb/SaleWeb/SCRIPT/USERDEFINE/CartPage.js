@@ -12,10 +12,10 @@ function loadGioHang() {
         contentType: 'application/json;charset=utf-8',
         dataType: 'json',
         data: tempOrderId,
-        url: 'CartPage.aspx/fGetDanhSachChiTietDonHang',
+        url: 'CartPage.aspx/fGetListOrderDetails',
         success: function (result) {
             if (result.d == null) {
-                alert("asfnasnf");
+                alert("Cant load your Cart!");
                 return;
             }
             
@@ -27,7 +27,7 @@ function loadGioHang() {
                     contentType: 'application/json;charset=utf-8',
                     dataType: 'json',
                     data: productCode,
-                    url: 'CartPage.aspx/fGetMaNhom',
+                    url: 'CartPage.aspx/fGetGroup',
                     success: function (ketQua) {
                         if (ketQua.d == null) {
                             alert("ma nhom rong");
