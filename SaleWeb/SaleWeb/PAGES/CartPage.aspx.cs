@@ -26,8 +26,8 @@ namespace SaleWeb.PAGES
             if (HttpContext.Current.Session["DANGNHAP"] != null && HttpContext.Current.Session["DANGNHAP"].ToString() != "" )
             {
                 dropdownMenuTaiKhoan.InnerHtml = HttpContext.Current.Session["DANGNHAP"].ToString() + " <i class='fa fa-sign-in'></i>";
-                
 
+                string key= System.Configuration.ConfigurationManager.AppSettings["language"];
             }
             else
             {
@@ -76,7 +76,7 @@ namespace SaleWeb.PAGES
 
         #region webMethod
         [WebMethod]
-        public static DM_DONHANG_CHITIET[] fGetDanhSachChiTietDonHang(string maDonHang)
+        public static DM_DONHANG_CHITIET[] fGetListOrderDetails(string maDonHang)
         {
             if (checkSSGioHang())
             {
@@ -134,7 +134,7 @@ namespace SaleWeb.PAGES
 
         }
         [WebMethod]
-        public static string fGetMaNhom(string maSanPham)
+        public static string fGetGroup(string maSanPham)
         {
            
             DataTable dt = sp.getDataTable("SP_GIOHANG", new string[] { "@flag", "@maSanPham" }, new object[] { 3, maSanPham });
