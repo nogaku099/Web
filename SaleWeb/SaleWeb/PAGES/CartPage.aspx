@@ -106,7 +106,7 @@
 
 
         <%--Div noi dung--%>
-        <div runat="server" class="container" id="hienGioHang" style="margin-top:120px;">
+        <div runat="server" class="container" style="margin-top:120px;">
             <%--Row Thông tin--%>
             <div class="row backgroundRow">
                 <div class="col-xs-6">
@@ -131,7 +131,7 @@
             </div>
             <br />
             <%--Row SanPham--%>
-            <asp:Panel id="gioHangODa"  OnLoad="gioHangODay_Load" runat="server" Width="100%">
+            <asp:Panel id="cartHere"  OnLoad="gioHangODay_Load" runat="server" Width="100%">
 
             </asp:Panel>
 

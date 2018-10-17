@@ -40,13 +40,13 @@ namespace SaleWeb.PAGES {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl hienGioHang;
         
         /// <summary>
-        /// gioHangODa control.
+        /// cartHere control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel gioHangODa;
+        protected global::System.Web.UI.WebControls.Panel cartHere;
         
         /// <summary>
         /// hdfMaNhom control.

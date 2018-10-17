@@ -50,6 +50,18 @@ namespace SaleWeb.PAGES
                 return false;
             }
         }
+
+        public static string getOrderCode()
+        {
+            //orderCode = Session GIOHANG
+            string orderCode = "";
+            if (HttpContext.Current.Session["GIOHANG"] != null && HttpContext.Current.Session["GIOHANG"].ToString() != "")
+            {
+                orderCode = HttpContext.Current.Session["GIOHANG"].ToString();
+                return orderCode;
+            }
+            else return orderCode;
+        }
         public void fTaoGioHang()
         {
            
@@ -161,11 +173,27 @@ namespace SaleWeb.PAGES
             }
             return null;
         }
+
+        [WebMethod]
+        public static bool fUpdateOrderDetail(string orderCode, string orderDetailCode, string color, string size, string productCode, float quantity, float total)
+        {
+
+            int result = 0;
+            
+            result = sp.updateTable("SP_GIOHANG", new string[] { "@flag", "@soLuong","@thanhTien","@maDonHang","@maChiTietDonHang",
+            "@mau","@size","@maSanPham"}, new object[] { 4, quantity,total,orderCode,orderDetailCode,color,size,productCode });
+            if (result != -1)
+            {
+                return true;
+            }
+            else return false;
+            
+        }
         #endregion
 
         protected void gioHangODay_Load(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "loadGioHang()", true);
+            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "loadCart()", true);
         }
     }
 }

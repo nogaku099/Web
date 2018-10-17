@@ -1,5 +1,5 @@
 ﻿
-function loadGioHang() {
+function loadCart() {
     
     var lstHtml = "";
     var total = 0;
@@ -118,7 +118,7 @@ function loadGioHang() {
                                 lstHtml += "</div>";
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
-                                lstHtml += "<span id='lblTotalPrice" + formatItem + " '>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
+                                lstHtml += "<span id='lblTotalPrice" + formatItem + "'>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
                                 //document.getElementById('lblThanhTienSanPham').InnerHtml = result.d[i].THANHTIEN;
                                 total += parseFloat(result.d[i].THANHTIEN.toString());
                                 //alert(total.toString());
@@ -137,7 +137,7 @@ function loadGioHang() {
                             lstHtml += "<br />";
                             lstHtml += "</div>";
 
-                            document.getElementById('gioHangODa').innerHTML = lstHtml;
+                            document.getElementById('cartHere').innerHTML = lstHtml;
                             document.getElementById('lblTotal').innerHTML = number_format(total, 0).toString();
                             document.getElementById('lblTotalQuantity').innerHTML = totalQuantity.toString();
 
@@ -218,16 +218,58 @@ function getQuantity(str, type) {
     return [currentQuantity,tempID];
     
 }
+function getInformationCurrentRow(str , type) {
+    var productCode = "";
+    var color = "";
+    var size = "";
+    var quantity = 0;
+    var unitPrice = 0;
+    var tempID = "";
+    if (type == "-")
+    {
+        tempID = str.substring(9, str.length);
+        productCode = str.substring(9, 19);
+        color = str.substring(20, str.indexOf("_", 20));
+        size = str.substring(str.indexOf("_", 20) + 1, str.length);
 
+    }
+    if (type == "+")
+    {
+        tempID = str.substring(8, str.length);
+        productCode = str.substring(8, 18);
+        color = str.substring(19, str.indexOf("_", 19));
+        size = str.substring(str.indexOf("_", 19) + 1, str.length);
+    }
+    var idCurrentQuantity = "lblQuantity_" + tempID;
+    
+    var idCurrentUnitPrice = "lblUnitPrice_" + tempID;
+
+    var idQuantity = "lblQuantity_" + tempID;
+
+    var idTotalPrice = "lblTotalPrice_" + tempID;
+    quantity = document.getElementById(idCurrentQuantity).value;
+    var strUnitPrice = "";
+    strUnitPrice = document.getElementById(idCurrentUnitPrice).innerHTML;
+
+    unitPrice = parseFloat(
+        strUnitPrice.replace(/[^\d]/g, '')
+    );
+
+    return [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice];
+}
 function minusQuantity(id) {
 
-    var [quantity,idQuantity] =[0," "];
+    
+    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["","","",0,0,"",""];
 
-    [quantity, idQuantity] = getQuantity(id, "-");
+    [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "-");
 
     if (quantity > 1) {
         quantity--;
+        var total = unitPrice * quantity;
+        
         document.getElementById(idQuantity).value = quantity;
+        document.getElementById(idTotalPrice).innerHTML = number_format(total, 0).toString();
     }
     else {
         alert("Ko the giam");
@@ -235,16 +277,48 @@ function minusQuantity(id) {
 }
 
 function plusQuantity(id) {
-    var [quantity, idQuantity] = [0, " "];
+    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["", "", "", 0, 0, "",""];
 
-    [quantity, idQuantity] = getQuantity(id, "+");
-   
+    [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "+");
     quantity++;
     //handle display quantity
-
-    document.getElementById(idQuantity).value = quantity;
+    var total = unitPrice * quantity;
     
+    document.getElementById(idQuantity).value = quantity;
+    document.getElementById(idTotalPrice).innerHTML = number_format(total, 0).toString();
+    //var tempOrderId = "{maDonHang:'" + 1 + "'}";
+    //string orderCode, string orderDetailCode, string color, string size, string productCode, float quantity, float total
+//    var dataUpdate = "";
+//    dataUpdate = {
+//        "orderCode": "21", "orderDetailCode": "CT21",
+//        "color": color, "size": size, "productCode": productCode, "quantity": quantity,
+//        "total": total
+//    };
+//    dataUpdate = "{orderCode:'21' ", orderDetailCode: 'CT21', color: '" + color +"', size:
+//} "
 
+//var bien = "{madon:'" + 1 + "'"; // session don hang
+//bien += ",makhach:'" + 2 + "'"; // session dang nhap
+//bien += ",masanpham:'" + mahang + "'";
+//bien += ",soluong:'" + 1 + "'";
+//bien += ",size:'" + s + "'";
+//bien += ",mau:'" + m + "'}";
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: dataUpdate,
+        url: 'CartPage.aspx/fUpdateOrderDetail',
+        success: function (result) {
+            if (result.d == null) {
+                alert("Cant load your Cart!");
+                return;
+            }
+            return;
+        }, error: function (result) {
+            alert(result.responseText);
+        }
+    });
 
 
 }
