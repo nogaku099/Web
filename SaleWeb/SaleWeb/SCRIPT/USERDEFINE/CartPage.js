@@ -96,7 +96,7 @@ function loadCart() {
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
 
-                                lstHtml += "<input type='text' id='lblQuantity" + formatItem
+                                lstHtml += "<input type='number' class='modifyInputNumber' id='lblQuantity" + formatItem
                                     + "' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
                                 totalQuantity += parseFloat(result.d[i].SOLUONG.toString());
                                 
@@ -392,6 +392,6 @@ function deleteProduct (id){
 
 }
 
-function getButtonID(obj) {
-    return obj;
+function updateTotalQuantityAndTotal() {
+    $ajax();
 }
