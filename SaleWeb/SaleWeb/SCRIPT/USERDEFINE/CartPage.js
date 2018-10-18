@@ -15,7 +15,7 @@ function loadCart() {
         url: 'CartPage.aspx/fGetListOrderDetails',
         success: function (result) {
             if (result.d == null) {
-                alert("Cant load your Cart!");
+                alertCustom("Error","Cant load your Cart!");
                 return;
             }
             
@@ -30,13 +30,13 @@ function loadCart() {
                     url: 'CartPage.aspx/fGetGroup',
                     success: function (ketQua) {
                         if (ketQua.d == null) {
-                            alert("Cant get group code");
+                            alertCustom("Error","Cant get group code");
 
                         }
                         //Get group code of each product to assign folder name for load product's image
                         if (ketQua.d.length > 0) {
                             var groupCode = ketQua.d;
-                            //alert(maNhom);
+                        
                             for (var i = 0; i < result.d.length; i++) {
                                 var formatItem = "";
                                 formatItem = "_" + result.d[i].MASANPHAM.toString()
@@ -118,7 +118,7 @@ function loadCart() {
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
                                 lstHtml += "<input type='button'" + " id='btnDelete" + formatItem + "'"
-                                    + "value = 'Delete' class='buttonDelete' style = 'background-color:white;width:100%;border:none;' onclick='deleteProduct(this.id)' /> ";
+                                    + "value = 'Delete' class='buttonDelete' style = 'background-color:white;width:100%;border:none;' onclick='callAlertCustomConfirm(this.id)' /> ";
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
@@ -136,7 +136,7 @@ function loadCart() {
                             document.getElementById('lblTotalQuantity').innerHTML = totalQuantity.toString();
 
                         }
-                        //console.log(ketQua.d.toString());
+                        
                         return;
 
                     }, error: function (ketQua) {
@@ -150,7 +150,9 @@ function loadCart() {
     });
 
 }
-
+function callAlertCustomConfirm(id) {
+    alertConfirmCustomDelete("Question","Do you want to delete this item from your Cart?","Yes","No",id);
+}
 
 function number_format(number, decimals, dec_point, thousands_sep) {
     // http://kevin.vanzonneveld.net
@@ -222,7 +224,7 @@ function getInformationCurrentRow(str , type) {
         size = str.substring(19, str.indexOf("_", 19));
         color = str.substring(str.indexOf("_", 19) + 1, str.length);
     }
-    if (type ="del")
+    if (type == "del")
     {
         var tempID = str.substring(10, str.length);
         var productCode = str.substring(10, 20);
@@ -245,6 +247,26 @@ function getInformationCurrentRow(str , type) {
     );
     
     return [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice];
+}
+
+function alertConfirmCustomDelete(title, mess, yes, no, id) {
+    BootstrapDialog.show({
+        title: title,
+        message: mess,
+        buttons: [{
+            label: yes,
+            cssClass: 'demo',
+            action: function (Itself) {
+                deleteProduct(id);
+                Itself.close();
+            }
+        }, {
+            label: no,
+            action: function (Itself) {
+                Itself.close();
+            }
+        }]
+    });
 }
 function minusQuantity(id) {
 
@@ -277,7 +299,7 @@ function minusQuantity(id) {
             url: 'CartPage.aspx/fUpdateOrderDetail',
             success: function (result) {
                 if (result.d == false) {
-                    alert("Cant load your Cart!");
+                    alertCustom("Error", "Cant update this item please check your session again!");
                     return;
                 }
                 return;
@@ -287,7 +309,7 @@ function minusQuantity(id) {
         });
     }
     else {
-        alert("Ko the giam");
+        alertCustom("Error","You can not change value into 0!");
     }
 }
 
@@ -318,7 +340,7 @@ function plusQuantity(id) {
         url: 'CartPage.aspx/fUpdateOrderDetail',
         success: function (result) {
             if (result.d == false) {
-                alert("Cant load your Cart!");
+                alertCustom("Error","Cant update this item please check your session again!");
                 return;
             }
             return;
@@ -339,6 +361,8 @@ function deleteProduct (id){
     //handle display
     var elemRow = document.getElementById(currentRowId);
     var elemHr = document.getElementById(currentHrId);
+
+
     elemRow.parentElement.removeChild(elemRow);
     elemHr.parentElement.removeChild(elemHr);
 
@@ -357,7 +381,7 @@ function deleteProduct (id){
         url: 'CartPage.aspx/fDeleteOrderDetail',
         success: function (result) {
             if (result.d == false) {
-                alert("Cant load your Cart!");
+                alertCustom("Error", "Cant delete this item please check your session again!");
                 return;
             }
             return;
