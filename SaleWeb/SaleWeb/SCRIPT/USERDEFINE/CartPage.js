@@ -38,7 +38,12 @@ function loadCart() {
                             var groupCode = ketQua.d;
                             //alert(maNhom);
                             for (var i = 0; i < result.d.length; i++) {
-                                lstHtml += "<div class='row backgroundRowProduct'>";
+                                var formatItem = "";
+                                formatItem = "_" + result.d[i].MASANPHAM.toString()
+                                    + "_" + result.d[i].SIZE.toString() + "_" + result.d[i].MAU.toString();
+                                var idRow = "";
+                                idRow = "row" + formatItem;
+                                lstHtml += "<div class='row backgroundRowProduct' id='" + idRow + "'>";
                                 lstHtml += "<div class='col-xs-6'>";
                                 lstHtml += "<div class='row'>";
 
@@ -63,9 +68,7 @@ function loadCart() {
                                 else if (groupCode == "NHH_006") {
                                     imageFolder = "KHAC";
                                 }
-                                var formatItem = "";
-                                formatItem = "_" + result.d[i].MASANPHAM.toString()
-                                    + "_" + result.d[i].SIZE.toString() + "_" + result.d[i].MAU.toString();
+                                
                                 lstHtml += "<img src='../IMAGES/" + imageFolder + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
 
                                 lstHtml += "</div>";
@@ -131,7 +134,9 @@ function loadCart() {
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
-                                lstHtml += "<hr style='margin-top:2px;margin-bottom:2px;background-color:#e00d0df2;border-color:#e00d0df2;margin-left:20px;margin-right:20px;'/>";
+                                var idHr = "hr" + formatItem;
+                                lstHtml += "<hr style='margin-top:2px;margin-bottom:2px;background-color:#e00d0df2;border-color:#e00d0df2;margin-left:20px;margin-right:20px;'" +
+                                    "id='" + idHr + "'/>";
 
                             }
                             lstHtml += "<br />";
@@ -224,21 +229,23 @@ function getInformationCurrentRow(str , type) {
     var size = "";
     var quantity = 0;
     var unitPrice = 0;
+
+
     var tempID = "";
     if (type == "-")
     {
         tempID = str.substring(9, str.length);
         productCode = str.substring(9, 19);
-        color = str.substring(20, str.indexOf("_", 20));
-        size = str.substring(str.indexOf("_", 20) + 1, str.length);
+        size = str.substring(20, str.indexOf("_", 20));
+        color = str.substring(str.indexOf("_", 20) + 1, str.length);
 
     }
     if (type == "+")
     {
         tempID = str.substring(8, str.length);
         productCode = str.substring(8, 18);
-        color = str.substring(19, str.indexOf("_", 19));
-        size = str.substring(str.indexOf("_", 19) + 1, str.length);
+        size = str.substring(19, str.indexOf("_", 19));
+        color = str.substring(str.indexOf("_", 19) + 1, str.length);
     }
     var idCurrentQuantity = "lblQuantity_" + tempID;
     
@@ -254,7 +261,7 @@ function getInformationCurrentRow(str , type) {
     unitPrice = parseFloat(
         strUnitPrice.replace(/[^\d]/g, '')
     );
-
+    
     return [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice];
 }
 function minusQuantity(id) {
@@ -263,13 +270,39 @@ function minusQuantity(id) {
     var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["","","",0,0,"",""];
 
     [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "-");
-
+    
     if (quantity > 1) {
         quantity--;
         var total = unitPrice * quantity;
         
         document.getElementById(idQuantity).value = quantity;
         document.getElementById(idTotalPrice).innerHTML = number_format(total, 0).toString();
+
+        var dataUpdate = "{orderCode:'" + 1 + "'"; // get from Session
+        dataUpdate += ",orderDetailCode:'" + 2 + "'";
+        dataUpdate += ",color:'" + color + "'";
+        dataUpdate += ",size:'" + size + "'";
+        dataUpdate += ",productCode:'" + productCode + "'";
+        dataUpdate += ",quantity:'" + quantity + "'";
+        dataUpdate += ",total:'" + total + "'}";
+
+        //Update to DB
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            data: dataUpdate,
+            url: 'CartPage.aspx/fUpdateOrderDetail',
+            success: function (result) {
+                if (result.d == false) {
+                    alert("Cant load your Cart!");
+                    return;
+                }
+                return;
+            }, error: function (result) {
+                alert(result.responseText);
+            }
+        });
     }
     else {
         alert("Ko the giam");
@@ -286,23 +319,15 @@ function plusQuantity(id) {
     
     document.getElementById(idQuantity).value = quantity;
     document.getElementById(idTotalPrice).innerHTML = number_format(total, 0).toString();
-    //var tempOrderId = "{maDonHang:'" + 1 + "'}";
-    //string orderCode, string orderDetailCode, string color, string size, string productCode, float quantity, float total
-//    var dataUpdate = "";
-//    dataUpdate = {
-//        "orderCode": "21", "orderDetailCode": "CT21",
-//        "color": color, "size": size, "productCode": productCode, "quantity": quantity,
-//        "total": total
-//    };
-//    dataUpdate = "{orderCode:'21' ", orderDetailCode: 'CT21', color: '" + color +"', size:
-//} "
-
-//var bien = "{madon:'" + 1 + "'"; // session don hang
-//bien += ",makhach:'" + 2 + "'"; // session dang nhap
-//bien += ",masanpham:'" + mahang + "'";
-//bien += ",soluong:'" + 1 + "'";
-//bien += ",size:'" + s + "'";
-//bien += ",mau:'" + m + "'}";
+    
+    //Update to DB
+    var dataUpdate = "{orderCode:'" + 1 + "'"; // get from Session
+    dataUpdate += ",orderDetailCode:'" + 2 + "'";
+    dataUpdate += ",color:'" + color + "'";
+    dataUpdate += ",size:'" + size + "'";
+    dataUpdate += ",productCode:'" + productCode + "'";
+    dataUpdate += ",quantity:'" + quantity + "'";
+    dataUpdate += ",total:'" + total + "'}";
     $.ajax({
         type: 'POST',
         contentType: 'application/json;charset=utf-8',
@@ -310,7 +335,7 @@ function plusQuantity(id) {
         data: dataUpdate,
         url: 'CartPage.aspx/fUpdateOrderDetail',
         success: function (result) {
-            if (result.d == null) {
+            if (result.d == false) {
                 alert("Cant load your Cart!");
                 return;
             }
