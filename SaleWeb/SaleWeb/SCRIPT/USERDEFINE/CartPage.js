@@ -129,7 +129,7 @@ function loadCart() {
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
                                 lstHtml += "<input type='button'" + " id='btnDelete" + formatItem + "'"
-                                + "value = 'Delete' class='buttonDelete' style = 'background-color:white;width:100%;border:none;' /> ";
+                                    + "value = 'Delete' class='buttonDelete' style = 'background-color:white;width:100%;border:none;' onclick='deleteProduct(this.id)' /> ";
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
@@ -247,6 +247,13 @@ function getInformationCurrentRow(str , type) {
         size = str.substring(19, str.indexOf("_", 19));
         color = str.substring(str.indexOf("_", 19) + 1, str.length);
     }
+    if (type ="del")
+    {
+        var tempID = str.substring(10, str.length);
+        var productCode = str.substring(10, 20);
+        var size = str.substring(21, str.indexOf("_", 21));
+        var color = str.substring(str.indexOf("_", 21) + 1, str.length);
+    }
     var idCurrentQuantity = "lblQuantity_" + tempID;
     
     var idCurrentUnitPrice = "lblUnitPrice_" + tempID;
@@ -347,7 +354,42 @@ function plusQuantity(id) {
 
 
 }
-function deleteProduct (){
+function deleteProduct (id){
+    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["", "", "", 0, 0, "", ""];
+
+    [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "del");
+
+    var currentRowId = "row_" + productCode + "_" + size + "_" + color;
+    var currentHrId = "hr_" + productCode + "_" + size + "_" + color;
+    //handle display
+    var elemRow = document.getElementById(currentRowId);
+    var elemHr = document.getElementById(currentHrId);
+    elemRow.parentElement.removeChild(elemRow);
+    elemHr.parentElement.removeChild(elemHr);
+
+    //update to db
+    var dataUpdate = "{orderCode:'" + 1 + "'"; // get from Session
+    dataUpdate += ",orderDetailCode:'" + 2 + "'";
+    dataUpdate += ",color:'" + color + "'";
+    dataUpdate += ",size:'" + size + "'";
+    dataUpdate += ",productCode:'" + productCode + "'}";
+    
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: dataUpdate,
+        url: 'CartPage.aspx/fDeleteOrderDetail',
+        success: function (result) {
+            if (result.d == false) {
+                alert("Cant load your Cart!");
+                return;
+            }
+            return;
+        }, error: function (result) {
+            alert(result.responseText);
+        }
+    });
 
 }
 

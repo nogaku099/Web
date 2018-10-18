@@ -175,7 +175,7 @@ namespace SaleWeb.PAGES
         }
 
         [WebMethod]
-        public static bool fUpdateOrderDetail(string orderCode, string orderDetailCode, string color, string size, string productCode, float quantity, float total) // sai vi tri
+        public static bool fUpdateOrderDetail(string orderCode, string orderDetailCode, string color, string size, string productCode, float quantity, float total) 
         {
             if (checkSSGioHang())
             {
@@ -192,6 +192,26 @@ namespace SaleWeb.PAGES
             }
             else return false;
             
+        }
+
+        [WebMethod]
+        public static bool fDeleteOrderDetail(string orderCode, string orderDetailCode, string color, string size, string productCode)
+        {
+            if (checkSSGioHang())
+            {
+                orderCode = HttpContext.Current.Session["GIOHANG"].ToString();
+                orderDetailCode = "CT" + orderCode;
+            }
+            int result = 0;
+
+            result = sp.updateTable("SP_GIOHANG", new string[] { "@flag","@maDonHang","@maChiTietDonHang",
+            "@mau","@size","@maSanPham"}, new object[] { 5, orderCode, orderDetailCode, color, size, productCode });
+            if (result != -1)
+            {
+                return true;
+            }
+            else return false;
+
         }
         #endregion
 
