@@ -73,7 +73,7 @@ function loadCart() {
 
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-8' style='text-align:left'>";
-                                //lstHtml += "<span id='lblTenSanPham'></span>";
+                                
                                 lstHtml += result.d[i].TENSANPHAM.toString();
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
@@ -83,48 +83,37 @@ function loadCart() {
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
 
                                 lstHtml += "<span id='lblUnitPrice" + formatItem + "'>" + number_format(parseFloat(result.d[i].DONGIA).toString(), 0).toString() + "</span>";
-                                //document.getElementById('lblGiaSanPham').InnerHtml = result.d[i].DONGIA;
+                               
                                 lstHtml += "</div>";
                                 lstHtml += "<div class ='col-xs-3'style='padding-left:0px;padding-right:0px;'>";
-                                //lstHtml += "<div class='row'>";
+                                
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
 
-                                //"<input type='button'" + " id='btnDelete" + formatItem + "'"
-                                //+ "value = 'Delete' class='buttonDelete' style = 'background-color:white;width:100%;border:none;' /> ";
+                                
                                 lstHtml += "<input type='button' onclick='minusQuantity(this.id)' style='width:100%;padding:0px;margin-top:5px' id='btnMinus"
                                     + formatItem + "' value='-'/> ";
 
-
-                                //lstHtml += "<button class='btn' onclick='minusQuantity()' style='width:100%;' id='btnMinus"
-                                //    + formatItem + "'> ";
-                                //lstHtml += "-";
-                                //lstHtml += "</button>";
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
 
                                 lstHtml += "<input type='text' id='lblQuantity" + formatItem
                                     + "' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
                                 totalQuantity += parseFloat(result.d[i].SOLUONG.toString());
-                                //document.getElementById('lblSoLuong').InnerHtml = result.d[i].SOLUONG;
+                                
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
-                                //lstHtml += "<button class='btn' onclick='plusQuantity()' style='width:100%;' id='btnPlus"
-                                //    + formatItem + "'> ";
-                                //lstHtml += "+";
-                                //lstHtml += "</button>";
+                                
                                 lstHtml += "<input type='button' onclick='plusQuantity(this.id)' style='width:100%;padding:0px;margin-top:5px' id='btnPlus"
                                     + formatItem + "' value='+'/> ";
                                 lstHtml += "</div>";
-
-                                //lstHtml += "</div>";
-
+                                
                                 lstHtml += "</div>";
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
                                 lstHtml += "<span id='lblTotalPrice" + formatItem + "'>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
-                                //document.getElementById('lblThanhTienSanPham').InnerHtml = result.d[i].THANHTIEN;
+                               
                                 total += parseFloat(result.d[i].THANHTIEN.toString());
-                                //alert(total.toString());
+                                
                                 lstHtml += "</div>";
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
@@ -208,21 +197,7 @@ function alertConfirmCustom(title, mess, yes, no) {
         }]
     });
 }
-function getQuantity(str, type) {
-    var tempID = "";
-    if (type == "-") {
-        tempID = str.substring(8, str.len);
-        tempID = "lblQuantity" + tempID;
-    }
-    if (type == "+") {
-        tempID = str.substring(7, str.len);
-        tempID = "lblQuantity" + tempID;
-    }
-    var currentQuantity = document.getElementById(tempID).value;
-   
-    return [currentQuantity,tempID];
-    
-}
+
 function getInformationCurrentRow(str , type) {
     var productCode = "";
     var color = "";
