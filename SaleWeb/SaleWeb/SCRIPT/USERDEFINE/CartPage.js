@@ -1,12 +1,12 @@
 ﻿
 function loadCart() {
-    
+
     var lstHtml = "";
     var total = 0;
     var totalQuantity = 0;
     lstHtml += "<br/>";
-    var tempOrderId = "{maDonHang:'" + 1 + "'}";
-    
+    var tempOrderId = "{orderCode:'" + 1 + "'}";
+
     $.ajax({
         type: 'POST',
         contentType: 'application/json;charset=utf-8',
@@ -15,13 +15,13 @@ function loadCart() {
         url: 'CartPage.aspx/fGetListOrderDetails',
         success: function (result) {
             if (result.d == null) {
-                alertCustom("Error","Cant load your Cart!");
+                alertCustom("Error", "Cant load your Cart!");
                 return;
             }
-            
+
             if (result.d.length > 0) {
                 //alert("ok");
-                var productCode = "{maSanPham:'" + result.d[0].MASANPHAM.toString() + "'}";
+                var productCode = "{productCode:'" + result.d[0].MASANPHAM.toString() + "'}";
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json;charset=utf-8',
@@ -30,13 +30,13 @@ function loadCart() {
                     url: 'CartPage.aspx/fGetGroup',
                     success: function (ketQua) {
                         if (ketQua.d == null) {
-                            alertCustom("Error","Cant get group code");
+                            alertCustom("Error", "Cant get group code");
 
                         }
                         //Get group code of each product to assign folder name for load product's image
                         if (ketQua.d.length > 0) {
                             var groupCode = ketQua.d;
-                        
+
                             for (var i = 0; i < result.d.length; i++) {
                                 var formatItem = "";
                                 formatItem = "_" + result.d[i].MASANPHAM.toString()
@@ -49,7 +49,7 @@ function loadCart() {
 
                                 lstHtml += "<div class='col-xs-4'>";
                                 var imageFolder = "";
-                               
+
                                 if (groupCode == "NHH_001") {
                                     imageFolder = "DONGHO";
                                 }
@@ -68,12 +68,12 @@ function loadCart() {
                                 else if (groupCode == "NHH_006") {
                                     imageFolder = "KHAC";
                                 }
-                                
+
                                 lstHtml += "<img src='../IMAGES/" + imageFolder + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
 
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-8' style='text-align:left'>";
-                                
+
                                 lstHtml += result.d[i].TENSANPHAM.toString();
                                 lstHtml += "</div>";
                                 lstHtml += "</div>";
@@ -83,37 +83,37 @@ function loadCart() {
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
 
                                 lstHtml += "<span id='lblUnitPrice" + formatItem + "'>" + number_format(parseFloat(result.d[i].DONGIA).toString(), 0).toString() + "</span>";
-                               
+
                                 lstHtml += "</div>";
                                 lstHtml += "<div class ='col-xs-3'style='padding-left:0px;padding-right:0px;'>";
-                                
+
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
 
-                                
+
                                 lstHtml += "<input type='button' onclick='minusQuantity(this.id)' style='width:100%;padding:0px;margin-top:5px' id='btnMinus"
                                     + formatItem + "' value='-'/> ";
 
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
 
-                                lstHtml += "<input type='number' class='modifyInputNumber' id='lblQuantity" + formatItem
+                                lstHtml += "<input type='number' onchange='changeValueQuantity(this.id)' min='1' max='100' class='modifyInputNumber' id='lblQuantity" + formatItem
                                     + "' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
                                 totalQuantity += parseFloat(result.d[i].SOLUONG.toString());
-                                
+
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;'>";
-                                
+
                                 lstHtml += "<input type='button' onclick='plusQuantity(this.id)' style='width:100%;padding:0px;margin-top:5px' id='btnPlus"
                                     + formatItem + "' value='+'/> ";
                                 lstHtml += "</div>";
-                                
+
                                 lstHtml += "</div>";
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
                                 lstHtml += "<span id='lblTotalPrice" + formatItem + "'>" + number_format(parseFloat(result.d[i].THANHTIEN).toString(), 0).toString() + "</span>";
-                               
+
                                 total += parseFloat(result.d[i].THANHTIEN.toString());
-                                
+
                                 lstHtml += "</div>";
 
                                 lstHtml += "<div class ='col-xs-3'style='margin-top:5px;'>";
@@ -136,22 +136,22 @@ function loadCart() {
                             document.getElementById('lblTotalQuantity').innerHTML = totalQuantity.toString();
 
                         }
-                        
+
                         return;
 
                     }, error: function (ketQua) {
                         alert(ketQua.responseText);
                     }
-                });                          
+                });
             }
         }, error: function (result) {
-            alert(result.statusText);
+            alert(result.responseText);
         }
     });
 
 }
 function callAlertCustomConfirm(id) {
-    alertConfirmCustomDelete("Question","Do you want to delete this item from your Cart?","Yes","No",id);
+    alertConfirmCustomDelete("Question", "Do you want to delete this item from your Cart?", "Yes", "No", id);
 }
 
 function number_format(number, decimals, dec_point, thousands_sep) {
@@ -200,7 +200,7 @@ function alertConfirmCustom(title, mess, yes, no) {
     });
 }
 
-function getInformationCurrentRow(str , type) {
+function getInformationCurrentRow(str, type) {
     var productCode = "";
     var color = "";
     var size = "";
@@ -209,30 +209,34 @@ function getInformationCurrentRow(str , type) {
 
 
     var tempID = "";
-    if (type == "-")
-    {
+    if (type == "-") {
         tempID = str.substring(9, str.length);
         productCode = str.substring(9, 19);
         size = str.substring(20, str.indexOf("_", 20));
         color = str.substring(str.indexOf("_", 20) + 1, str.length);
 
     }
-    if (type == "+")
-    {
+    if (type == "+") {
         tempID = str.substring(8, str.length);
         productCode = str.substring(8, 18);
         size = str.substring(19, str.indexOf("_", 19));
         color = str.substring(str.indexOf("_", 19) + 1, str.length);
     }
-    if (type == "del")
-    {
+    if (type == "del") {
         var tempID = str.substring(10, str.length);
         var productCode = str.substring(10, 20);
         var size = str.substring(21, str.indexOf("_", 21));
         var color = str.substring(str.indexOf("_", 21) + 1, str.length);
     }
+    if (type == "change") {
+        var tempID = str.substring(12, str.length);
+        var productCode = str.substring(12, 22);
+        var size = str.substring(23, str.indexOf("_", 23));
+        var color = str.substring(str.indexOf("_", 23) + 1, str.length);
+
+    }
     var idCurrentQuantity = "lblQuantity_" + tempID;
-    
+
     var idCurrentUnitPrice = "lblUnitPrice_" + tempID;
 
     var idQuantity = "lblQuantity_" + tempID;
@@ -245,7 +249,7 @@ function getInformationCurrentRow(str , type) {
     unitPrice = parseFloat(
         strUnitPrice.replace(/[^\d]/g, '')
     );
-    
+
     return [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice];
 }
 
@@ -255,13 +259,13 @@ function alertConfirmCustomDelete(title, mess, yes, no, id) {
         message: mess,
         buttons: [{
             label: yes,
-            cssClass: 'demo',
             action: function (Itself) {
                 deleteProduct(id);
                 Itself.close();
             }
         }, {
             label: no,
+            cssClass: 'demo',
             action: function (Itself) {
                 Itself.close();
             }
@@ -270,15 +274,15 @@ function alertConfirmCustomDelete(title, mess, yes, no, id) {
 }
 function minusQuantity(id) {
 
-    
-    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["","","",0,0,"",""];
+
+    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["", "", "", 0, 0, "", ""];
 
     [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "-");
-    
+
     if (quantity > 1) {
         quantity--;
         var total = unitPrice * quantity;
-        
+
         document.getElementById(idQuantity).value = quantity;
         document.getElementById(idTotalPrice).innerHTML = number_format(total, 0).toString();
 
@@ -307,23 +311,24 @@ function minusQuantity(id) {
                 alert(result.responseText);
             }
         });
+        updateTotalMoneyAndTotalQuantity();
     }
     else {
-        alertCustom("Error","You can not change value into 0!");
+        alertCustom("Error", "You can not change value into 0!");
     }
 }
 
 function plusQuantity(id) {
-    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["", "", "", 0, 0, "",""];
+    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["", "", "", 0, 0, "", ""];
 
     [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "+");
     quantity++;
     //handle display quantity
     var total = unitPrice * quantity;
-    
+
     document.getElementById(idQuantity).value = quantity;
     document.getElementById(idTotalPrice).innerHTML = number_format(total, 0).toString();
-    
+
     //Update to DB
     var dataUpdate = "{orderCode:'" + 1 + "'"; // get from Session
     dataUpdate += ",orderDetailCode:'" + 2 + "'";
@@ -340,7 +345,31 @@ function plusQuantity(id) {
         url: 'CartPage.aspx/fUpdateOrderDetail',
         success: function (result) {
             if (result.d == false) {
-                alertCustom("Error","Cant update this item please check your session again!");
+                alertCustom("Error", "Cant update this item please check your session again!");
+                return;
+            }
+            loadCart();
+            return;
+        }, error: function (result) {
+            alert(result.responseText);
+        }
+    });
+
+    //updateTotalMoneyAndTotalQuantity();
+}
+
+function updateTotalMoneyAndTotalQuantity() {
+    //Update to DB
+    var dataUpdate = "{orderCode:'" + 1 + "'}"; // get from Session
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: dataUpdate,
+        url: 'CartPage.aspx/fUpdateTotalMoneyOfOrder',
+        success: function (result) {
+            if (result.d == false) {
+                alertCustom("Error", "Cant update this item please check your session again!");
                 return;
             }
             return;
@@ -348,10 +377,9 @@ function plusQuantity(id) {
             alert(result.responseText);
         }
     });
-
-
+    //loadCart();
 }
-function deleteProduct (id){
+function deleteProduct(id) {
     var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["", "", "", 0, 0, "", ""];
 
     [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "del");
@@ -372,7 +400,7 @@ function deleteProduct (id){
     dataUpdate += ",color:'" + color + "'";
     dataUpdate += ",size:'" + size + "'";
     dataUpdate += ",productCode:'" + productCode + "'}";
-    
+
     $.ajax({
         type: 'POST',
         contentType: 'application/json;charset=utf-8',
@@ -389,9 +417,52 @@ function deleteProduct (id){
             alert(result.responseText);
         }
     });
-
+    updateTotalMoneyAndTotalQuantity();
+    
 }
+function changeValueQuantity(id) {
+    var currentValue = parseFloat(document.getElementById(id).value);
+    var [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = ["", "", "", 0, 0, "", ""];
+    
+    [productCode, color, size, quantity, unitPrice, idQuantity, idTotalPrice] = getInformationCurrentRow(id, "change");
+    if (currentValue <= 0) {
+        alertCustom("Error", "You cant change quantity into 0 or lower! Default is 1");
+        document.getElementById(id).value = 1;
+        currentValue = 1;
+    }
 
+    var total = unitPrice * currentValue;
+    quantity = currentValue;
+    document.getElementById(idTotalPrice).innerHTML = number_format(total, 0).toString();
+
+    //Update to DB
+    var dataUpdate = "{orderCode:'" + 1 + "'"; // get from Session
+    dataUpdate += ",orderDetailCode:'" + 2 + "'";
+    dataUpdate += ",color:'" + color + "'";
+    dataUpdate += ",size:'" + size + "'";
+    dataUpdate += ",productCode:'" + productCode + "'";
+    dataUpdate += ",quantity:'" + quantity + "'";
+    dataUpdate += ",total:'" + total + "'}";
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: dataUpdate,
+        url: 'CartPage.aspx/fUpdateOrderDetail',
+        success: function (result) {
+            if (result.d == false) {
+                alertCustom("Error", "Cant update this item please check your session again!");
+                return;
+            }
+            loadCart();
+            return;
+        }, error: function (result) {
+            alert(result.responseText);
+        }
+    });
+
+    //updateTotalMoneyAndTotalQuantity();
+}
 function updateTotalQuantityAndTotal() {
     $ajax();
 }

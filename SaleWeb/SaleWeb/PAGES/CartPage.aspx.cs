@@ -15,7 +15,7 @@ namespace SaleWeb.PAGES
     {
         public static StoreProcedure sp;
 
-        public static string maNhom = "";
+        //public static string maNhom = "";
         protected void Page_Load(object sender, EventArgs e)
         {
           
@@ -52,22 +52,24 @@ namespace SaleWeb.PAGES
             }
         }
 
-        public static string getOrderCode()
+        public static List<string> getOrderCodeAndCustomerCode()
         {
             //orderCode = Session GIOHANG
             string orderCode = "";
-            if (HttpContext.Current.Session["GIOHANG"] != null && HttpContext.Current.Session["GIOHANG"].ToString() != "")
+            string customerCode = "";
+            List<string> lst = new List<string>();
+            if (HttpContext.Current.Session["GIOHANG"] != null && HttpContext.Current.Session["GIOHANG"].ToString() != ""
+                && HttpContext.Current.Session["MAKHACH"] != null && HttpContext.Current.Session["MAKHACH"].ToString() != "")
             {
                 orderCode = HttpContext.Current.Session["GIOHANG"].ToString();
-                return orderCode;
+                customerCode = HttpContext.Current.Session["MAKHACH"].ToString();
+                lst.Add(orderCode);
+                lst.Add(customerCode);
+                return lst;
             }
-            else return orderCode;
+            else return null;
         }
-        public void fTaoGioHang()
-        {
-           
-        }
-
+        
         public StoreProcedure getConnect()
         {
             string connect = ConfigurationManager.ConnectionStrings["Connect"].ConnectionString;
@@ -81,27 +83,29 @@ namespace SaleWeb.PAGES
             StoreProcedure sp = new StoreProcedure(server, data, user, pass);
             return sp;
         }
-
         
-
-        protected void btnMenuTaiKhoan_Click(object sender, EventArgs e)
-        {
-
-        }
-
         #region webMethod
         [WebMethod]
-        public static DM_DONHANG_CHITIET[] fGetListOrderDetails(string maDonHang)
+        public static DM_DONHANG_CHITIET[] fGetListOrderDetails(string orderCode)
         {
-            if (checkSSGioHang())
+            List<string> lstOrderCodeAndCustomerCode = new List<string>();
+            lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
+            string customerCode = "";
+            if (lstOrderCodeAndCustomerCode != null)
             {
-                maDonHang = HttpContext.Current.Session["GIOHANG"].ToString();
+                orderCode = lstOrderCodeAndCustomerCode[0];
+                customerCode = lstOrderCodeAndCustomerCode[1];
             }
+            //if (checkSSGioHang())
+            //{
+            //    orderCode = HttpContext.Current.Session["GIOHANG"].ToString();
+            //    customerCode = "KH_0000001";
+            //}
             else
             {
                 return null;
             }
-            DataTable dt_chiTietDonHang = sp.getDataTable("SP_GIOHANG", new string[] { "@flag", "@maDonHang" }, new object[] { 2, maDonHang });
+            DataTable dt_chiTietDonHang = sp.getDataTable("SP_GIOHANG", new string[] { "@flag", "@maDonHang", "@maKhach" }, new object[] { 2, orderCode, customerCode });
             List<DM_DONHANG_CHITIET> lst = new List<DM_DONHANG_CHITIET>();
             
             if (dt_chiTietDonHang == null)
@@ -128,6 +132,7 @@ namespace SaleWeb.PAGES
                     chiTietDonHang.DUNGTICH = dt_chiTietDonHang.Rows[i]["DUNGTICH"].ToString();
                     chiTietDonHang.LOAI = dt_chiTietDonHang.Rows[i]["LOAI"].ToString();
                     chiTietDonHang.SALE = float.Parse(dt_chiTietDonHang.Rows[i]["SALE"].ToString());
+                    chiTietDonHang.MUIHUONG = dt_chiTietDonHang.Rows[i]["MUIHUONG"].ToString();
 
                     lst.Add(chiTietDonHang);
                 }
@@ -149,26 +154,42 @@ namespace SaleWeb.PAGES
 
         }
         [WebMethod]
-        public static string fGetGroup(string maSanPham)
+        public static bool fUpdateTotalMoneyOfOrder(string orderCode)
+        {
+            int result = 0;
+            if (checkSSGioHang())
+            {
+                orderCode = HttpContext.Current.Session["GIOHANG"].ToString();
+                //orderDetailCode = "CT" + orderCode;
+            }
+            result = sp.updateTable("SP_GIOHANG", new string[] { "@flag", "@maDonHang" }, new object[] { 6, orderCode });
+            if(result != -1)
+            {
+                return true;
+            }
+            else return false;
+        }
+        [WebMethod]
+        public static string fGetGroup(string productCode)
         {
            
-            DataTable dt = sp.getDataTable("SP_GIOHANG", new string[] { "@flag", "@maSanPham" }, new object[] { 3, maSanPham });
-            string ketQua = "";
+            DataTable dt = sp.getDataTable("SP_GIOHANG", new string[] { "@flag", "@maSanPham" }, new object[] { 3, productCode });
+            string result = "";
             
             if (dt.Rows.Count > 0)
             {
-                
+
                 //DM_DONHANG_CHITIET chiTietDonHang;
 
-                ketQua = dt.Rows[0]["MANHOM"].ToString();
-                if (ketQua == null || ketQua == "")
+                result = dt.Rows[0]["MANHOM"].ToString();
+                if (result == null || result == "")
                 {
                     return null;
                 }
                 else
                 {
-                    maNhom = ketQua;
-                    return ketQua;
+                    //maNhom = result;
+                    return result;
                 }
                 
             }
