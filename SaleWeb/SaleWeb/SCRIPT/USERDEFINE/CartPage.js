@@ -20,7 +20,7 @@ function loadCart() {
             }
 
             if (result.d.length > 0) {
-                //alert("ok");
+                
                 var productCode = "{productCode:'" + result.d[0].MASANPHAM.toString() + "'}";
                 $.ajax({
                     type: 'POST',
@@ -96,7 +96,7 @@ function loadCart() {
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-4'style='padding:0px;margin-top:5px;'>";
 
-                                lstHtml += "<input type='number' onchange='changeValueQuantity(this.id)' min='1' max='100' class='modifyInputNumber' id='lblQuantity" + formatItem
+                                lstHtml += "<input type='number' onchange='changeValueQuantity(this.id)' onkeyup='keyUpQuantity(event)' class='modifyInputNumber' id='lblQuantity" + formatItem
                                     + "' style='width:100%;text-align:center' value='" + result.d[i].SOLUONG + "'>";
                                 totalQuantity += parseFloat(result.d[i].SOLUONG.toString());
 
@@ -146,6 +146,7 @@ function loadCart() {
             }
         }, error: function (result) {
             alert(result.responseText);
+            alert("loadCart");
         }
     });
 
@@ -180,25 +181,6 @@ function alertCustom(title, mess) {
     });
 }
 
-
-function alertConfirmCustom(title, mess, yes, no) {
-    BootstrapDialog.show({
-        title: title,
-        message: mess,
-        buttons: [{
-            label: yes,
-            cssClass: 'demo',
-            action: function (Itself) {
-                alertCustom('bam', 'yes');
-            }
-        }, {
-            label: no,
-            action: function (Itself) {
-                alertCustom('bam', 'no');
-            }
-        }]
-    });
-}
 
 function getInformationCurrentRow(str, type) {
     var productCode = "";
@@ -306,6 +288,7 @@ function minusQuantity(id) {
                     alertCustom("Error", "Cant update this item please check your session again!");
                     return;
                 }
+                updateTotalMoneyAndTotalQuantity();
                 loadCart();
                 return;
             }, error: function (result) {
@@ -349,6 +332,7 @@ function plusQuantity(id) {
                 alertCustom("Error", "Cant update this item please check your session again!");
                 return;
             }
+            updateTotalMoneyAndTotalQuantity();
             loadCart();
             return;
         }, error: function (result) {
@@ -375,6 +359,7 @@ function updateTotalMoneyAndTotalQuantity() {
             }
             return;
         }, error: function (result) {
+            alert("updateTotalMoneyAndTotalQuantity");
             alert(result.responseText);
         }
     });
@@ -413,6 +398,7 @@ function deleteProduct(id) {
                 alertCustom("Error", "Cant delete this item please check your session again!");
                 return;
             }
+            updateTotalMoneyAndTotalQuantity();
             loadCart();
             return;
         }, error: function (result) {
@@ -456,15 +442,28 @@ function changeValueQuantity(id) {
                 alertCustom("Error", "Cant update this item please check your session again!");
                 return;
             }
+            updateTotalMoneyAndTotalQuantity();
             loadCart();
             return;
         }, error: function (result) {
+            alert("changeValueQuantity");
             alert(result.responseText);
         }
     });
 
     //updateTotalMoneyAndTotalQuantity();
 }
-function updateTotalQuantityAndTotal() {
-    $ajax();
+function keyUpQuantity(e) {
+    if (e.keyCode == 13)
+    {
+        alert("Enter");
+        //changeValueQuantity(id);
+        
+    }
+}
+
+function showCheckPage() {
+
+    window.location.replace("CheckOutPage.aspx");
+    
 }

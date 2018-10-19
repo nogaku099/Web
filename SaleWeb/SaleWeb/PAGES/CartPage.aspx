@@ -151,7 +151,7 @@
                     <span id="lblTotal">
                         50.000.000
                     </span>
-                    <button class="btn btn-success" style="color:white;height:50px;width:150px;font-size:large">
+                    <button runat="server" onclick="showCheckPage();" class="btn btn-success" style="color:white;height:50px;width:150px;font-size:large">
                         Buy
                     </button>
                 </div>

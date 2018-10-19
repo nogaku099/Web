@@ -31,15 +31,6 @@ namespace SaleWeb.PAGES {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dropdownMenuTaiKhoan;
         
         /// <summary>
-        /// hienGioHang control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hienGioHang;
-        
-        /// <summary>
         /// cartHere control.
         /// </summary>
         /// <remarks>
@@ -65,14 +56,5 @@ namespace SaleWeb.PAGES {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField language;
-        
-        /// <summary>
-        /// hdfMaNhom control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        
     }
 }
