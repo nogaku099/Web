@@ -7,11 +7,11 @@ namespace SaleWeb.THU_VIEN
 {
     public class Function
     {
-        public float CFloat(string val)
+        public float CFloat(object val)
         {
             if (null == val) return 0;
             float result;
-            if( float.TryParse(val, out result))
+            if( float.TryParse(val.ToString(), out result))
             {
                 return result;
             }
@@ -19,11 +19,11 @@ namespace SaleWeb.THU_VIEN
         }
 
 
-        public double CDouble(string val)
+        public double CDouble(object val)
         {
             if (null == val) return 0;
             double result;
-            if (double.TryParse(val, out result))
+            if (double.TryParse(val.ToString(), out result))
             {
                 return result;
             }
@@ -36,11 +36,11 @@ namespace SaleWeb.THU_VIEN
             return val.ToString();
         }
 
-        public bool CBool(string val)
+        public bool CBool(object val)
         {
             if (null == val) return false;
             bool result;
-            if(bool.TryParse(val,out result))
+            if(bool.TryParse(val.ToString(),out result))
             {
                return result;
             }
