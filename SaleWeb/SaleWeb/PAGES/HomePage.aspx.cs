@@ -166,17 +166,20 @@ namespace SaleWeb.FRONT_END
                     sp.MASANPHAM = f.CString(dt_temp.Rows[i]["MASANPHAM"]);
                     sp.TENSANPHAM = f.CString(dt_temp.Rows[i]["TENSANPHAM"]);
                     sp.DONVITINH = f.CString(dt_temp.Rows[i]["DONVITINH"]);
-                    sp.GIA1 = f.CFloat(f.CString(dt_temp.Rows[i]["GIA1"]));
-                    sp.GIA2 = f.CFloat(f.CString(dt_temp.Rows[i]["GIA2"]));
+                    sp.GIA1 = f.CFloat(dt_temp.Rows[i]["GIA1"]);
+                    sp.GIA2 = f.CFloat(dt_temp.Rows[i]["GIA2"]);
                     sp.SIZE = f.CString(dt_temp.Rows[i]["SIZE"]);
                     sp.MAU = f.CString(dt_temp.Rows[i]["MAU"]);
                     sp.DUNGTICH = f.CString(dt_temp.Rows[i]["DUNGTICH"]);
                     sp.MUIHUONG = f.CString(dt_temp.Rows[i]["MUIHUONG"]);
                     sp.LOAI = f.CString(dt_temp.Rows[i]["LOAI"]);
-                    sp.GIOITINH = f.CBool(f.CBool(dt_temp.Rows[i]["GIOITINH"]));
-                    sp.SALE = f.CFloat(f.CString(dt_temp.Rows[i]["SALE"]));
+                    sp.GIOITINH = f.CBool(dt_temp.Rows[i]["GIOITINH"]);
+                    sp.SALE = f.CFloat(dt_temp.Rows[i]["SALE"]);
+                    sp.TENSANPHAM = f.CString(dt_temp.Rows[i]["TENSANPHAM"]);
 
+                    lst_result.Add(sp);
                 }
+                return lst_result.ToArray();
             }else
             {
                 return null;
