@@ -14,10 +14,13 @@ namespace SaleWeb.FRONT_END
     public partial class HomePage : System.Web.UI.Page
     {
         public static StoreProcedure sp;
+        public static Function f;
         protected void Page_Load(object sender, EventArgs e)
         {
              if (sp == null)
                     sp = getConnect();
+            if (f == null)
+                f = new Function();
 
                 if (HttpContext.Current.Session["DANGNHAP"] != null && !HttpContext.Current.Session["DANGNHAP"].ToString().Equals(""))
                 {
@@ -77,7 +80,7 @@ namespace SaleWeb.FRONT_END
             if(null != HttpContext.Current.Session["GIOHANG"] && !HttpContext.Current.Session["GIOHANG"].ToString().Equals(""))
             {
                 string SoLuong = "0";
-                DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@session" }, new object[] { 2, HttpContext.Current.Session["GIOHANG"].ToString() });
+                DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@session","@makhach" }, new object[] { 2, HttpContext.Current.Session["GIOHANG"].ToString(), HttpContext.Current.Session["MAKHACH"].ToString() });
                 if(dt_temp.Rows.Count > 0)
                 {
                     SoLuong = dt_temp.Rows[0]["SOLUONG"].ToString();
@@ -91,7 +94,7 @@ namespace SaleWeb.FRONT_END
         }
 
         [WebMethod]
-        public static string fMuaHang(string madon,string makhach, string masanpham, string soluong, string size,string mau)
+        public static string fMuaHang(string madon,string makhach, string masanpham, string soluong, string size,string mau,string dungtich,string muihuong)
         {
             if(null == HttpContext.Current.Session["DANGNHAP"] || HttpContext.Current.Session["DANGNHAP"].ToString().Equals(""))
             {
@@ -117,9 +120,9 @@ namespace SaleWeb.FRONT_END
                 //
             }
             //
-
-            int result = sp.updateTable("SP_HOMEPAGE", new string[] { "@flag", "@madonhang", "@makhach", "@masanpham", "@soluong", "@size", "@mau" }
-                                          , new object[] { 4, madon, makhach, masanpham, float.Parse(soluong), size, mau });
+            makhach = HttpContext.Current.Session["MAKHACH"].ToString();
+            int result = sp.updateTable("SP_HOMEPAGE", new string[] { "@flag", "@madonhang", "@makhach", "@masanpham", "@soluong", "@size", "@mau","@muihuong","@dungtich" }
+                                          , new object[] { 4, madon, makhach, masanpham, float.Parse(soluong), size, mau,muihuong,dungtich });
             if(result > -1)
             {
                 return "OK";
@@ -147,6 +150,38 @@ namespace SaleWeb.FRONT_END
             }
             return lst.ToArray();
         }
+
+        [WebMethod]
+        public static DM_SANPHAM_CHITIET[] fLoadDetail(string ProductID)
+        {
+            DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@masanpham" },
+                                                new object[] { 6, ProductID });
+            List<DM_SANPHAM_CHITIET> lst_result = new List<DM_SANPHAM_CHITIET>();
+            if(dt_temp.Rows.Count > 0)
+            {
+                
+                for(int i = 0; i < dt_temp.Rows.Count; i++)
+                {
+                    DM_SANPHAM_CHITIET sp = new DM_SANPHAM_CHITIET();
+                    sp.MASANPHAM = f.CString(dt_temp.Rows[i]["MASANPHAM"]);
+                    sp.TENSANPHAM = f.CString(dt_temp.Rows[i]["TENSANPHAM"]);
+                    sp.DONVITINH = f.CString(dt_temp.Rows[i]["DONVITINH"]);
+                    sp.GIA1 = f.CFloat(f.CString(dt_temp.Rows[i]["GIA1"]));
+                    sp.GIA2 = f.CFloat(f.CString(dt_temp.Rows[i]["GIA2"]));
+                    sp.SIZE = f.CString(dt_temp.Rows[i]["SIZE"]);
+                    sp.MAU = f.CString(dt_temp.Rows[i]["MAU"]);
+                    sp.DUNGTICH = f.CString(dt_temp.Rows[i]["DUNGTICH"]);
+                    sp.MUIHUONG = f.CString(dt_temp.Rows[i]["MUIHUONG"]);
+                    sp.LOAI = f.CString(dt_temp.Rows[i]["LOAI"]);
+                    sp.GIOITINH = f.CBool(f.CBool(dt_temp.Rows[i]["GIOITINH"]));
+                    sp.SALE = f.CFloat(f.CString(dt_temp.Rows[i]["SALE"]));
+
+                }
+            }else
+            {
+                return null;
+            }
+        }
         #endregion
 
         public StoreProcedure getConnect()
@@ -170,6 +205,7 @@ namespace SaleWeb.FRONT_END
             if (temp.Rows.Count > 0)
             {
                 HttpContext.Current.Session["DANGNHAP"] = temp.Rows[0]["TENDANGNHAP"].ToString();
+                HttpContext.Current.Session["MAKHACH"] = temp.Rows[0]["MAKHACHHANG"].ToString();
                 Response.Redirect("~/PAGES/HomePage.aspx");
             }
         }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../CSS/BOOTSTRAP/bootstrap.min.css" />
     <link rel="stylesheet" href="../CSS/USERDEFINE/Alert.css" />
     <link rel="stylesheet" href="../CSS/USERDEFINE/HomePage.css" />
+    <link rel="stylesheet" href="../CSS/USERDEFINE/ProductDetail.css" />
     <link rel="stylesheet" href="../CSS/BOOTSTRAP/font-awesome.min.css" />
 
     <script src="../SCRIPT/BOOTSTRAP/jquery-1.12.4.js" type="text/javascript"></script>
@@ -28,7 +29,7 @@
             <nav class="navbar  navbar-fixed-top navbar-default narcustom">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#" style="color: white;">WEBSALE.com</a>
+                        <a class="navbar-brand" href="HomePage.aspx" style="color: white;">WEBSALE.com</a>
                     </div>
                     <ul class="nav navbar-nav" style="float: right;">
                         <li><a href="#" style="color: white;">Thông báo
@@ -151,11 +152,9 @@
                         </div>
 
                         <div class="modal-body">
-                             
                         </div>
 
                         <div class="modal-footer">
-
                         </div>
                     </div>
                 </div>
@@ -182,14 +181,14 @@
                 </div>
 
                 <div class="col-xs-3" style="text-align: center; margin-top: 10px;">
-                    <img runat="server" onclick="fshowgiohang();" style="cursor:pointer; width: 30px; height: 30px;" src="../Images/cart.png" />
+                    <img runat="server" onclick="fshowgiohang();" style="cursor: pointer; width: 30px; height: 30px;" src="../Images/cart.png" />
                     <label id="lblSoLuong" class="labelSL"></label>
                 </div>
             </div>
 
             <!-- row3 -->
             <div class="row parallax" style="text-align: center; margin-left: 0px; margin-right: 0px;">
-                 <img width="100%" alt="quang cao" src="../Images/quangcao.gif" />
+                <img width="100%" alt="quang cao" src="../Images/quangcao.gif" />
             </div>
 
             <!-- row4 -->
@@ -219,11 +218,73 @@
                 </div>
             </div>
 
-            <!-- row5 -->
-            <div class="row" style="margin-right: 10px;">
-                <asp:Panel ID="pnlSanPham" runat="server" ScrollBars="Both" Width="100%" Height="500px" OnLoad="pnlSanPham_Load">
 
-                    <%--<div class="col-xs-2 productCard animated bounceIn">
+
+            <!-- modal product detail -->
+            <div class="modal fade" role="dialog" id="modalCardDetail" style="display:none;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body detail">
+                            <div class="row r1"></div>
+                            <div class="row r2"></div>
+
+                            <div class="container2">
+                                <div class="row" style="margin-left: 0px; margin-right: 0px;">
+                                    <div class="col-xs-6 c1" style="left: 0px;">
+
+
+                                        <div class="row" style="margin-top: 120px;">
+                                            <div class="row" style="padding-top: 5px; margin-left: 30px;">
+                                                <label class="brand">swatch</label>
+                                            </div>
+                                            <div class="row" style="padding-top: 5px; width: 100px; margin-left: 30px;">
+                                                <label class="name">Blue Rebel</label>
+                                            </div>
+                                            <div class="row" style="padding-top: 5px; width: 100px; margin-left: 30px;">
+                                                <label class="price">1,000,000</label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-xs-6 c2" style="left: 0px;">
+
+                                        <div class="row" style="margin-top: 120px; margin-right: 10px;">
+
+                                            <div class="row" style="padding-top: 15px; margin-left: 80px; text-align: center; height: 130px">
+                                                <label class="des">Snciacnadi diasjd idjisdis dsidjsijd sisjdisjds dsd odkwd okdod dokod sssuot fdijidj ssin jisjdisdsidsijd ijsd iijs asdasd sidjsidj sdijsidjsid sdisjijsd sdisjdi sdijsijd sidjisjd dsd</label>
+                                            </div>
+
+                                            <div class="row" style="margin-left: 120px; margin-top: 60px">
+                                                <label>Qty: </label>
+                                                <input type="number" style="width: 50px; height: 30px; text-align: center;" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row" style="height: 30%;">
+                                            <div class="row" style="margin-left: 110px; padding-top: 10px;">
+                                                <input type="button" class="btn btn-cart" value="Add to cart"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <img src="../IMAGES/DONGHO/HH_0000002.png" class="img" style="z-index: 5;" />
+                                    <label class="group">Watch</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- end modal product detail-->
+
+                <!-- row5 -->
+                <div class="row" style="margin-right: 10px;">
+
+                    <asp:Panel ID="pnlSanPham" runat="server" ScrollBars="Both" Width="100%" Height="500px" OnLoad="pnlSanPham_Load">
+
+                        <%--<div class="col-xs-2 productCard animated bounceIn">
                         <div class="row cardProductHeader" >
                             <img src="../IMAGES/DONGHO/HH_0000001.png" class="productImage"   />
                         </div>
@@ -285,26 +346,24 @@
                             </div>
                         </div>
                     </div>--%>
-                </asp:Panel>
+                    </asp:Panel>
+                </div>
+
+                <!-- row6 -->
+                <div class="row footer " style="margin-left: 0px; margin-right: 0px;">
+                    <input type="text" value="Thực hiện bởi : " style="background-color: #862b2b; color: white; padding-left: 20px; border: none;" />
+                </div>
+
             </div>
 
-            <!-- row6 -->
-            <div class="row footer " style="margin-left: 0px; margin-right: 0px;">
-                <input type="text" value="Thực hiện bởi : " style="background-color: #862b2b; color: white; padding-left: 20px; border: none;" />
-            </div>
-
-        </div>
 
 
 
 
 
-
-        <!-- HiddenField -->
-        <asp:HiddenField ID="hdfDangNhap" runat="server" ClientIDMode="Static" Value="0" />
-        <asp:HiddenField ID="hdfMuaHang" runat="server" ClientIDMode="Static" Value="0" />
-        
-        
+            <!-- HiddenField -->
+            <asp:HiddenField ID="hdfDangNhap" runat="server" ClientIDMode="Static" Value="0" />
+            <asp:HiddenField ID="hdfMuaHang" runat="server" ClientIDMode="Static" Value="0" />
     </form>
 </body>
 </html>
