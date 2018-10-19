@@ -306,12 +306,13 @@ function minusQuantity(id) {
                     alertCustom("Error", "Cant update this item please check your session again!");
                     return;
                 }
+                loadCart();
                 return;
             }, error: function (result) {
                 alert(result.responseText);
             }
         });
-        updateTotalMoneyAndTotalQuantity();
+        //updateTotalMoneyAndTotalQuantity();
     }
     else {
         alertCustom("Error", "You can not change value into 0!");
@@ -412,12 +413,13 @@ function deleteProduct(id) {
                 alertCustom("Error", "Cant delete this item please check your session again!");
                 return;
             }
+            loadCart();
             return;
         }, error: function (result) {
             alert(result.responseText);
         }
     });
-    updateTotalMoneyAndTotalQuantity();
+    //updateTotalMoneyAndTotalQuantity();
     
 }
 function changeValueQuantity(id) {
