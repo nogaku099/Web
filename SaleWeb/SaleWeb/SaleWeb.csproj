@@ -107,6 +107,7 @@
     <Content Include="CSS\USERDEFINE\Alert.css" />
     <Content Include="CSS\USERDEFINE\CartPage.css" />
     <Content Include="CSS\USERDEFINE\HomePage.css" />
+    <Content Include="CSS\USERDEFINE\ProductDetail.css" />
     <Content Include="DB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DB.edmx</DependentUpon>
@@ -251,6 +252,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="THU VIEN\Function.cs" />
     <Compile Include="THU VIEN\StoreProcedure.cs" />
   </ItemGroup>
   <ItemGroup>

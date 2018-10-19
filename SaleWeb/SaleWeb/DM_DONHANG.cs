@@ -21,5 +21,6 @@ namespace SaleWeb
         public string MAXACNHAN { get; set; }
         public Nullable<double> TONGTIEN { get; set; }
         public string MAHINHTHUCTHANHTOAN { get; set; }
+        public Nullable<double> PHISHIP { get; set; }
     }
 }

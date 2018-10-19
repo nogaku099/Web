@@ -25,5 +25,6 @@ namespace SaleWeb
         public string LOAI { get; set; }
         public Nullable<bool> GIOITINH { get; set; }
         public Nullable<double> SALE { get; set; }
+        public string MUIHUONG { get; set; }
     }
 }

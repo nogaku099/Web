@@ -17,5 +17,7 @@ namespace SaleWeb
         public string MASANPHAM { get; set; }
         public string MANHOM { get; set; }
         public string TENSANPHAM { get; set; }
+        public string MATHUONGHIEU { get; set; }
+        public string MOTA { get; set; }
     }
 }

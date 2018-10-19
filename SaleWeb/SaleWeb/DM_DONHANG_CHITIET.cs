@@ -26,5 +26,6 @@ namespace SaleWeb
         public string MAU { get; set; }
         public string DUNGTICH { get; set; }
         public string LOAI { get; set; }
+        public string MUIHUONG { get; set; }
     }
 }

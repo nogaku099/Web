@@ -33,7 +33,7 @@
             <nav class="navbar navbar-fixed-top navbar-default narcustom">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#" style="color: white;">TRUONGHUNG.com</a>
+                        <a class="navbar-brand" href="#" style="color: white;">WEBSALE.com</a>
                     </div>
                     <ul class="nav navbar-nav" style="float: right;">
                         <li><a href="#" style="color: white;">Thông báo
@@ -158,11 +158,7 @@
 
             </div>
 
-
         </div>
-
-
-
         <!-- HiddenField -->
         <asp:HiddenField ID="hdfMaNhom" runat="server" ClientIDMode="Static"/>
         

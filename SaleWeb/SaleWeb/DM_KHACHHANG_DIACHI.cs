@@ -16,5 +16,6 @@ namespace SaleWeb
     {
         public string MAKHACHHANG { get; set; }
         public string DIACHI { get; set; }
+        public Nullable<bool> MACDINH { get; set; }
     }
 }
