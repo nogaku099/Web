@@ -3,10 +3,6 @@ $(document).ready(function () {
     var myVar = setInterval(myTimer, 2000);
 
     function myTimer() {
-
-       // var a = document.getElementById("lblSoLuong").innerHTML;
-        //a = parseInt(a);
-        //document.getElementById("lblSoLuong").innerHTML = a + 1;
         
         var session = "1";
         var bien = "{session:'"+session+"'}";
@@ -34,6 +30,15 @@ $(document).ready(function () {
                 alert("ERROR: fGetSoLuong");
             }
         });
+    }
+
+    document.getElementsByClassName('cardProductHeader').onmouseover = function () {
+        document.getElementById('lblDetail').style.display = 'block';
+        alert('a');
+    }
+
+    document.getElementsByClassName('cardProductHeader').onmouseout = function () {
+        document.getElementById('lblDetail').style.display = 'none';
     }
 });
 
@@ -561,8 +566,9 @@ function fLoadSanPham(manhom) {
                         if (addSP) {
                             arrlst.push(result.d[i].MASANPHAM);
                             lstDanhSachSanPham += "<div class='col-xs-2 productCard animated bounceIn'>";
-                            lstDanhSachSanPham += "<div class='row cardProductHeader'>";
+                            lstDanhSachSanPham += "<div class='row cardProductHeader' onclick='fLoadDetail("+'"'+result.d[i].MASANPHAM+'"'+")'>";
                             lstDanhSachSanPham += "<img src='../IMAGES/DONGHO/" + result.d[i].MASANPHAM + ".png' class='productImage'/>";
+                            lstDanhSachSanPham += "<label id='lblDetail' style='display:none;'>Click for more detail</label>";
                             lstDanhSachSanPham += "</div>";
 
                             lstDanhSachSanPham += "<div class='row cardProductBody'>";
@@ -754,8 +760,10 @@ function fMuaHang(mahang, size, mau, dungtich) {
 
     var s = document.getElementById("size_" + mahang).innerHTML;
     var m = document.getElementById("mau_" + mahang).innerHTML;
+    var dt = "";
+    var mui = "";
     if (s == "" || m == "") {
-        alertCustom("Thong bao", "Ban chua chon size/mau");
+        alertCustom("Warning", "Choose size and color,please!");
     } else {
 
         var bien = "{madon:'" + 1 + "'"; // session don hang
@@ -763,7 +771,9 @@ function fMuaHang(mahang, size, mau, dungtich) {
         bien += ",masanpham:'" + mahang + "'";
         bien += ",soluong:'" + 1 + "'";
         bien += ",size:'" + s + "'";
-        bien += ",mau:'" + m + "'}";
+        bien += ",mau:'" + m + "'";
+        bien += ",dungtich:'" + dt + "'";
+        bien += ",muihuong:'" + mui + "'}";
 
         $.ajax({
             type : 'POST',
@@ -782,6 +792,25 @@ function fMuaHang(mahang, size, mau, dungtich) {
             }
         });
     }
+}
+
+function fLoadDetail(productID) {
+
+    var bien = "{productID:'" + productID + "'}";
+    var lstDetail = "";
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset:utf-8',
+        dataType: 'json',
+        data: bien,
+        url: 'HomePage.aspx/fLoadDetail',
+        success: function (result) {
+
+        }, error: function (result) {
+
+        }
+    });
+    $("#modalCardDetail").modal();
 }
 
 
