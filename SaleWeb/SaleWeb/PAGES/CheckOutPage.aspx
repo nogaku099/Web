@@ -190,7 +190,7 @@
         </div>
 
         <div class="row" style="background-color: white; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center">
-            <input type="button" class="btn btn-danger" value="Confirm" />
+            <input type="button" class="btn btn-danger btn-lg" value="Confirm"  style="background-color:#960b0b"/>
         </div>
     </form>
 </body>
