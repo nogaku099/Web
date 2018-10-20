@@ -353,7 +353,7 @@ function fChonSize(size, mahang) {
 }
 
 function fChonMau(id, mau, mahang, type) {
-    alert(id + "" + mahang + "" + mau);
+   // alert(id + "" + mahang + "" + mau);
     if (type == "master") {
         //alert(id + "" + mahang + "" + mau);
         if (id == "mau1") {
@@ -486,12 +486,12 @@ function fLoadMau(mahang, size,type) {
                     if (type == "master") {
                        
                         for (i = 0 ; i < result.d.length; i++) {
-
+                            
                             // alert(result.d[i]);
                             document.getElementById("mau" + (i + 1) + "_" + mahang).style.backgroundColor = result.d[i];
                             document.getElementById("col_mau" + (i + 1) + "_" + mahang).style.display = 'inline';
                             document.getElementById("mau" + (i + 1) + "_" + mahang).innerHTML = result.d[i];
-                            var id = "mau" + (i+1) + "";
+                            //var id = "mau" + (i+1) + "";
                            
                             //var mau = result.d[i];
                             //document.getElementById(id + "_" + mahang).onclick = function () { fChonMau(id, mau, mahang,type) };
@@ -609,7 +609,9 @@ function fLoadSanPham(manhom,text) {
                                 if (add) {
                                     for (l = 0; l < arrColor.length; l++) {
                                         if (arrColor[l] == "0") {
+                                           // alert(result.d[j].MAU);
                                             arrColor[l] = result.d[j].MAU;
+
                                             break;
                                         }
                                     }
@@ -741,8 +743,10 @@ function fLoadSanPham(manhom,text) {
                             //    lstDanhSachSanPham += "<label id='mau1_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[0] + ";' onclick='fChonMau(" + '"mau1"' + "," + '"' + arrColor[0] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + ");'>" + arrColor[0] + "</label>";
                             //    lstDanhSachSanPham += "</div>";
                             //} else {
+
+                               
                                 lstDanhSachSanPham += "<div id='col_mau1_" + result.d[i].MASANPHAM + "'" + " class='col-xs-2' style='text-align:center;padding-left:0px;padding-right:0px;margin-top:-10px;display:none;'>";
-                                lstDanhSachSanPham += "<label id='mau1_" + result.d[i].MASANPHAM + "'" + " class='productColor' ='background-color:" + arrColor[0] + ";' onclick='fChonMau(" + '"mau1"' + "," + '"' + arrColor[0] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + "," + '"master"' + ");'>" + arrColor[0] + "</label>";
+                                lstDanhSachSanPham += "<label id='mau1_" + result.d[i].MASANPHAM + "'" + " class='productColor' style='background-color:" + arrColor[0] + ";' onclick='fChonMau(" + '"mau1"' + "," + '"' + arrColor[0] + '"' + "," + '"' + result.d[i].MASANPHAM + '"' + "," + '"master"' + ");'>" + arrColor[0] + "</label>";
                                 lstDanhSachSanPham += "</div>";
                             //}
 
