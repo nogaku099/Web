@@ -131,7 +131,7 @@
             </div>
             <br />
             <%--Row SanPham--%>
-            <asp:Panel id="cartHere"  OnLoad="gioHangODay_Load" runat="server" Width="100%">
+            <asp:Panel ScrollBars="Horizontal" Height="400px" id="cartHere"  OnLoad="gioHangODay_Load" runat="server" Width="100%">
 
             </asp:Panel>
 

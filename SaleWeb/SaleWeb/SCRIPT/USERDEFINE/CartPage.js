@@ -43,6 +43,7 @@ function loadCart() {
                                     + "_" + result.d[i].SIZE.toString() + "_" + result.d[i].MAU.toString();
                                 var idRow = "";
                                 idRow = "row" + formatItem;
+                                
                                 lstHtml += "<div class='row backgroundRowProduct' id='" + idRow + "'>";
                                 lstHtml += "<div class='col-xs-6'>";
                                 lstHtml += "<div class='row'>";

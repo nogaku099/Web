@@ -138,7 +138,8 @@
 
         <br />
         <!-- Div List product (Cart) -->
-        <div class="row" style="background-color: white; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center">
+        <div class="row" style="background-color: #960b0b; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center;color:white;display: flex; 
+    justify-content: center; align-items: center;">
             <div class="col-xs-6">
                 Product
             </div>
@@ -154,7 +155,7 @@
                         Total Price
                     </div>
                     <div class="col-xs-3">
-                        Actions
+                       
                     </div>
                 </div>
             </div>
@@ -166,15 +167,15 @@
         </asp:Panel>
         <%--Row Tong Tien--%>
 
-        <div class="row" style="background-color: white; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center">
+        <div class="row" style="background-color:  #960b0b; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center; color:white">
             <div class="col-xs-1">
             </div>
             <div class="col-xs-11" style="text-align: right">
                 Total (
-                    <span id="lblTotalQuantity">12
+                    <span style="color:green;font-weight:bold" id="lblTotalQuantity">12
                     </span>
                 product):
-                    <span id="lblTotal" style="color:red;font-weight:bold">50.000.000
+                    <span id="lblTotal" style="color:green;font-weight:bold">50.000.000
                     </span>
             </div>
 
