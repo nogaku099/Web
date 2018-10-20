@@ -1,0 +1,129 @@
+﻿.detail{
+    height:550px;
+    background-color:gray;
+    border-radius:5px;
+}
+
+.r1{
+    background-color:#eae5e5;
+    height:55%;
+    clip-path:polygon(0 0,100% 0,100% calc(100% - 10vw),0 100%);
+    margin-bottom:-10vw;
+    margin-top: -15px;
+    border-top-left-radius:  5px;
+    border-top-right-radius:  5px;
+}
+
+
+.r2{
+    background-color:#9c0b0b;
+    height:77%;
+    border-bottom-left-radius:  5px;
+    border-bottom-right-radius:  5px;
+}
+
+.container2{
+    height:80%;
+    background: linear-gradient( to bottom, #ffffff 0%, #ff3399 100%);
+    width:90%;
+    top:50px;
+    left:30px;
+    position:absolute;
+    box-shadow: 0px 0px 30px 1px gray;
+}
+
+
+.c1{
+    height:100%;
+    background-color:transparent;
+}
+
+.c2{
+    height:100%;
+    background-color:transparent;
+
+}
+.img{
+    width:260px;
+    height:300px;
+    position:absolute;
+    top:70px;
+    left:140px;
+}
+
+.group{
+    font-size:85px;
+    position:absolute;
+    top:-0px;
+    color:gray;
+    opacity:.2;
+    letter-spacing: 12px;
+    margin-left: -530px;
+}
+
+.brand{
+    font-size:15px;
+}
+
+.name{
+    font-size:30px;
+    font-weight:bolder;
+    white-space: pre-wrap;
+    line-height:30px;
+}
+.price{
+    color:black;
+    font-size:20px;
+    font-weight:bold;
+}
+.des{
+    text-align:center;
+}
+.btn-cart{
+    color:white;
+    width: 130px;
+    background-color:#960b0b;
+    border:none;
+    border-radius:25px;
+    padding:10px;
+    box-shadow:5px 5px 15px gray;
+    cursor:pointer;
+}
+.btn-exit{
+    position: absolute;
+    margin-left: -30px;
+    margin-top: 10px;
+    color:white;
+    font-weight:bold;
+    background-color:#960b0b;
+    box-shadow: 2px 4px 10px grey;
+}
+.productSizeDetail{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px rgba(82, 66, 57, 0.69);
+    border-radius: 5px;
+    color: #000000;
+    font-weight: bolder;
+    width: 40%;
+    padding-right: -31px;
+    margin-left: 10px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+}
+.productColorDetail{
+   
+    border-radius: 5px;
+    color: rgba(128, 128, 128, 0.00);
+    font-weight: bolder;
+    width: 40%;
+    padding-right: -31px;
+    margin-left: 10px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    font-size:1px;
+    height:20px;
+    width:23px;
+    box-shadow: none;
+    border: solid 1px rgba(128, 128, 128, 0.60);
+    cursor: not-allowed;
+}
