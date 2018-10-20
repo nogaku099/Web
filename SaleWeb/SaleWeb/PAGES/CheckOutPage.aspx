@@ -32,7 +32,7 @@
             <nav class="navbar navbar-fixed-top navbar-default narcustom">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#" style="color: white;">WEBSALE.com</a>
+                        <a class="navbar-brand" href="HomePage.aspx" style="color: white;">WEBSALE.com</a>
                     </div>
                     <ul class="nav navbar-nav" style="float: right;">
                         <li><a href="#" style="color: white;">Thông báo
@@ -118,7 +118,7 @@
             <!-- Div load Address -->
             <div class="row" style="font-weight: bold">
                 <div class="col-xs-4">
-                    Phan Tuấn Trọng (+84) 974930868
+                    Nguyễn Văn A (+84) 132456789
                 </div>
 
                 <div class="col-xs-6">
@@ -172,10 +172,10 @@
             </div>
             <div class="col-xs-11" style="text-align: right">
                 Total (
-                    <span style="color:green;font-weight:bold" id="lblTotalQuantity">12
+                    <span style="color:#79ff16;font-weight:bold;font-size:larger" id="lblTotalQuantity">12
                     </span>
                 product):
-                    <span id="lblTotal" style="color:green;font-weight:bold">50.000.000
+                    <span id="lblTotal" style="color:#79ff16;font-weight:bold;font-size:larger">50.000.000
                     </span>
             </div>
 
