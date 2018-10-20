@@ -170,11 +170,11 @@
                 <div class="col-xs-6" style="text-align: center">
                     <div class="row">
                         <div class="col-xs-8" style="padding-right: 0px;">
-                            <input type="text" placeholder="Tim kiem..." class="searchtext" />
+                            <input type="text" id="txtTim" placeholder="Tim kiem..." class="searchtext" />
                         </div>
 
                         <div class="col-xs-4" style="padding-left: 0px; padding-top: 3px;">
-                            <input type="button" class="btn searchbutton" value="Tìm" />
+                            <input type="button" id="btnTim" onclick="fTimKiem();" class="btn searchbutton" value="Tìm" />
                         </div>
                     </div>
 
@@ -222,7 +222,7 @@
 
             <!-- modal product detail -->
             <div class="modal fade" role="dialog" id="modalCardDetail" style="display:none;">
-                <div class="modal-dialog">
+                <%--<div class="modal-dialog">
                     <div class="modal-content">
 
                         <div class="modal-body detail">
@@ -244,6 +244,42 @@
                                             <div class="row" style="padding-top: 5px; width: 100px; margin-left: 30px;">
                                                 <label class="price">1,000,000</label>
                                             </div>
+
+                                            <div class="row" style="padding-top: 5px; width: 100px; margin-left: 30px;">
+                                                <div class="col-xs-2 productSizeDetail" onclick="fSelectColor_Detail('HH_0000001','XS')" id="HH_0000001_XS">XS</div>
+                                                <div class="col-xs-2 productSizeDetail" onclick="fSelectColor_Detail('HH_0000001','S')" id="HH_0000001_S">S</div>
+                                                <div class="col-xs-2 productSizeDetail" onclick="fSelectColor_Detail('HH_0000001','M')" id="HH_0000001_M">M</div>
+                                                <div class="col-xs-2 productSizeDetail" onclick="fSelectColor_Detail('HH_0000001','L')" id="HH_0000001_L">L</div>
+                                                <div class="col-xs-2 productSizeDetail" onclick="fSelectColor_Detail('HH_0000001','XL')" id="HH_0000001_XL">XL</div>
+                                                <div class="col-xs-2 productSizeDetail" onclick="fSelectColor_Detail('HH_0000001','XXL')" id="HH_0000001_XXL">XXL</div>
+                                            </div>
+
+                                            <div class="row" style="padding-top: 5px; width: 100px; margin-left: 30px;">
+                                                <div class="col-xs-2 productColorDetail " id="HH_0000001_M1">M1
+                                                    <i class="fa fa-check animated rotateIn" id="HH_0000001_M1_check" style="display:none; font-size: 20px;color: green; margin-left: -4px;position:absolute"></i>
+                                                </div>
+                                                <div class="col-xs-2 productColorDetail" id="HH_0000001_M2">M2
+                                                    <i class="fa fa-check rotateIn" id="HH_0000001_M2_check" style="display:none; font-size: 20px;color: green;  margin-left: -4px;position:absolute;"></i>
+                                                </div>
+                                                <div class="col-xs-2 productColorDetail" id="HH_0000001_M3">M3
+                                                    <i class="fa fa-check rotateIn" id="HH_0000001_M3_check" style="display:none; font-size: 20px;color: green;  margin-left: -4px;position:absolute;"></i>
+                                                </div>
+                                                <div class="col-xs-2 productColorDetail" id="HH_0000001_M4">M4
+                                                    <i class="fa fa-check rotateIn" id="HH_0000001_M4_check" style="display:none; font-size: 20px;color: green;  margin-left: -4px;position:absolute;"></i>
+                                                </div>
+                                                <div class="col-xs-2 productColorDetail" id="HH_0000001_M5">M5
+                                                    <i class="fa fa-check rotateIn" id="HH_0000001_M5_check" style="display:none; font-size: 20px;color: green;  margin-left: -4px;position:absolute;"></i>
+                                                </div>
+                                                <div class="col-xs-2 productColorDetail" id="HH_0000001_M6">M6
+                                                    <i class="fa fa-check rotateIn" id="HH_0000001_M6_check" style="display:none; font-size: 20px;color: green;  margin-left: -4px;position:absolute;"></i>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top: 5px; width: 100px; margin-left: 30px; display:none;">
+                                                <label id="size_detail_HH_0000001"></label>
+                                                <label id="color_detail_HH_0000001"></label>
+                                                <label id="qty_detail_HH_0000001"></label>
+                                            </div>
+
                                         </div>
 
 
@@ -258,7 +294,7 @@
 
                                             <div class="row" style="margin-left: 120px; margin-top: 60px">
                                                 <label>Qty: </label>
-                                                <input type="number" style="width: 50px; height: 30px; text-align: center;" />
+                                                <input type="number" id="qty_detail" style="width: 50px; height: 30px; text-align: center;" onchange="fChangeQtyDetail('HH_0000001')" />
                                             </div>
 
                                         </div>
@@ -271,16 +307,17 @@
                                     </div>
                                     <img src="../IMAGES/DONGHO/HH_0000002.png" class="img" style="z-index: 5;" />
                                     <label class="group">Watch</label>
+                                    <input type="button" class="btn btn-exit" onclick="fExit_Detail('HH_0000001')" value="X"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
                 </div>
                 <!-- end modal product detail-->
 
                 <!-- row5 -->
-                <div class="row" style="margin-right: 10px;">
+                <div class="row" id ="r5" style="margin-right: 10px;">
 
                     <asp:Panel ID="pnlSanPham" runat="server" ScrollBars="Both" Width="100%" Height="500px" OnLoad="pnlSanPham_Load">
 

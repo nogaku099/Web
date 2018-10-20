@@ -42,10 +42,10 @@ namespace SaleWeb.FRONT_END
 
         #region webmethod
         [WebMethod]
-        public static DM_SANPHAM_CHITIET[] fLoadSanPham(string manhom)
+        public static DM_SANPHAM_CHITIET[] fLoadSanPham(string manhom, string text)
         {
 
-            DataTable dt_hanghoa = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@manhom" }, new object[] { 1, manhom });
+            DataTable dt_hanghoa = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@manhom","@text" }, new object[] { 1, manhom,text });
             List<DM_SANPHAM_CHITIET> lst = new List<DM_SANPHAM_CHITIET>();
             if (dt_hanghoa.Rows.Count > 0)
             {
@@ -152,14 +152,13 @@ namespace SaleWeb.FRONT_END
         }
 
         [WebMethod]
-        public static DM_SANPHAM_CHITIET[] fLoadDetail(string ProductID)
+        public static DM_SANPHAM_CHITIET[] fLoadDetail(string productID)
         {
             DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@masanpham" },
-                                                new object[] { 6, ProductID });
+                                                new object[] { 6, productID });
             List<DM_SANPHAM_CHITIET> lst_result = new List<DM_SANPHAM_CHITIET>();
             if(dt_temp.Rows.Count > 0)
             {
-                
                 for(int i = 0; i < dt_temp.Rows.Count; i++)
                 {
                     DM_SANPHAM_CHITIET sp = new DM_SANPHAM_CHITIET();
@@ -178,12 +177,29 @@ namespace SaleWeb.FRONT_END
                     sp.TENSANPHAM = f.CString(dt_temp.Rows[i]["TENSANPHAM"]);
 
                     lst_result.Add(sp);
+
+
                 }
                 return lst_result.ToArray();
             }else
             {
                 return null;
             }
+        }
+
+        [WebMethod]
+        public static string[] fGetGroupName(string productID)
+        {
+            List<string> lst_result = new List<string>();
+            DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@masanpham" },
+                new object[] { 7,productID});
+            if(dt_temp.Rows.Count > 0)
+            {
+                lst_result.Add(dt_temp.Rows[0]["TENNHOM"].ToString());
+                lst_result.Add(dt_temp.Rows[0]["TENTHUONGHIEU"].ToString());
+                lst_result.Add(dt_temp.Rows[0]["MOTA"].ToString());
+            }
+            return lst_result.ToArray();
         }
         #endregion
 
