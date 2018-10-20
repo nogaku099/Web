@@ -147,6 +147,13 @@
           <Property Name="MATKHAU" Type="nvarchar" MaxLength="100" />
           <Property Name="CHUCVU" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="DM_THUONGHIEU">
+          <Key>
+            <PropertyRef Name="MATHUONGHIEU" />
+          </Key>
+          <Property Name="MATHUONGHIEU" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TENTHUONGHIEU" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityContainer Name="WEB_DATAModelStoreContainer">
           <EntitySet Name="DM_DONHANG" EntityType="Self.DM_DONHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_DONHANG_CHITIET" EntityType="Self.DM_DONHANG_CHITIET" Schema="dbo" store:Type="Tables" />
@@ -161,6 +168,7 @@
           <EntitySet Name="DM_SANPHAM_CHITIET" EntityType="Self.DM_SANPHAM_CHITIET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_SANPHAM_NHOM" EntityType="Self.DM_SANPHAM_NHOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TAIKHOAN" EntityType="Self.DM_TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DM_THUONGHIEU" EntityType="Self.DM_THUONGHIEU" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -293,6 +301,7 @@
           <EntitySet Name="DM_TAIKHOAN" EntityType="Self.DM_TAIKHOAN" />
           <EntitySet Name="DM_KHACHHANG_DIACHI" EntityType="WEB_DATAModel.DM_KHACHHANG_DIACHI" />
           <EntitySet Name="DM_SANPHAM_CHITIET" EntityType="WEB_DATAModel.DM_SANPHAM_CHITIET" />
+          <EntitySet Name="DM_THUONGHIEU" EntityType="WEB_DATAModel.DM_THUONGHIEU" />
         </EntityContainer>
         <EntityType Name="DM_KHACHHANG_DIACHI">
           <Key>
@@ -322,6 +331,13 @@
           <Property Name="GIOITINH" Type="Boolean" />
           <Property Name="SALE" Type="Double" />
           <Property Name="MUIHUONG" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DM_THUONGHIEU">
+          <Key>
+            <PropertyRef Name="MATHUONGHIEU" />
+          </Key>
+          <Property Name="MATHUONGHIEU" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TENTHUONGHIEU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -472,6 +488,14 @@
                 <ScalarProperty Name="DONVITINH" ColumnName="DONVITINH" />
                 <ScalarProperty Name="TENSANPHAM" ColumnName="TENSANPHAM" />
                 <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DM_THUONGHIEU">
+            <EntityTypeMapping TypeName="WEB_DATAModel.DM_THUONGHIEU">
+              <MappingFragment StoreEntitySet="DM_THUONGHIEU">
+                <ScalarProperty Name="TENTHUONGHIEU" ColumnName="TENTHUONGHIEU" />
+                <ScalarProperty Name="MATHUONGHIEU" ColumnName="MATHUONGHIEU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
