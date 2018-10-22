@@ -106,6 +106,7 @@
     <Content Include="CSS\BOOTSTRAP\font-awesome.min.css" />
     <Content Include="CSS\USERDEFINE\Alert.css" />
     <Content Include="CSS\USERDEFINE\CartPage.css" />
+    <Content Include="CSS\USERDEFINE\CheckOutPage.css" />
     <Content Include="CSS\USERDEFINE\HomePage.css" />
     <Content Include="CSS\USERDEFINE\ProductDetail.css" />
     <Content Include="DB.Context.tt">
@@ -130,6 +131,7 @@
     <Content Include="IMAGES\DONGHO\HH_0000009.png" />
     <Content Include="IMAGES\DONGHO\HH_0000010.png" />
     <Content Include="PAGES\CartPage.aspx" />
+    <Content Include="PAGES\CheckOutPage.aspx" />
     <Content Include="PAGES\HomePage.aspx" />
     <Content Include="IMAGES\cart.png" />
     <Content Include="IMAGES\icons8-about-50.png" />
@@ -155,6 +157,7 @@
     <Content Include="CSS\fonts\fontawesome-webfont.woff2" />
     <Content Include="CSS\fonts\FontAwesome.otf" />
     <Content Include="SCRIPT\USERDEFINE\CartPage.js" />
+    <Content Include="SCRIPT\USERDEFINE\CheckOutPage.js" />
     <Content Include="vssver2.scc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -234,12 +237,22 @@
     <Compile Include="DM_TAIKHOAN.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DM_THUONGHIEU.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="PAGES\CartPage.aspx.cs">
       <DependentUpon>CartPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PAGES\CartPage.aspx.designer.cs">
       <DependentUpon>CartPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PAGES\CheckOutPage.aspx.cs">
+      <DependentUpon>CheckOutPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PAGES\CheckOutPage.aspx.designer.cs">
+      <DependentUpon>CheckOutPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="PAGES\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
@@ -258,6 +271,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="IMAGES\GIAYDEP\" />
+    <Folder Include="IMAGES\KHAC\" />
     <Folder Include="IMAGES\NUOCHOA\" />
     <Folder Include="IMAGES\QUANAO\" />
     <Folder Include="IMAGES\TUIXACH\" />
