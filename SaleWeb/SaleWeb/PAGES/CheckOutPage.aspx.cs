@@ -109,6 +109,130 @@ namespace SaleWeb.PAGES
         }
 
         [WebMethod]
+        public static List<DM_KHACHHANG_DIACHI> fGetUserAddress(string customerCode)
+        {
+            List<DM_KHACHHANG_DIACHI> lstAddress = new List<DM_KHACHHANG_DIACHI>();
+
+            //Get customerCode by Session
+            List<string> lstOrderCodeAndCustomerCode = new List<string>();
+            lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
+
+            if (lstOrderCodeAndCustomerCode != null)
+            {
+                //orderCode = lstOrderCodeAndCustomerCode[0];
+                customerCode = lstOrderCodeAndCustomerCode[1];
+            }
+            else return null;
+            
+            DataTable dt_ListAddress = sp.getDataTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach" }, new object[] { 1, customerCode });
+            if(dt_ListAddress.Rows.Count > 0)
+            {
+                DM_KHACHHANG_DIACHI address = new DM_KHACHHANG_DIACHI();
+                for(int i=0; i < dt_ListAddress.Rows.Count; i++)
+                {
+                    address.MAKHACHHANG = dt_ListAddress.Rows[i]["MAKHACHHANG"].ToString();
+                    address.DIACHI= dt_ListAddress.Rows[i]["DIACHI"].ToString();
+                    //address.MACDINH = dt_ListAddress.Rows[i]["MACDINH"];
+                    string tempDefault = "";
+                    tempDefault = dt_ListAddress.Rows[i]["MACDINH"].ToString();
+                    if (tempDefault == "True")
+                    {
+                        address.MACDINH = true;
+                    }
+                    else address.MACDINH = false;
+                    lstAddress.Add(address);
+
+                }
+            }
+            if(lstAddress != null)
+            {
+                return lstAddress;
+            }
+            else return null;
+        }
+        [WebMethod]
+        public static bool fAddAddress(string customerCode, string address)
+        {
+            //Get customerCode by Session
+            List<string> lstOrderCodeAndCustomerCode = new List<string>();
+            lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
+
+            int result = 0;
+            if (lstOrderCodeAndCustomerCode != null)
+            {
+                //orderCode = lstOrderCodeAndCustomerCode[0];
+                customerCode = lstOrderCodeAndCustomerCode[1];
+            }
+            else return false;
+
+            List<DM_KHACHHANG_DIACHI> lstAddress = new List<DM_KHACHHANG_DIACHI>();
+            lstAddress = fGetUserAddress(customerCode);
+            bool checkAddress = false;
+
+            //Add address for the first time
+            if(lstAddress.Count == 0)
+            {
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, customerCode, address, true });
+                if (result != -1)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else
+            {
+                for (int i = 0; i < lstAddress.Count;i++)
+                {
+                    if(lstAddress[i].DIACHI == address)
+                    {
+                        checkAddress = true;
+                    }
+                }
+            }
+
+            //Check address = true mean address already exist 
+            if (checkAddress)
+            {
+                return false;
+            }
+            else
+            {
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, customerCode, address, false });
+                
+            }
+            
+      
+            if (result != -1)
+            {
+                return true;
+            }
+            else return false;
+           
+        }
+
+        public static bool fUpdateDefaultAddress(string customerCode, string address)
+        {
+            //Get customerCode by Session
+            List<string> lstOrderCodeAndCustomerCode = new List<string>();
+            lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
+
+            if (lstOrderCodeAndCustomerCode != null)
+            {
+                //orderCode = lstOrderCodeAndCustomerCode[0];
+                customerCode = lstOrderCodeAndCustomerCode[1];
+            }
+            else return false;
+            int result = 0;
+
+            result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 3, customerCode, address, true });
+            if (result != -1)
+            {
+                return true;
+            }
+            else return false;
+
+        }
+        [WebMethod]
 
         public static DM_DONHANG_CHITIET[] fGetListOrderDetails(string orderCode)
         {
