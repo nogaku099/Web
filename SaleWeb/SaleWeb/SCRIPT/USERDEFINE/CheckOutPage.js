@@ -29,18 +29,19 @@ function getCheckedAddress() {
     arrAdressID = document.getElementsByName("addressCode");
     for (var i = 0; i < arrAdressID.length; i++) {
         if (arrAdressID[i].checked == true) {
-            return arrAdressID[i].id;
+            return arrAdressID[i].id.toString();
         }
     }
     return null;
 }
 function confirmOrder() {
     var [a, b] = document.getElementsByName("paymentType");
+    var status = document.getElementById('hdfPaymentStatus');
     if (a.checked == false && b.checked == false) {
         alertCustom("Error", "Please choose your payment type!");
     }
     var addressCode = "";
-    addressCode = document.getElementById(getCheckedAddress().toString());
+    addressCode = getCheckedAddress();
     var dataUpdate = "{customerCode:'" + 1 + "'"; // get from Session
     dataUpdate += ",orderCode:'" + 2 + "'";
     dataUpdate += ",addressCode:'" + addressCode + "'}";
@@ -65,10 +66,79 @@ function confirmOrder() {
             }
         });
     }
+    
     if (b.checked == true) {
-
+        
+        $('#modalCardPay').modal('show');
     }
     
+}
+
+function payByCard() {
+    var cardHolderName = document.getElementById('cardHolderName').value;
+    var cardNumber = document.getElementById('cardNumber').value;
+    var ccv = document.getElementById('ccv').value;
+    var month = document.getElementById('monthPick');
+    var year = document.getElementById('yearPick');
+    var strYear = year.options[year.selectedIndex].text;
+    var strMonth = month.options[month.selectedIndex].text;
+    var strMoney = document.getElementById('lblTotal').innerHTML;
+    var money = parseFloat(strMoney.replace(/[^\d]/g, ''));
+    //var s = "";
+    //s += cardHolderName + " " + cardNumber + " " + strMonth + " " + strYear;
+    //alert(s);
+    //Update to DB
+    //(string cardHolderName, string cardNumber, string month, string year, string ccv, float money)
+
+    var dataUpdate = "{cardHolderName:'" + cardHolderName + "'"; // get from Session
+    dataUpdate += ",cardNumber:'" + cardNumber + "'";
+    dataUpdate += ",month:'" + strMonth + "'";
+    dataUpdate += ",year:'" + strYear + "'";
+    dataUpdate += ",ccv:'" + ccv + "'";
+    dataUpdate += ",money:'" + money + "'}";
+   
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: dataUpdate,
+        url: 'CheckOutPage.aspx/fCheckPayByCard',
+        success: function (result) {
+            if (result.d == false) {
+                alertCustom("Error", "Wrong card information or invalid amount");
+               
+                return;
+            }
+            var addressCode = "";
+            addressCode = getCheckedAddress();
+            var dataUpdate = "{customerCode:'" + 1 + "'"; // get from Session
+            dataUpdate += ",orderCode:'" + 2 + "'";
+            dataUpdate += ",addressCode:'" + addressCode + "'}";
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                data: dataUpdate,
+                url: 'CheckOutPage.aspx/fUpdateOrderStatus',
+                success: function (result) {
+                    if (result.d == null) {
+                        alertCustom("Error", "Cant Order");
+                    }
+                    
+                    
+                }, error: function (result) {
+                    alert(result.responseText);
+
+                }
+            });
+            alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
+            window.location.replace("HomePage.aspx");
+            return;
+            
+        }, error: function (result) {
+            alert(result.responseText);
+        }
+    });
 }
 function loadAddress() {
     var lstHtml = "";
@@ -82,9 +152,12 @@ function loadAddress() {
         success: function (result) {
             if (result.d == null) {
                 alertCustom("Error", "Cant load your Address");
+                lstHtml += "<center>Click add below to create your first address</center>";
+                lstHtml += "<center><input type='button' value='Add' style='border: none; background-color: white; font-weight: bold' onclick='callModalAddress()' /></center>";
             }
 
             if (result.d.length > 0) {
+                lstHtml += "<center><input type='button' value='Add' style='border: none; background-color: white; font-weight: bold' onclick='callModalAddress()' /></center>";
                 for (var i = 0; i < result.d.length; i++)
                 {
                     
@@ -100,24 +173,31 @@ function loadAddress() {
                         lstHtml += "<input type='radio' name='addressCode' value='" + addressCode + "' id='" + addressCode + "' />";
                         lstHtml += "</div>";
                     }
-                    
-                    lstHtml += "<div class='col-xs-3' id='userNameAndPhone'>";
-                    lstHtml += result.d[i].TENNGUOINHAN.toString() + "&nbsp" + result.d[i].SDTNGUOINHAN.toString();
-    
-                    //Nguyễn Văn A (+84) 132456789
-                    lstHtml += "</div>";
 
+                    lstHtml += "<div class='col-xs-2' id='receiverName_" + addressCode+ "'>";
+                    lstHtml += result.d[i].TENNGUOINHAN.toString();
+    
+                    lstHtml += "</div>";
+                    lstHtml += "<div class='col-xs-2' id='phoneNumber_" + addressCode + "'>";
+                    lstHtml += result.d[i].SDTNGUOINHAN.toString();
+                    
+                    lstHtml += "</div>";
                     lstHtml += "<div class='col-xs-6' id='userAddress'>";
                     lstHtml += result.d[i].DIACHI.toString();
                     //Đường Lê Văn Lương, Huyện Nhà Bè, TP. Hồ Chí Minh
                     lstHtml += "</div>";
 
                     lstHtml += "<div class='col-xs-1'>";
-                    lstHtml += "<input type='button' value='Default' style='border: none; background-color: white; font-weight: bold' />";
+                    if (result.d[i].MACDINH) {
+                        lstHtml += "<input type='button' value='Default' disabled " + "id='def_" + addressCode + "'" + " style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                    }
+                    else {
+                        lstHtml += "<input type='button' value='Default'" + "id='def_" + addressCode+ "'" + "style='border: none; background-color: white; font-weight: bold' onclick='changThisToDefault(this.id)'/>";
+                    }
                     lstHtml += "</div>";
-                    lstHtml += "<div class='col-xs-1'>";
-                    lstHtml += "<input type='button' value='Change' style='border: none; background-color: white; font-weight: bold' />";
-                    lstHtml += "</div>";
+                    //lstHtml += "<div class='col-xs-1'>";
+                    //lstHtml += "<input type='button' value='Change' style='border: none; background-color: white; font-weight: bold' onclick=''/>";
+                    //lstHtml += "</div>";
                     lstHtml += " </div>";
                 }
                 document.getElementById('address').innerHTML = lstHtml;
@@ -126,6 +206,33 @@ function loadAddress() {
         }, error: function (result) {
             alert(result.responseText);
 
+        }
+    });
+}
+function callModalAddress() {
+    $("#modalCreateNewAddress").modal();
+}
+function changThisToDefault(id) {
+    var currentID = id.substring(4, id.length);
+    alert(currentID);
+    //Update to DB
+    var dataUpdate = "{customerCode:'" + 1 + "'"; // get from Session
+    dataUpdate += ",addressCode:'" + currentID + "'}";
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: dataUpdate,
+        url: 'CheckOutPage.aspx/fUpdateDefaultAddress',
+        success: function (result) {
+            if (result.d == false) {
+                alertCustom("Error", "Cant update this address to be your default address!");
+                return;
+            }
+            loadAddress();
+            return;
+        }, error: function (result) {
+            alert(result.responseText);
         }
     });
 }
@@ -304,3 +411,11 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 }
+
+$('input[name="paymentType"]').change(function () {
+    var status = document.getElementById('hdfPaymentStatus');
+
+    if ($(this).is(':checked') && $(this).val() == "banking" && status=='0') {
+        $('#modalCardPay').modal('show');
+    }
+});

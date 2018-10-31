@@ -129,12 +129,13 @@ namespace SaleWeb.PAGES
             {
                 return null;
             }
-           
+            int indexDefault = 0;
             if(dt_ListAddress.Rows.Count > 0)
             {
-                DM_KHACHHANG_DIACHI address = new DM_KHACHHANG_DIACHI();
+                
                 for(int i=0; i < dt_ListAddress.Rows.Count; i++)
                 {
+                    DM_KHACHHANG_DIACHI address = new DM_KHACHHANG_DIACHI();
                     address.MADIACHI = dt_ListAddress.Rows[i]["MADIACHI"].ToString();
                     address.MAKHACHHANG = dt_ListAddress.Rows[i]["MAKHACHHANG"].ToString();
                     address.DIACHI= dt_ListAddress.Rows[i]["DIACHI"].ToString();
@@ -144,6 +145,7 @@ namespace SaleWeb.PAGES
                     if (tempDefault == "True")
                     {
                         address.MACDINH = true;
+                        indexDefault = i;
                     }
                     else address.MACDINH = false;
                     address.TENNGUOINHAN = dt_ListAddress.Rows[i]["TENNGUOINHAN"].ToString();
@@ -154,6 +156,13 @@ namespace SaleWeb.PAGES
             }
             if(lstAddress != null)
             {
+                if (indexDefault != 0)
+                {
+                    DM_KHACHHANG_DIACHI tempAddress = lstAddress[0];
+                    lstAddress[0] = lstAddress[indexDefault];
+                    lstAddress[indexDefault] = tempAddress;
+
+                }
                 return lstAddress;
             }
             else return null;
@@ -181,7 +190,58 @@ namespace SaleWeb.PAGES
         }
      
         [WebMethod]
-        public static bool fAddAddress(string customerCode, string address)
+        public static bool fCheckPayByCard(string cardHolderName, string cardNumber, string month, string year, string ccv, float money)
+        {
+            //List<THE> the = new List<THE>();
+            //bool checkExist = false;
+            List<string> lstOrderCodeAndCustomerCode = new List<string>();
+            lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
+            string orderCode = "";
+            string customerCode = "";
+           
+            if (lstOrderCodeAndCustomerCode != null)
+            {
+                orderCode = lstOrderCodeAndCustomerCode[0];
+                customerCode = lstOrderCodeAndCustomerCode[1];
+            }
+            else return false;
+            DataTable dt = sp.getDataTable("SP_CHECKOUT", new string[] { "@flag", "@tenChuThe", "@maThe", "@thang", "@nam" , "@ccv" }, new object[] { 5, cardHolderName,cardNumber,month,year,ccv });
+
+            if(dt == null)
+            {
+                return false;
+            }
+            THE cardPay = new THE();
+            if (dt.Rows.Count > 0)
+            {
+                //THE cardPay = new THE();
+                cardPay.MATHE = dt.Rows[0]["MATHE"].ToString();
+                cardPay.TENCHUTHE = dt.Rows[0]["TENCHUTHE"].ToString();
+                cardPay.THANG = dt.Rows[0]["THANG"].ToString();
+                cardPay.NAM = dt.Rows[0]["NAM"].ToString();
+                cardPay.CCV = dt.Rows[0]["CCV"].ToString();
+                cardPay.TIEN = float.Parse(dt.Rows[0]["TIEN"].ToString());
+            }
+            int result = 0;
+            if (cardPay != null)
+            {
+                if (cardPay.TIEN - money >= 0)
+                {
+                    result = sp.updateTable("SP_CHECKOUT", new string[] {"@flag","@maThe", "@soTienThanhToan","@maDon","@maKhach" }, new object[] {6, cardNumber, money, orderCode, customerCode });
+                }
+                else return false;
+            }
+            else
+            {
+                return false;
+            }
+            if (result != -1)
+                return true;
+            else return false;
+            
+        }
+        [WebMethod]
+        public static bool fAddAddress(string customerCode, string address, string receiverName, string phoneNumber)
         {
             //Get customerCode by Session
             List<string> lstOrderCodeAndCustomerCode = new List<string>();
@@ -205,7 +265,7 @@ namespace SaleWeb.PAGES
             if(lstAddress.Count == 0)
             {
                 addressCode += "1";
-                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, addressCode, customerCode, address, true });
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh", "@tenNguoiNhan", "@sdtNguoiNhan" }, new object[] { 2, addressCode, customerCode, address, true, receiverName, phoneNumber });
                 if (result != -1)
                 {
                     return true;
@@ -231,7 +291,7 @@ namespace SaleWeb.PAGES
             else
             {
                 addressCode += lstAddress.Count + System.DateTime.Today.Year;
-                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, addressCode, customerCode, address, false });
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh", "@tenNguoiNhan", "@sdtNguoiNhan" }, new object[] { 2, addressCode, customerCode, address, false, receiverName, phoneNumber });
 
             }
             
@@ -243,8 +303,8 @@ namespace SaleWeb.PAGES
             else return false;
            
         }
-
-        public static bool fUpdateDefaultAddress(string customerCode, string address)
+        [WebMethod]
+        public static bool fUpdateDefaultAddress(string customerCode, string addressCode)
         {
             //Get customerCode by Session
             List<string> lstOrderCodeAndCustomerCode = new List<string>();
@@ -258,7 +318,7 @@ namespace SaleWeb.PAGES
             else return false;
             int result = 0;
 
-            result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 3, customerCode, address, true });
+            result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@maDiaChi"}, new object[] { 3, customerCode, addressCode});
             if (result != -1)
             {
                 return true;
@@ -343,6 +403,21 @@ namespace SaleWeb.PAGES
 
         protected void address_Load(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "load();", true);
+        }
+
+        protected void btnAddAddress_Click(object sender, EventArgs e)
+        {
+            List<string> lstOrderCodeAndCustomerCode = new List<string>();
+            lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
+            string customerCode = "";
+            if (lstOrderCodeAndCustomerCode != null)
+            {
+                //orderCode = lstOrderCodeAndCustomerCode[0];
+                customerCode = lstOrderCodeAndCustomerCode[1];
+            }
+            //public static bool fAddAddress(string customerCode, string address, string receiverName, string phoneNumber)
+            fAddAddress(customerCode,txtAddress.Value,txtReceiverName.Value,txtPhoneNumber.Value);
             ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "load();", true);
         }
     }

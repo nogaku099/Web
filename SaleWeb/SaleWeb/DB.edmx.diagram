@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="WEB_DATAModel.DM_SANPHAM_CHITIET" Width="1.5" PointX="2.375" PointY="6.25" />
         <EntityTypeShape EntityType="WEB_DATAModel.DM_THUONGHIEU" Width="1.5" PointX="8.625" PointY="5.875" />
         <EntityTypeShape EntityType="WEB_DATAModel.DM_KHACHHANG_DIACHI" Width="1.5" PointX="10.5" PointY="6.375" />
+        <EntityTypeShape EntityType="WEB_DATAModel.THE" Width="1.5" PointX="4.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

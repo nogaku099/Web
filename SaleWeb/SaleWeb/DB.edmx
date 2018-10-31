@@ -158,12 +158,33 @@
           <Property Name="MATHUONGHIEU" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TENTHUONGHIEU" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="THE">
+          <Key>
+            <PropertyRef Name="MATHE" />
+          </Key>
+          <Property Name="MATHE" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="TENCHUTHE" Type="nvarchar" MaxLength="100" />
+          <Property Name="THANG" Type="nvarchar" MaxLength="10" />
+          <Property Name="NAM" Type="nvarchar" MaxLength="100" />
+          <Property Name="TIEN" Type="float" />
+          <Property Name="CCV" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <Function Name="SP_CHECKOUT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="flag" Type="int" Mode="In" />
           <Parameter Name="maKhach" Type="nvarchar" Mode="In" />
           <Parameter Name="diaChi" Type="nvarchar" Mode="In" />
           <Parameter Name="danhDauMacDinh" Type="bit" Mode="In" />
           <Parameter Name="maDiaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="tenNguoiNhan" Type="nvarchar" Mode="In" />
+          <Parameter Name="sdtNguoiNhan" Type="nvarchar" Mode="In" />
+          <Parameter Name="maDon" Type="nvarchar" Mode="In" />
+          <Parameter Name="soTienThanhToan" Type="float" Mode="In" />
+          <Parameter Name="soTienCoTrongTaiKhoan" Type="float" Mode="In" />
+          <Parameter Name="tenChuThe" Type="nvarchar" Mode="In" />
+          <Parameter Name="maThe" Type="nvarchar" Mode="In" />
+          <Parameter Name="thang" Type="nvarchar" Mode="In" />
+          <Parameter Name="nam" Type="nvarchar" Mode="In" />
+          <Parameter Name="ccv" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="SP_DANGNHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="flag" Type="int" Mode="In" />
@@ -210,6 +231,7 @@
           <EntitySet Name="DM_SANPHAM_NHOM" EntityType="Self.DM_SANPHAM_NHOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_TAIKHOAN" EntityType="Self.DM_TAIKHOAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_THUONGHIEU" EntityType="Self.DM_THUONGHIEU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THE" EntityType="Self.THE" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -349,6 +371,16 @@
             <Parameter Name="diaChi" Mode="In" Type="String" />
             <Parameter Name="danhDauMacDinh" Mode="In" Type="Boolean" />
             <Parameter Name="maDiaChi" Mode="In" Type="String" />
+            <Parameter Name="tenNguoiNhan" Mode="In" Type="String" />
+            <Parameter Name="sdtNguoiNhan" Mode="In" Type="String" />
+            <Parameter Name="maDon" Mode="In" Type="String" />
+            <Parameter Name="soTienThanhToan" Mode="In" Type="Double" />
+            <Parameter Name="soTienCoTrongTaiKhoan" Mode="In" Type="Double" />
+            <Parameter Name="tenChuThe" Mode="In" Type="String" />
+            <Parameter Name="maThe" Mode="In" Type="String" />
+            <Parameter Name="thang" Mode="In" Type="String" />
+            <Parameter Name="nam" Mode="In" Type="String" />
+            <Parameter Name="ccv" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_DANGNHAP" ReturnType="Collection(WEB_DATAModel.SP_DANGNHAP_Result)">
             <Parameter Name="flag" Mode="In" Type="Int32" />
@@ -381,6 +413,7 @@
             <Parameter Name="text" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="DM_KHACHHANG_DIACHI" EntityType="WEB_DATAModel.DM_KHACHHANG_DIACHI" />
+          <EntitySet Name="THEs" EntityType="WEB_DATAModel.THE" />
         </EntityContainer>
         <EntityType Name="DM_SANPHAM_CHITIET">
           <Key>
@@ -471,6 +504,17 @@
           <Property Name="MACDINH" Type="Boolean" />
           <Property Name="TENNGUOINHAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SDTNGUOINHAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="THE">
+          <Key>
+            <PropertyRef Name="MATHE" />
+          </Key>
+          <Property Name="MATHE" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="TENCHUTHE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="THANG" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NAM" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TIEN" Type="Double" />
+          <Property Name="CCV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -697,6 +741,18 @@
                 <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
                 <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
                 <ScalarProperty Name="MADIACHI" ColumnName="MADIACHI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="THEs">
+            <EntityTypeMapping TypeName="WEB_DATAModel.THE">
+              <MappingFragment StoreEntitySet="THE">
+                <ScalarProperty Name="CCV" ColumnName="CCV" />
+                <ScalarProperty Name="TIEN" ColumnName="TIEN" />
+                <ScalarProperty Name="NAM" ColumnName="NAM" />
+                <ScalarProperty Name="THANG" ColumnName="THANG" />
+                <ScalarProperty Name="TENCHUTHE" ColumnName="TENCHUTHE" />
+                <ScalarProperty Name="MATHE" ColumnName="MATHE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

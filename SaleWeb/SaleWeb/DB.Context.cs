@@ -42,8 +42,9 @@ namespace SaleWeb
         public DbSet<DM_SANPHAM_CHITIET> DM_SANPHAM_CHITIET { get; set; }
         public DbSet<DM_THUONGHIEU> DM_THUONGHIEU { get; set; }
         public DbSet<DM_KHACHHANG_DIACHI> DM_KHACHHANG_DIACHI { get; set; }
+        public DbSet<THE> THEs { get; set; }
     
-        public virtual int SP_CHECKOUT(Nullable<int> flag, string maKhach, string diaChi, Nullable<bool> danhDauMacDinh, string maDiaChi)
+        public virtual int SP_CHECKOUT(Nullable<int> flag, string maKhach, string diaChi, Nullable<bool> danhDauMacDinh, string maDiaChi, string tenNguoiNhan, string sdtNguoiNhan, string maDon, Nullable<double> soTienThanhToan, Nullable<double> soTienCoTrongTaiKhoan, string tenChuThe, string maThe, string thang, string nam, string ccv)
         {
             var flagParameter = flag.HasValue ?
                 new ObjectParameter("flag", flag) :
@@ -65,7 +66,47 @@ namespace SaleWeb
                 new ObjectParameter("maDiaChi", maDiaChi) :
                 new ObjectParameter("maDiaChi", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CHECKOUT", flagParameter, maKhachParameter, diaChiParameter, danhDauMacDinhParameter, maDiaChiParameter);
+            var tenNguoiNhanParameter = tenNguoiNhan != null ?
+                new ObjectParameter("tenNguoiNhan", tenNguoiNhan) :
+                new ObjectParameter("tenNguoiNhan", typeof(string));
+    
+            var sdtNguoiNhanParameter = sdtNguoiNhan != null ?
+                new ObjectParameter("sdtNguoiNhan", sdtNguoiNhan) :
+                new ObjectParameter("sdtNguoiNhan", typeof(string));
+    
+            var maDonParameter = maDon != null ?
+                new ObjectParameter("maDon", maDon) :
+                new ObjectParameter("maDon", typeof(string));
+    
+            var soTienThanhToanParameter = soTienThanhToan.HasValue ?
+                new ObjectParameter("soTienThanhToan", soTienThanhToan) :
+                new ObjectParameter("soTienThanhToan", typeof(double));
+    
+            var soTienCoTrongTaiKhoanParameter = soTienCoTrongTaiKhoan.HasValue ?
+                new ObjectParameter("soTienCoTrongTaiKhoan", soTienCoTrongTaiKhoan) :
+                new ObjectParameter("soTienCoTrongTaiKhoan", typeof(double));
+    
+            var tenChuTheParameter = tenChuThe != null ?
+                new ObjectParameter("tenChuThe", tenChuThe) :
+                new ObjectParameter("tenChuThe", typeof(string));
+    
+            var maTheParameter = maThe != null ?
+                new ObjectParameter("maThe", maThe) :
+                new ObjectParameter("maThe", typeof(string));
+    
+            var thangParameter = thang != null ?
+                new ObjectParameter("thang", thang) :
+                new ObjectParameter("thang", typeof(string));
+    
+            var namParameter = nam != null ?
+                new ObjectParameter("nam", nam) :
+                new ObjectParameter("nam", typeof(string));
+    
+            var ccvParameter = ccv != null ?
+                new ObjectParameter("ccv", ccv) :
+                new ObjectParameter("ccv", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CHECKOUT", flagParameter, maKhachParameter, diaChiParameter, danhDauMacDinhParameter, maDiaChiParameter, tenNguoiNhanParameter, sdtNguoiNhanParameter, maDonParameter, soTienThanhToanParameter, soTienCoTrongTaiKhoanParameter, tenChuTheParameter, maTheParameter, thangParameter, namParameter, ccvParameter);
         }
     
         public virtual ObjectResult<SP_DANGNHAP_Result> SP_DANGNHAP(Nullable<int> flag, string ten, string matkhau)
