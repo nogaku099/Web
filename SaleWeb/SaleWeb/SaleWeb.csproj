@@ -274,6 +274,9 @@
     <Compile Include="SP_HOMEPAGE_Result.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="THE.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="THU VIEN\Function.cs" />
     <Compile Include="THU VIEN\StoreProcedure.cs" />
   </ItemGroup>

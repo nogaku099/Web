@@ -82,6 +82,15 @@ namespace SaleWeb.PAGES
 
         #region WebMethod
         [WebMethod]
+        public void clearSS()
+        {
+            HttpContext.Current.Session["GIOHANG"] = null;
+            HttpContext.Current.Session["DANGNHAP"] = null;
+            Session.Abandon();
+            Session.Clear();
+            Session.RemoveAll();
+        }
+        [WebMethod]
         public static string fGetGroup(string productCode)
         {
 

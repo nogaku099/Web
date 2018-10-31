@@ -58,6 +58,23 @@ function confirmOrder() {
                     alertCustom("Error", "Cant Order");
                 }
                 alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
+                $.ajax({
+                    type: 'POST',
+                    url: 'CheckOutPage.aspx/clearSS',
+                    success: function (result) {
+                        if (result.d == null) {
+                            alertCustom("Error", "Cant Order");
+                        }
+                        alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
+            
+                    }, error: function (result) {
+                        alert(result.responseText);
+
+                    }
+                });
+                window.onunload = function () {
+                    alert('Bye.');
+                }
                 window.location.replace("HomePage.aspx");
                 return;
             }, error: function (result) {
@@ -124,7 +141,7 @@ function payByCard() {
                     if (result.d == null) {
                         alertCustom("Error", "Cant Order");
                     }
-                    
+                    sessionStorage.clear();
                     
                 }, error: function (result) {
                     alert(result.responseText);
@@ -132,6 +149,10 @@ function payByCard() {
                 }
             });
             alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
+            window.onunload = function () {
+                alert('Bye.');
+            }
+            //sessionStorage.removeItem('GIOHANG');
             window.location.replace("HomePage.aspx");
             return;
             
