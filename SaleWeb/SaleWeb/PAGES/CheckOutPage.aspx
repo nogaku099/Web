@@ -113,30 +113,36 @@
             </div>
 
             <!-- Div load Address -->
-            <div class="row" style="font-weight: bold">
-                <div class="col-xs-4">
-                    Nguyễn Văn A (+84) 132456789
-                </div>
+            <asp:Panel ID="address" OnLoad="address_Load" runat="server" Width="100%">
+                <div class="row" style="font-weight: bold">
+                    <div class="col-xs-1">
+                        <input type="radio" name="paymentType" value="AddressCode" />
+                    </div>
+                    <div class="col-xs-3" id="userNameAndPhone">
+                        Nguyễn Văn A (+84) 132456789
+                    </div>
 
-                <div class="col-xs-6">
-                    Đường Lê Văn Lương, Huyện Nhà Bè, TP. Hồ Chí Minh
-                </div>
+                    <div class="col-xs-6" id="userAddress">
+                        Đường Lê Văn Lương, Huyện Nhà Bè, TP. Hồ Chí Minh
+                    </div>
 
-                <div class="col-xs-1">
-                    <input type="button" value="Default" style="border: none; background-color: white; font-weight: bold" />
+                    <div class="col-xs-1">
+                        <input type="button" value="Default" style="border: none; background-color: white; font-weight: bold" />
+                    </div>
+                    <div class="col-xs-1">
+                        <input type="button" value="Change" style="border: none; background-color: white; font-weight: bold" />
+                    </div>
                 </div>
-                <div class="col-xs-1">
-                    <input type="button" value="Change" style="border: none; background-color: white; font-weight: bold" />
-                </div>
-            </div>
+            </asp:Panel>
+
+
 
         </div>
 
 
         <br />
         <!-- Div List product (Cart) -->
-        <div class="row" style="background-color: #960b0b; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center;color:white;display: flex; 
-    justify-content: center; align-items: center;">
+        <div class="row" style="background-color: #960b0b; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center; color: white; display: flex; justify-content: center; align-items: center;">
             <div class="col-xs-6">
                 Product
             </div>
@@ -152,7 +158,6 @@
                         Total Price
                     </div>
                     <div class="col-xs-3">
-                       
                     </div>
                 </div>
             </div>
@@ -164,15 +169,15 @@
         </asp:Panel>
         <%--Row Tong Tien--%>
 
-        <div class="row" style="background-color:  #960b0b; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center; color:white">
+        <div class="row" style="background-color: #960b0b; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center; color: white">
             <div class="col-xs-1">
             </div>
             <div class="col-xs-11" style="text-align: right">
                 Total (
-                    <span style="color:#79ff16;font-weight:bold;font-size:larger" id="lblTotalQuantity">12
+                    <span style="color: #79ff16; font-weight: bold; font-size: larger" id="lblTotalQuantity">12
                     </span>
                 product):
-                    <span id="lblTotal" style="color:#79ff16;font-weight:bold;font-size:larger">50.000.000
+                    <span id="lblTotal" style="color: #79ff16; font-weight: bold; font-size: larger">50.000.000
                     </span>
             </div>
 
@@ -182,12 +187,12 @@
         <div class="row" style="background-color: white; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: left">
             Choose your payment method:
             <br />
-            <input type="radio" name="paymentType" value="COD" />Cash On Delivery(COD)<br/>
-            <input type="radio" name="paymentType" value="banking" />InternetBanking<br/>
+            <input type="radio" name="paymentType" value="COD" id="COD" />&nbsp Cash On Delivery(COD)<br />
+            <input type="radio" name="paymentType" value="banking" id="banking" />&nbsp InternetBanking<br />
         </div>
 
         <div class="row" style="background-color: white; height: 50px; border-radius: 5px 5px; margin-left: 50px; margin-right: 50px; text-align: center">
-            <input type="button" class="btn btn-danger btn-lg" value="Confirm"  style="background-color:#960b0b"/>
+            <input type="button" class="btn btn-danger btn-lg" value="Confirm" style="background-color: #960b0b" onclick="confirmOrder()" />
         </div>
     </form>
 </body>

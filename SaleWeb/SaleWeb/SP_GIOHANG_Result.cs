@@ -10,11 +10,23 @@
 namespace SaleWeb
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DM_DONHANG
+    public partial class SP_GIOHANG_Result
     {
         public string MADONHANG { get; set; }
+        public string MACHITIETDONHANG { get; set; }
+        public string MASANPHAM { get; set; }
+        public string TENSANPHAM { get; set; }
+        public Nullable<double> SOLUONG { get; set; }
+        public Nullable<double> DONGIA { get; set; }
+        public Nullable<double> THANHTIEN { get; set; }
+        public string SIZE { get; set; }
+        public string MAU { get; set; }
+        public string DUNGTICH { get; set; }
+        public string LOAI { get; set; }
+        public Nullable<double> SALE { get; set; }
+        public string MUIHUONG { get; set; }
+        public string MADONHANG1 { get; set; }
         public string MAKHACHHANG { get; set; }
         public Nullable<System.DateTime> NGAYLAP { get; set; }
         public string MATRANGTHAI { get; set; }

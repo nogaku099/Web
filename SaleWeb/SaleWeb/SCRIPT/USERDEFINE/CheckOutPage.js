@@ -4,6 +4,135 @@
         message: mess
     });
 }
+
+function alertConfirmCustomDelete(title, mess, yes, no, id) {
+    BootstrapDialog.show({
+        title: title,
+        message: mess,
+        buttons: [{
+            label: yes,
+            action: function (Itself) {
+                deleteProduct(id);
+                Itself.close();
+            }
+        }, {
+            label: no,
+            cssClass: 'demo',
+            action: function (Itself) {
+                Itself.close();
+            }
+        }]
+    });
+}
+function getCheckedAddress() {
+    var arrAdressID = [];
+    arrAdressID = document.getElementsByName("addressCode");
+    for (var i = 0; i < arrAdressID.length; i++) {
+        if (arrAdressID[i].checked == true) {
+            return arrAdressID[i].id;
+        }
+    }
+    return null;
+}
+function confirmOrder() {
+    var [a, b] = document.getElementsByName("paymentType");
+    if (a.checked == false && b.checked == false) {
+        alertCustom("Error", "Please choose your payment type!");
+    }
+    var addressCode = "";
+    addressCode = document.getElementById(getCheckedAddress().toString());
+    var dataUpdate = "{customerCode:'" + 1 + "'"; // get from Session
+    dataUpdate += ",orderCode:'" + 2 + "'";
+    dataUpdate += ",addressCode:'" + addressCode + "'}";
+    if (a.checked == true) {
+       
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            data: dataUpdate,
+            url: 'CheckOutPage.aspx/fUpdateOrderStatus',
+            success: function (result) {
+                if (result.d == null) {
+                    alertCustom("Error", "Cant Order");
+                }
+                alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
+                window.location.replace("HomePage.aspx");
+                return;
+            }, error: function (result) {
+                alert(result.responseText);
+
+            }
+        });
+    }
+    if (b.checked == true) {
+
+    }
+    
+}
+function loadAddress() {
+    var lstHtml = "";
+    var customerCode = "{customerCode:'" + 1 + "'}";
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json;charset=utf-8',
+        dataType: 'json',
+        data: customerCode,
+        url: 'CheckOutPage.aspx/fGetUserAddress',
+        success: function (result) {
+            if (result.d == null) {
+                alertCustom("Error", "Cant load your Address");
+            }
+
+            if (result.d.length > 0) {
+                for (var i = 0; i < result.d.length; i++)
+                {
+                    
+                    lstHtml += "<div class='row' style='font-weight: bold'>";
+                    lstHtml += "<div class='col-xs-1'>";
+                    var addressCode = "";
+                    addressCode = result.d[i].MADIACHI.toString();
+                    if (result.d[i].MACDINH) {
+                        lstHtml += "<input type='radio' name='addressCode' checked='checked' value='" + addressCode + "' id='" + addressCode + "' />";
+                        lstHtml += "</div>";
+                    }
+                    else {
+                        lstHtml += "<input type='radio' name='addressCode' value='" + addressCode + "' id='" + addressCode + "' />";
+                        lstHtml += "</div>";
+                    }
+                    
+                    lstHtml += "<div class='col-xs-3' id='userNameAndPhone'>";
+                    lstHtml += result.d[i].TENNGUOINHAN.toString() + "&nbsp" + result.d[i].SDTNGUOINHAN.toString();
+    
+                    //Nguyễn Văn A (+84) 132456789
+                    lstHtml += "</div>";
+
+                    lstHtml += "<div class='col-xs-6' id='userAddress'>";
+                    lstHtml += result.d[i].DIACHI.toString();
+                    //Đường Lê Văn Lương, Huyện Nhà Bè, TP. Hồ Chí Minh
+                    lstHtml += "</div>";
+
+                    lstHtml += "<div class='col-xs-1'>";
+                    lstHtml += "<input type='button' value='Default' style='border: none; background-color: white; font-weight: bold' />";
+                    lstHtml += "</div>";
+                    lstHtml += "<div class='col-xs-1'>";
+                    lstHtml += "<input type='button' value='Change' style='border: none; background-color: white; font-weight: bold' />";
+                    lstHtml += "</div>";
+                    lstHtml += " </div>";
+                }
+                document.getElementById('address').innerHTML = lstHtml;
+            }
+            return;
+        }, error: function (result) {
+            alert(result.responseText);
+
+        }
+    });
+}
+function load() {
+    loadAddress();
+    loadCart();
+}
 function loadCart() {
 
     var lstHtml = "";

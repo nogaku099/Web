@@ -111,8 +111,7 @@ namespace SaleWeb.PAGES
         [WebMethod]
         public static List<DM_KHACHHANG_DIACHI> fGetUserAddress(string customerCode)
         {
-            List<DM_KHACHHANG_DIACHI> lstAddress = new List<DM_KHACHHANG_DIACHI>();
-
+        
             //Get customerCode by Session
             List<string> lstOrderCodeAndCustomerCode = new List<string>();
             lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
@@ -125,11 +124,18 @@ namespace SaleWeb.PAGES
             else return null;
             
             DataTable dt_ListAddress = sp.getDataTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach" }, new object[] { 1, customerCode });
+            List<DM_KHACHHANG_DIACHI> lstAddress = new List<DM_KHACHHANG_DIACHI>();
+            if (dt_ListAddress == null)
+            {
+                return null;
+            }
+           
             if(dt_ListAddress.Rows.Count > 0)
             {
                 DM_KHACHHANG_DIACHI address = new DM_KHACHHANG_DIACHI();
                 for(int i=0; i < dt_ListAddress.Rows.Count; i++)
                 {
+                    address.MADIACHI = dt_ListAddress.Rows[i]["MADIACHI"].ToString();
                     address.MAKHACHHANG = dt_ListAddress.Rows[i]["MAKHACHHANG"].ToString();
                     address.DIACHI= dt_ListAddress.Rows[i]["DIACHI"].ToString();
                     //address.MACDINH = dt_ListAddress.Rows[i]["MACDINH"];
@@ -140,6 +146,8 @@ namespace SaleWeb.PAGES
                         address.MACDINH = true;
                     }
                     else address.MACDINH = false;
+                    address.TENNGUOINHAN = dt_ListAddress.Rows[i]["TENNGUOINHAN"].ToString();
+                    address.SDTNGUOINHAN = dt_ListAddress.Rows[i]["SDTNGUOINHAN"].ToString();
                     lstAddress.Add(address);
 
                 }
@@ -150,6 +158,28 @@ namespace SaleWeb.PAGES
             }
             else return null;
         }
+        [WebMethod]
+        public static bool fUpdateOrderStatus(string customerCode, string orderCode, string addressCode)
+        {
+            List<string> lstOrderCodeAndCustomerCode = new List<string>();
+            lstOrderCodeAndCustomerCode = getOrderCodeAndCustomerCode();
+
+            if (lstOrderCodeAndCustomerCode != null)
+            {
+                orderCode = lstOrderCodeAndCustomerCode[0];
+                customerCode = lstOrderCodeAndCustomerCode[1];
+            }
+            else return false;
+            int result = 0;
+
+            result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDon", "@maKhach", "@maDiaChi"}, new object[] { 4, orderCode, customerCode,addressCode});
+            if (result != -1)
+            {
+                return true;
+            }
+            else return false;
+        }
+     
         [WebMethod]
         public static bool fAddAddress(string customerCode, string address)
         {
@@ -168,11 +198,14 @@ namespace SaleWeb.PAGES
             List<DM_KHACHHANG_DIACHI> lstAddress = new List<DM_KHACHHANG_DIACHI>();
             lstAddress = fGetUserAddress(customerCode);
             bool checkAddress = false;
+            string addressCode = "";
+            addressCode = customerCode + "_";
 
             //Add address for the first time
             if(lstAddress.Count == 0)
             {
-                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, customerCode, address, true });
+                addressCode += "1";
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, addressCode, customerCode, address, true });
                 if (result != -1)
                 {
                     return true;
@@ -197,8 +230,9 @@ namespace SaleWeb.PAGES
             }
             else
             {
-                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, customerCode, address, false });
-                
+                addressCode += lstAddress.Count + System.DateTime.Today.Year;
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh" }, new object[] { 2, addressCode, customerCode, address, false });
+
             }
             
       
@@ -305,6 +339,11 @@ namespace SaleWeb.PAGES
         protected void loadCartHere(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "loadCart()", true);
+        }
+
+        protected void address_Load(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "load();", true);
         }
     }
 }

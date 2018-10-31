@@ -17,6 +17,7 @@
           <Property Name="TONGTIEN" Type="float" />
           <Property Name="MAHINHTHUCTHANHTOAN" Type="nvarchar" MaxLength="100" />
           <Property Name="PHISHIP" Type="float" />
+          <Property Name="MADIACHI" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DM_DONHANG_CHITIET">
           <Key>
@@ -67,12 +68,15 @@
         </EntityType>
         <EntityType Name="DM_KHACHHANG_DIACHI">
           <Key>
+            <PropertyRef Name="MADIACHI" />
             <PropertyRef Name="MAKHACHHANG" />
-            <PropertyRef Name="DIACHI" />
           </Key>
+          <Property Name="MADIACHI" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MAKHACHHANG" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="DIACHI" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="100" />
           <Property Name="MACDINH" Type="bit" />
+          <Property Name="TENNGUOINHAN" Type="nvarchar" MaxLength="100" />
+          <Property Name="SDTNGUOINHAN" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DM_KM">
           <Key>
@@ -154,6 +158,43 @@
           <Property Name="MATHUONGHIEU" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="TENTHUONGHIEU" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <Function Name="SP_CHECKOUT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="flag" Type="int" Mode="In" />
+          <Parameter Name="maKhach" Type="nvarchar" Mode="In" />
+          <Parameter Name="diaChi" Type="nvarchar" Mode="In" />
+          <Parameter Name="danhDauMacDinh" Type="bit" Mode="In" />
+          <Parameter Name="maDiaChi" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_DANGNHAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="flag" Type="int" Mode="In" />
+          <Parameter Name="ten" Type="nvarchar" Mode="In" />
+          <Parameter Name="matkhau" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GIOHANG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="flag" Type="int" Mode="In" />
+          <Parameter Name="maDonHang" Type="nvarchar" Mode="In" />
+          <Parameter Name="maSanPham" Type="nvarchar" Mode="In" />
+          <Parameter Name="maChiTietDonHang" Type="nvarchar" Mode="In" />
+          <Parameter Name="soLuong" Type="float" Mode="In" />
+          <Parameter Name="thanhTien" Type="float" Mode="In" />
+          <Parameter Name="mau" Type="nvarchar" Mode="In" />
+          <Parameter Name="size" Type="nvarchar" Mode="In" />
+          <Parameter Name="maKhach" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_HOMEPAGE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="flag" Type="int" Mode="In" />
+          <Parameter Name="manhom" Type="nvarchar" Mode="In" />
+          <Parameter Name="session" Type="nvarchar" Mode="In" />
+          <Parameter Name="madonhang" Type="nvarchar" Mode="In" />
+          <Parameter Name="makhach" Type="nvarchar" Mode="In" />
+          <Parameter Name="masanpham" Type="nvarchar" Mode="In" />
+          <Parameter Name="soluong" Type="float" Mode="In" />
+          <Parameter Name="size" Type="nvarchar" Mode="In" />
+          <Parameter Name="mau" Type="nvarchar" Mode="In" />
+          <Parameter Name="muihuong" Type="nvarchar" Mode="In" />
+          <Parameter Name="dungtich" Type="nvarchar" Mode="In" />
+          <Parameter Name="text" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="WEB_DATAModelStoreContainer">
           <EntitySet Name="DM_DONHANG" EntityType="Self.DM_DONHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DM_DONHANG_CHITIET" EntityType="Self.DM_DONHANG_CHITIET" Schema="dbo" store:Type="Tables" />
@@ -186,6 +227,7 @@
           <Property Name="TONGTIEN" Type="Double" />
           <Property Name="MAHINHTHUCTHANHTOAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PHISHIP" Type="Double" />
+          <Property Name="MADIACHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DM_DONHANG_CHITIET">
           <Key>
@@ -299,19 +341,47 @@
           <EntitySet Name="DM_SANPHAM" EntityType="Self.DM_SANPHAM" />
           <EntitySet Name="DM_SANPHAM_NHOM" EntityType="Self.DM_SANPHAM_NHOM" />
           <EntitySet Name="DM_TAIKHOAN" EntityType="Self.DM_TAIKHOAN" />
-          <EntitySet Name="DM_KHACHHANG_DIACHI" EntityType="WEB_DATAModel.DM_KHACHHANG_DIACHI" />
           <EntitySet Name="DM_SANPHAM_CHITIET" EntityType="WEB_DATAModel.DM_SANPHAM_CHITIET" />
           <EntitySet Name="DM_THUONGHIEU" EntityType="WEB_DATAModel.DM_THUONGHIEU" />
+          <FunctionImport Name="SP_CHECKOUT">
+            <Parameter Name="flag" Mode="In" Type="Int32" />
+            <Parameter Name="maKhach" Mode="In" Type="String" />
+            <Parameter Name="diaChi" Mode="In" Type="String" />
+            <Parameter Name="danhDauMacDinh" Mode="In" Type="Boolean" />
+            <Parameter Name="maDiaChi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DANGNHAP" ReturnType="Collection(WEB_DATAModel.SP_DANGNHAP_Result)">
+            <Parameter Name="flag" Mode="In" Type="Int32" />
+            <Parameter Name="ten" Mode="In" Type="String" />
+            <Parameter Name="matkhau" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GIOHANG" ReturnType="Collection(WEB_DATAModel.SP_GIOHANG_Result)">
+            <Parameter Name="flag" Mode="In" Type="Int32" />
+            <Parameter Name="maDonHang" Mode="In" Type="String" />
+            <Parameter Name="maSanPham" Mode="In" Type="String" />
+            <Parameter Name="maChiTietDonHang" Mode="In" Type="String" />
+            <Parameter Name="soLuong" Mode="In" Type="Double" />
+            <Parameter Name="thanhTien" Mode="In" Type="Double" />
+            <Parameter Name="mau" Mode="In" Type="String" />
+            <Parameter Name="size" Mode="In" Type="String" />
+            <Parameter Name="maKhach" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_HOMEPAGE" ReturnType="Collection(WEB_DATAModel.SP_HOMEPAGE_Result)">
+            <Parameter Name="flag" Mode="In" Type="Int32" />
+            <Parameter Name="manhom" Mode="In" Type="String" />
+            <Parameter Name="session" Mode="In" Type="String" />
+            <Parameter Name="madonhang" Mode="In" Type="String" />
+            <Parameter Name="makhach" Mode="In" Type="String" />
+            <Parameter Name="masanpham" Mode="In" Type="String" />
+            <Parameter Name="soluong" Mode="In" Type="Double" />
+            <Parameter Name="size" Mode="In" Type="String" />
+            <Parameter Name="mau" Mode="In" Type="String" />
+            <Parameter Name="muihuong" Mode="In" Type="String" />
+            <Parameter Name="dungtich" Mode="In" Type="String" />
+            <Parameter Name="text" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="DM_KHACHHANG_DIACHI" EntityType="WEB_DATAModel.DM_KHACHHANG_DIACHI" />
         </EntityContainer>
-        <EntityType Name="DM_KHACHHANG_DIACHI">
-          <Key>
-            <PropertyRef Name="MAKHACHHANG" />
-            <PropertyRef Name="DIACHI" />
-          </Key>
-          <Property Name="MAKHACHHANG" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="DIACHI" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MACDINH" Type="Boolean" />
-        </EntityType>
         <EntityType Name="DM_SANPHAM_CHITIET">
           <Key>
             <PropertyRef Name="MASANPHAM" />
@@ -339,6 +409,69 @@
           <Property Name="MATHUONGHIEU" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TENTHUONGHIEU" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="SP_DANGNHAP_Result">
+          <Property Type="String" Name="TENDANGNHAP" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MATKHAU" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CHUCVU" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MAKHACHHANG" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TENKHACHHANG" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SODIENTHOAI" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="GIOITINH" Nullable="true" />
+          <Property Type="DateTime" Name="NGAYSINH" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EMAIL" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TENDANGNHAP1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MAKHACHHANG1" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_GIOHANG_Result">
+          <Property Type="String" Name="MADONHANG" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MACHITIETDONHANG" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MASANPHAM" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TENSANPHAM" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="SOLUONG" Nullable="true" />
+          <Property Type="Double" Name="DONGIA" Nullable="true" />
+          <Property Type="Double" Name="THANHTIEN" Nullable="true" />
+          <Property Type="String" Name="SIZE" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MAU" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DUNGTICH" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LOAI" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="SALE" Nullable="true" />
+          <Property Type="String" Name="MUIHUONG" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MADONHANG1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MAKHACHHANG" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="NGAYLAP" Nullable="true" Precision="23" />
+          <Property Type="String" Name="MATRANGTHAI" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MAXACNHAN" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="TONGTIEN" Nullable="true" />
+          <Property Type="String" Name="MAHINHTHUCTHANHTOAN" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="PHISHIP" Nullable="true" />
+          <Property Type="String" Name="MADIACHI" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_HOMEPAGE_Result">
+          <Property Type="String" Name="MASANPHAM" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DONVITINH" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="GIA1" Nullable="true" />
+          <Property Type="Double" Name="GIA2" Nullable="true" />
+          <Property Type="String" Name="SIZE" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MAU" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DUNGTICH" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LOAI" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="GIOITINH" Nullable="true" />
+          <Property Type="Double" Name="SALE" Nullable="true" />
+          <Property Type="String" Name="TENSANPHAM" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="MUIHUONG" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="DM_KHACHHANG_DIACHI">
+          <Key>
+            <PropertyRef Name="MADIACHI" />
+            <PropertyRef Name="MAKHACHHANG" />
+          </Key>
+          <Property Name="MADIACHI" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAKHACHHANG" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MACDINH" Type="Boolean" />
+          <Property Name="TENNGUOINHAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SDTNGUOINHAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -348,6 +481,7 @@
           <EntitySetMapping Name="DM_DONHANG">
             <EntityTypeMapping TypeName="WEB_DATAModel.DM_DONHANG">
               <MappingFragment StoreEntitySet="DM_DONHANG">
+                <ScalarProperty Name="MADIACHI" ColumnName="MADIACHI" />
                 <ScalarProperty Name="PHISHIP" ColumnName="PHISHIP" />
                 <ScalarProperty Name="MADONHANG" ColumnName="MADONHANG" />
                 <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
@@ -464,15 +598,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DM_KHACHHANG_DIACHI">
-            <EntityTypeMapping TypeName="WEB_DATAModel.DM_KHACHHANG_DIACHI">
-              <MappingFragment StoreEntitySet="DM_KHACHHANG_DIACHI">
-                <ScalarProperty Name="MACDINH" ColumnName="MACDINH" />
-                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
-                <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DM_SANPHAM_CHITIET">
             <EntityTypeMapping TypeName="WEB_DATAModel.DM_SANPHAM_CHITIET">
               <MappingFragment StoreEntitySet="DM_SANPHAM_CHITIET">
@@ -496,6 +621,82 @@
               <MappingFragment StoreEntitySet="DM_THUONGHIEU">
                 <ScalarProperty Name="TENTHUONGHIEU" ColumnName="TENTHUONGHIEU" />
                 <ScalarProperty Name="MATHUONGHIEU" ColumnName="MATHUONGHIEU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_CHECKOUT" FunctionName="WEB_DATAModel.Store.SP_CHECKOUT" />
+          <FunctionImportMapping FunctionImportName="SP_DANGNHAP" FunctionName="WEB_DATAModel.Store.SP_DANGNHAP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_DATAModel.SP_DANGNHAP_Result">
+                <ScalarProperty Name="TENDANGNHAP" ColumnName="TENDANGNHAP" />
+                <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
+                <ScalarProperty Name="CHUCVU" ColumnName="CHUCVU" />
+                <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
+                <ScalarProperty Name="TENKHACHHANG" ColumnName="TENKHACHHANG" />
+                <ScalarProperty Name="SODIENTHOAI" ColumnName="SODIENTHOAI" />
+                <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
+                <ScalarProperty Name="NGAYSINH" ColumnName="NGAYSINH" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TENDANGNHAP1" ColumnName="TENDANGNHAP1" />
+                <ScalarProperty Name="MAKHACHHANG1" ColumnName="MAKHACHHANG1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GIOHANG" FunctionName="WEB_DATAModel.Store.SP_GIOHANG">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_DATAModel.SP_GIOHANG_Result">
+                <ScalarProperty Name="MADONHANG" ColumnName="MADONHANG" />
+                <ScalarProperty Name="MACHITIETDONHANG" ColumnName="MACHITIETDONHANG" />
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="TENSANPHAM" ColumnName="TENSANPHAM" />
+                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="DONGIA" ColumnName="DONGIA" />
+                <ScalarProperty Name="THANHTIEN" ColumnName="THANHTIEN" />
+                <ScalarProperty Name="SIZE" ColumnName="SIZE" />
+                <ScalarProperty Name="MAU" ColumnName="MAU" />
+                <ScalarProperty Name="DUNGTICH" ColumnName="DUNGTICH" />
+                <ScalarProperty Name="LOAI" ColumnName="LOAI" />
+                <ScalarProperty Name="SALE" ColumnName="SALE" />
+                <ScalarProperty Name="MUIHUONG" ColumnName="MUIHUONG" />
+                <ScalarProperty Name="MADONHANG1" ColumnName="MADONHANG1" />
+                <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
+                <ScalarProperty Name="NGAYLAP" ColumnName="NGAYLAP" />
+                <ScalarProperty Name="MATRANGTHAI" ColumnName="MATRANGTHAI" />
+                <ScalarProperty Name="MAXACNHAN" ColumnName="MAXACNHAN" />
+                <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
+                <ScalarProperty Name="MAHINHTHUCTHANHTOAN" ColumnName="MAHINHTHUCTHANHTOAN" />
+                <ScalarProperty Name="PHISHIP" ColumnName="PHISHIP" />
+                <ScalarProperty Name="MADIACHI" ColumnName="MADIACHI" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_HOMEPAGE" FunctionName="WEB_DATAModel.Store.SP_HOMEPAGE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WEB_DATAModel.SP_HOMEPAGE_Result">
+                <ScalarProperty Name="MASANPHAM" ColumnName="MASANPHAM" />
+                <ScalarProperty Name="DONVITINH" ColumnName="DONVITINH" />
+                <ScalarProperty Name="GIA1" ColumnName="GIA1" />
+                <ScalarProperty Name="GIA2" ColumnName="GIA2" />
+                <ScalarProperty Name="SIZE" ColumnName="SIZE" />
+                <ScalarProperty Name="MAU" ColumnName="MAU" />
+                <ScalarProperty Name="DUNGTICH" ColumnName="DUNGTICH" />
+                <ScalarProperty Name="LOAI" ColumnName="LOAI" />
+                <ScalarProperty Name="GIOITINH" ColumnName="GIOITINH" />
+                <ScalarProperty Name="SALE" ColumnName="SALE" />
+                <ScalarProperty Name="TENSANPHAM" ColumnName="TENSANPHAM" />
+                <ScalarProperty Name="MUIHUONG" ColumnName="MUIHUONG" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DM_KHACHHANG_DIACHI">
+            <EntityTypeMapping TypeName="WEB_DATAModel.DM_KHACHHANG_DIACHI">
+              <MappingFragment StoreEntitySet="DM_KHACHHANG_DIACHI">
+                <ScalarProperty Name="SDTNGUOINHAN" ColumnName="SDTNGUOINHAN" />
+                <ScalarProperty Name="TENNGUOINHAN" ColumnName="TENNGUOINHAN" />
+                <ScalarProperty Name="MACDINH" ColumnName="MACDINH" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="MAKHACHHANG" ColumnName="MAKHACHHANG" />
+                <ScalarProperty Name="MADIACHI" ColumnName="MADIACHI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
