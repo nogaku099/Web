@@ -36,13 +36,8 @@ function loadCart() {
                         //Get group code of each product to assign folder name for load product's image
                         if (ketQua.d.length > 0) {
                             var groupCode = ketQua.d;
-                            //alert(groupCode);
-                            for (var i = 0; i < result.d.length; i++) {
-                                //fGetGroupCode(result.d[i].MASANPHAM);
-                                //groupCode = document.getElementById('hdfG').value;
 
-                                
-                                //alert(groupCode);
+                            for (var i = 0; i < result.d.length; i++) {
                                 var formatItem = "";
                                 formatItem = "_" + result.d[i].MASANPHAM.toString()
                                     + "_" + result.d[i].SIZE.toString() + "_" + result.d[i].MAU.toString();
@@ -74,7 +69,7 @@ function loadCart() {
                                 else if (groupCode == "NHH_006") {
                                     imageFolder = "KHAC";
                                 }
-                                imageFolder = "ALL";
+
                                 lstHtml += "<img src='../IMAGES/" + imageFolder + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
 
                                 lstHtml += "</div>";
@@ -472,192 +467,4 @@ function showCheckPage() {
 
     window.location.replace("CheckOutPage.aspx");
     
-}
-function ToJavaScriptDate(value) {
-    var pattern = /Date\(([^)]+)\)/;
-    var results = pattern.exec(value);
-    var dt = new Date(parseFloat(results[1]));
-    return dt.getDate() +"/" +(dt.getMonth() + 1) + "/" + dt.getFullYear();
-}
-function fShowDangXuat() {
-
-    var fullname = "";
-    var sex = "";
-    var birthday = "";
-    var phone = "";
-    var email = "";
-
-    var variable = "{cusID:'KH_1'}";
-    $.ajax({
-        type: 'POST',
-        contentType : 'application/json;charset=utf-8',
-        dataType: 'json',
-        data: variable,
-        url: 'HomePage.aspx/fShowDangXuat',
-        success: function (result) {
-            fullname = result.d[0].TENKHACHHANG;
-            sex = result.d[0].GIOITINH;
-            birthday =  result.d[0].NGAYSINH;
-            phone = result.d[0].SODIENTHOAI;
-            email = result.d[0].EMAIL;
-
-            //alert(fullname + "-" + sex + "-" + ToJavaScriptDate(birthday) + "-" + phone + "-" + email);
-            
-            document.getElementById("txtFullName").value = fullname;
-            if (sex) {
-                document.getElementById("radMale").checked = true;
-            } else {
-                document.getElementById("radFeMale").checked = true;
-            }
-            document.getElementById("lblDate").innerHTML = ToJavaScriptDate(birthday);
-            document.getElementById("txtDate").value = ToJavaScriptDate(birthday);
-            document.getElementById("txtPhone").value = phone;
-            document.getElementById("txtEmail").value = email;
-
-            $("#modalDangXuat").modal();
-        }, error: function (result) {
-            alert("ERROR: fShowDangXuat"+result.statusText);
-        }
-
-    });
-}
-function fUpdateInfo() {
-    var fullname = document.getElementById("txtFullName").value;
-    var sex;
-    if (document.getElementById("radMale").checked == true) {
-        sex = true;
-    } else {
-        sex = false;
-    }
-    var birthday = document.getElementById("txtDate").value;
-    var phone = document.getElementById("txtPhone").value;
-    var email = document.getElementById("txtEmail").value;
-
-
-    //alert(fullname + "-" + sex + "-" + birthday + "-" + phone + "-" + email);
-    if (fullname == "" || birthday == "" || phone == "" || email == "") {
-        alertCustom("Warning", "Let us know more about you!");
-
-    } else {
-        var variable = "{fullname:'"+fullname+"'";
-        variable += ",sex:'"+sex+"'";
-        variable += ",birthday:'"+birthday+"'";
-        variable += ",phone:'"+phone+"'";
-        variable += ",email:'"+email+"'}";
-        $.ajax({
-            type : 'POST',
-            contentType: 'application/json;charset=utf-8',
-            dataType: 'json',
-            data:variable,
-            url: 'HomePage.aspx/fUpdateInfo',
-            success: function (result) {
-                if (result.d == "OK") {
-                    alertCustom("WEBSALE:", "Update successfully");
-                } else {
-                    alertCustom("WEBSALE:", "Update failed");
-                }
-            }, error: function (result) {
-                alert("ERROR: fUpdateInfo");
-            }
-        });
-    }
-}
-
-
-function fLogOut() {
-    BootstrapDialog.show({
-        title: 'Warning',
-        message: 'Your cart will be deleted when you logout.Are you sure?',
-        closable: false,
-        buttons: [{
-            label: 'Yes',
-            cssClass: 'demo',
-            action: function (Itself) {
-                Itself.close();
-                $("#modalDangXuat").modal('hide');
-                
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json;charset:utf-8',
-                    dataType: 'json',
-                    data: '',
-                    url: 'HomePage.aspx/fLogOut',
-                    success: function (result) {
-                        if (result.d == "OK") {
-                            // location.reload(true);
-                            window.location.reload("~/HomePage.aspx");
-                        }
-                    }, error: function (result) {
-                        alert("ERROR: fLogOut");
-                    }
-
-
-                });
-               
-            }
-        }, {
-            label: 'Not now',
-            action: function (Itself) {
-                Itself.close();
-            }
-        }]
-    });
-}
-
-function fChangePassWord() {
-    var OldPass = document.getElementById("txtOldPass").value;
-    var NewPass = document.getElementById("txtNewPass").value;
-    var RetypePass = document.getElementById("txtRetypePass").value;
-
-    if (OldPass == "" || NewPass == "" || RetypePass == "") {
-        alertCustom("Warning", "Password can not blank!");
-        return;
-    }
-
-    if (NewPass != RetypePass) {
-        alertCustom("Warning", "Retype password does not match!");
-        return;
-    }
-    var variable = "{Old:'" + OldPass + "'";
-    variable += ",New:'" + NewPass + "'";
-    variable += ",Re:'" + RetypePass + "'}";
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json;charset:utf-8',
-        dataType: 'json',
-        data:variable,
-        url: 'HomePage.aspx/fChangePassWord',
-        success : function(result){
-            if (result.d == "OK") {
-                alertCustom("Warning", "Your password has been changed");
-                $("#modalReg").modal('hide');
-            } else {
-                alertCustom("Warning", "Your old password was incorrect");
-
-            }
-        },error: function (result){
-
-        }
-    });
-}
-
-function fGetGroupCode(ma){
-    //alert(ma);
-    var productCode = "{productCode:'" + ma + "'}";
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json;charset=utf-8',
-        dataType: 'json',
-        data: productCode,
-        url: 'CartPage.aspx/fGetGroup',
-        success: function(result){
-            if(result.d != ""){
-                
-                document.getElementById('hdfG').value = result.d;
-                alert(document.getElementById('hdfG').value);
-            }
-        },error:function(result){
-
-        }
-    });
 }

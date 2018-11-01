@@ -134,7 +134,7 @@ namespace SaleWeb.PAGES
             
             DataTable dt_ListAddress = sp.getDataTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach" }, new object[] { 1, customerCode });
             List<DM_KHACHHANG_DIACHI> lstAddress = new List<DM_KHACHHANG_DIACHI>();
-            if (dt_ListAddress == null)
+            if (dt_ListAddress == null || dt_ListAddress.Rows.Count<1)
             {
                 return null;
             }
@@ -271,10 +271,11 @@ namespace SaleWeb.PAGES
             addressCode = customerCode + "_";
 
             //Add address for the first time
-            if(lstAddress.Count == 0)
+            if(lstAddress == null || lstAddress.Count == 0)
             {
+                //(@maKhach,@maDiaChi,@danhDauMacDinh,@diaChi,@tenNguoiNhan,@sdtNguoiNhan)
                 addressCode += "1";
-                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh", "@tenNguoiNhan", "@sdtNguoiNhan" }, new object[] { 2, addressCode, customerCode, address, true, receiverName, phoneNumber });
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@maDiaChi", "@danhDauMacDinh", "@diaChi", "@tenNguoiNhan", "@sdtNguoiNhan" }, new object[] { 2, customerCode, addressCode, true, address,  receiverName, phoneNumber });
                 if (result != -1)
                 {
                     return true;
@@ -300,7 +301,7 @@ namespace SaleWeb.PAGES
             else
             {
                 addressCode += lstAddress.Count + System.DateTime.Today.Year;
-                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maDiaChi", "@maKhach", "@diaChi", "@danhDauMacDinh", "@tenNguoiNhan", "@sdtNguoiNhan" }, new object[] { 2, addressCode, customerCode, address, false, receiverName, phoneNumber });
+                result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag", "@maKhach", "@maDiaChi", "@danhDauMacDinh", "@diaChi", "@tenNguoiNhan", "@sdtNguoiNhan" }, new object[] { 2, customerCode, addressCode, false, address, receiverName, phoneNumber });
 
             }
             
@@ -412,7 +413,7 @@ namespace SaleWeb.PAGES
 
         protected void address_Load(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "load();", true);
+            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "load()", true);
         }
 
         protected void btnAddAddress_Click(object sender, EventArgs e)
@@ -427,7 +428,7 @@ namespace SaleWeb.PAGES
             }
             //public static bool fAddAddress(string customerCode, string address, string receiverName, string phoneNumber)
             fAddAddress(customerCode,txtAddress.Value,txtReceiverName.Value,txtPhoneNumber.Value);
-            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "load();", true);
+            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "load()", true);
         }
     }
 }

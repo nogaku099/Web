@@ -175,6 +175,7 @@ function loadAddress() {
                 alertCustom("Error", "Cant load your Address");
                 lstHtml += "<center>Click add below to create your first address</center>";
                 lstHtml += "<center><input type='button' value='Add' style='border: none; background-color: white; font-weight: bold' onclick='callModalAddress()' /></center>";
+                document.getElementById('address').innerHTML = lstHtml;
             }
 
             if (result.d.length > 0) {
@@ -222,7 +223,9 @@ function loadAddress() {
                     lstHtml += " </div>";
                 }
                 document.getElementById('address').innerHTML = lstHtml;
+                
             }
+            //document.getElementById('address').innerHTML = lstHtml;
             return;
         }, error: function (result) {
             alert(result.responseText);

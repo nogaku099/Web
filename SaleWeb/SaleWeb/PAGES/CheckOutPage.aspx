@@ -274,25 +274,7 @@
 
             <!-- Div load Address -->
             <asp:Panel ID="address" OnLoad="address_Load" runat="server" Width="100%" ScrollBars="Horizontal" Height="200px">
-                <div class="row" style="font-weight: bold">
-                    <div class="col-xs-1">
-                        <input type="radio" name="paymentType" value="AddressCode" />
-                    </div>
-                    <div class="col-xs-3" id="userNameAndPhone">
-                        Nguyễn Văn A (+84) 132456789
-                    </div>
-
-                    <div class="col-xs-6" id="userAddress">
-                        Đường Lê Văn Lương, Huyện Nhà Bè, TP. Hồ Chí Minh
-                    </div>
-
-                    <div class="col-xs-1">
-                        <input type="button" value="Default" style="border: none; background-color: white; font-weight: bold" />
-                    </div>
-                    <div class="col-xs-1">
-                        <input type="button" value="Change" style="border: none; background-color: white; font-weight: bold" />
-                    </div>
-                </div>
+               
             </asp:Panel>
 
 
