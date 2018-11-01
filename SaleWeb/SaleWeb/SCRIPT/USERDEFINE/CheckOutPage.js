@@ -57,11 +57,9 @@ function confirmOrder() {
                 if (result.d == null) {
                     alertCustom("Error", "Cant Order");
                 }
-                clearSS();
+                //clearSS();
+                window.location.replace("HomePage.aspx");
                 
-                window.onunload = function () {
-                    alert('Bye.');
-                }
                 
                 return;
             }, error: function (result) {
@@ -78,11 +76,12 @@ function confirmOrder() {
     
 }
 function clearSS() {
-    var dataUpdate = "{customerCode:'" + 1 + "'";
+    var variable = "{customerCode:'" + 1 + "'}";
     $.ajax({
         type: 'POST',
+        contentType: 'application/json;charset=utf-8',
         dataType: 'json',
-        data: dataUpdate,
+        data: variable,
         url: 'CheckOutPage.aspx/fclearSS',
         success: function (result) {
             if (result.d == "OK") {
@@ -154,11 +153,7 @@ function payByCard() {
 
                 }
             });
-            clearSS();
-            window.onunload = function () {
-                alert('Bye.');
-            }
-            //sessionStorage.removeItem('GIOHANG');
+            window.location.replace("HomePage.aspx");
             
             return;
             
