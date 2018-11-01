@@ -70,7 +70,7 @@ function loadCart() {
                                     imageFolder = "KHAC";
                                 }
 
-                                lstHtml += "<img src='../IMAGES/" + imageFolder + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
+                                lstHtml += "<img src='../IMAGES/ALL" + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
 
                                 lstHtml += "</div>";
                                 lstHtml += "<div class='col-xs-8' style='text-align:left'>";
