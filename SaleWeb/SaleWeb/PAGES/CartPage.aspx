@@ -48,11 +48,11 @@
                         </li>
                         <li>
                             <div class="dropdown show">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuTaiKhoan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                <a class="btn btn-secondary dropdown-toggle" onclick="fShowDangXuat();" href="#" role="button" id="dropdownMenuTaiKhoan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     style="color: white;padding-top:15px; background-color: #960b0b" runat="server">Menu Tài Khoản
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #e42424;position:relative">
+                               <%-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="background-color: #e42424;position:relative">
                                     <a class="dropdown-item" href="#" style="color: white; background-color: #e42424; margin-left: 10px">Quản lý tài khoản
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                     </a>
@@ -61,7 +61,7 @@
                                          <i class="fa fa-sign-out"></i>
                                     </a>
                                    
-                                </div>
+                                </div>--%>
                             </div>
 
                             <%--       data-toggle="modal" data-target="#modalDangNhap"--%>
@@ -74,11 +74,123 @@
 
                 </div>
             </nav>
+             <div class="modal fade" id="modalDangXuat" role="dialog" style="display: none">
+                <div class="modal-dialog" style="width: 80%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" style="color: white;">Account</h3>
+                        </div>
 
+                        <div class="modal-body" style="height:300px;">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Full name</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="text" class=" txtInfo" id="txtFullName" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                       <label class="radSex">Male  </label><input  type="radio" id="radMale" name="G1"/>
+                                         <label class="radSex">FeMale  </label><input  type="radio" id="radFeMale" name ="G1"/>
+                                    </div>
+
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">BirthDay</label>
+                                    </div>
+
+                                     <div class="col-xs-3">
+                                        <label class="txtInfo" style="padding-left: 0;margin-right:-30px;border-bottom-right-radius:0px;border-top-right-radius:0;" id="lblDate">00/00/0000</label>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="date" class="txtInfo" style="margin-left: -20px;width: 115%;font-size: 18px;height: 28px;" id="txtDate" />
+                                    </div>
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Phone</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="text" class=" txtInfo" id="txtPhone" />
+                                    </div>
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Email</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="text" class="txtInfo" id="txtEmail" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                     <input type="button" class="btnInfo" value="Update" onclick="fUpdateInfo();"/>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                               <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Old Password</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="password" class="txtInfo" id="txtOldPass" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">New Password</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="password" class="txtInfo" id="txtNewPass" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Re Password</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="password" class="txtInfo" id="txtRetypePass" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                        <input type="button" class="btnInfo" id="txtChangePass" value="Change Password" onclick="fChangePassWord();" />
+                                </div>
+
+
+
+                                 <div class="row">
+                                        <input type="button" class="btnInfo" id="txtLogOutPass" value="Log out" onclick="fLogOut();"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                </div>
+            </div>
             <!-- end nav -->
 
             <!-- row2 -->
-            <div class="row SearchArea" style="margin-left: 0px; margin-right: 0px;margin-top:-70px;">
+            <%--<div class="row SearchArea" style="margin-left: 0px; margin-right: 0px;margin-top:-70px;">
                 <div class="col-xs-3" style="text-align: center">
                     <img width="60px" height="60px" src="../Images/logo.png" />
                 </div>
@@ -100,7 +212,7 @@
                     <img runat="server" onclick="fshowgiohang();" style="width: 30px; height: 30px;" src="../Images/cart.png" />
                     <label id="lblSoLuong" class="labelSL">10</label>
                 </div>
-            </div>
+            </div>--%>
         </div>
 
 
@@ -156,12 +268,11 @@
                     </button>--%>
                     <input type="button" class="btn btn-success" style="color:white;height:50px;width:150px;font-size:large" value="Buy" onclick="showCheckPage()"/>
                 </div>
-
             </div>
-
         </div>
         <!-- HiddenField -->
         <asp:HiddenField ID="hdfMaNhom" runat="server" ClientIDMode="Static"/>
+        <asp:HiddenField ID="hdfG" runat="server" ClientIDMode="Static"/>
         
         <asp:HiddenField ID="language" runat="server" ClientIDMode="Static" />
     </form>

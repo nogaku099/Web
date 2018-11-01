@@ -52,7 +52,7 @@
 }
 
 .group{
-    font-size:85px;
+    font-size:70px;
     position:absolute;
     top:-0px;
     color:gray;
@@ -126,4 +126,17 @@
     box-shadow: none;
     border: solid 1px rgba(128, 128, 128, 0.60);
     cursor: not-allowed;
+}
+.productCapacityDetail{
+    font-size: 13px;
+    font-weight:bold;
+    color: black;
+    padding-left: 0px;
+    margin-bottom: 5px;
+    box-shadow: 2px 1px 8px -1px;
+    border-radius:5px;
+    width:40%;
+    margin-right: 10px;
+    cursor:pointer;
+    display:none;
 }

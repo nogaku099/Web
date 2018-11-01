@@ -46,5 +46,16 @@ namespace SaleWeb.THU_VIEN
             }
             return false;
         }
+
+        public DateTime CDateTime(object val)
+        {
+            if (null == val) return DateTime.Now;
+            DateTime result;
+            if (DateTime.TryParse(val.ToString(), out result))
+            {
+                return result;
+            }
+            return DateTime.Now;
+        }
     }
 }

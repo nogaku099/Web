@@ -104,6 +104,8 @@
     <Content Include="CSS\BOOTSTRAP\animate.css" />
     <Content Include="CSS\BOOTSTRAP\bootstrap.min.css" />
     <Content Include="CSS\BOOTSTRAP\font-awesome.min.css" />
+    <Content Include="CSS\USERDEFINE\Admin.css" />
+    <Content Include="CSS\USERDEFINE\AdminManager.css" />
     <Content Include="CSS\USERDEFINE\Alert.css" />
     <Content Include="CSS\USERDEFINE\CartPage.css" />
     <Content Include="CSS\USERDEFINE\CheckOutPage.css" />
@@ -130,6 +132,8 @@
     <Content Include="IMAGES\DONGHO\HH_0000008.png" />
     <Content Include="IMAGES\DONGHO\HH_0000009.png" />
     <Content Include="IMAGES\DONGHO\HH_0000010.png" />
+    <Content Include="PAGES\Admin.aspx" />
+    <Content Include="PAGES\AdminManager.aspx" />
     <Content Include="PAGES\CartPage.aspx" />
     <Content Include="PAGES\CheckOutPage.aspx" />
     <Content Include="PAGES\HomePage.aspx" />
@@ -156,6 +160,8 @@
     <Content Include="CSS\fonts\fontawesome-webfont.woff" />
     <Content Include="CSS\fonts\fontawesome-webfont.woff2" />
     <Content Include="CSS\fonts\FontAwesome.otf" />
+    <Content Include="SCRIPT\USERDEFINE\Admin.js" />
+    <Content Include="SCRIPT\USERDEFINE\AdminManager.js" />
     <Content Include="SCRIPT\USERDEFINE\CartPage.js" />
     <Content Include="SCRIPT\USERDEFINE\CheckOutPage.js" />
     <Content Include="vssver2.scc" />
@@ -237,8 +243,25 @@
     <Compile Include="DM_TAIKHOAN.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="DM_THE.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="DM_THUONGHIEU.cs">
       <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAGES\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PAGES\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PAGES\AdminManager.aspx.cs">
+      <DependentUpon>AdminManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PAGES\AdminManager.aspx.designer.cs">
+      <DependentUpon>AdminManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="PAGES\CartPage.aspx.cs">
       <DependentUpon>CartPage.aspx</DependentUpon>
@@ -265,23 +288,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SP_DANGNHAP_Result.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SP_GIOHANG_Result.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SP_HOMEPAGE_Result.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="THE.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="THU VIEN\Function.cs" />
     <Compile Include="THU VIEN\StoreProcedure.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="IMAGES\ALL\" />
     <Folder Include="IMAGES\GIAYDEP\" />
     <Folder Include="IMAGES\KHAC\" />
     <Folder Include="IMAGES\NUOCHOA\" />

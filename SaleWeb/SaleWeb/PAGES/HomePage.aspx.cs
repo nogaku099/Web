@@ -66,7 +66,7 @@ namespace SaleWeb.FRONT_END
                     sanpham_chitiet.SALE = Double.Parse(dt_hanghoa.Rows[i]["SALE"].ToString());
                     sanpham_chitiet.LOAI = dt_hanghoa.Rows[i]["LOAI"].ToString();
                     sanpham_chitiet.GIOITINH = Boolean.Parse(dt_hanghoa.Rows[i]["GIOITINH"].ToString());
-
+                    sanpham_chitiet.MUIHUONG = dt_hanghoa.Rows[i]["MUIHUONG"].ToString();
                     lst.Add(sanpham_chitiet);
                 }
                 return lst.ToArray();
@@ -198,8 +198,126 @@ namespace SaleWeb.FRONT_END
                 lst_result.Add(dt_temp.Rows[0]["TENNHOM"].ToString());
                 lst_result.Add(dt_temp.Rows[0]["TENTHUONGHIEU"].ToString());
                 lst_result.Add(dt_temp.Rows[0]["MOTA"].ToString());
+                lst_result.Add(dt_temp.Rows[0]["MANHOM"].ToString());
             }
             return lst_result.ToArray();
+        }
+
+        [WebMethod]
+        public static string fLoadPrice(string productID, string size, string color, string fla, string capa)
+        {
+            DataTable dt_temp;
+            if (color != "")
+            {
+               dt_temp  = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@masanpham", "@size", "@mau" }
+                                                              , new object[] { 8, productID, size, color });
+            }
+            else
+            {
+                dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@masanpham", "@muihuong", "@dungtich" }
+                                                              , new object[] { 9, productID, fla, capa });
+            }
+            
+            if(dt_temp.Rows.Count > 0)
+            {
+                return dt_temp.Rows[0]["GIA1"].ToString();
+            }
+            return "0";
+        }
+
+        [WebMethod]
+        public static string[] fLoadCapacity(string productID, string fla)
+        {
+            DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@masanpham", "@muihuong" }
+               
+                                                           , new object[] { 10, productID, fla });
+            List<string> lst_result = new List<string>();
+            if (dt_temp.Rows.Count > 0)
+            {
+               for(int i = 0; i < dt_temp.Rows.Count; i++)
+                {
+                    lst_result.Add(dt_temp.Rows[i]["DUNGTICH"].ToString());
+                }
+                return lst_result.ToArray();
+            }
+            return null;
+        }
+
+        [WebMethod]
+        public static string fReg(string u,string p)
+        {
+            int result = sp.updateTable("SP_HOMEPAGE", new string[] { "@flag", "@username", "@password" },
+                                                      new object[] { 11, u, p });
+            if (result > 0)
+                return "OK";
+            return "FAIL";
+        }
+
+        [WebMethod]
+        public static string fLogOut()
+        {
+
+            int result = sp.updateTable("SP_HOMEPAGE", new string[] { "@flag", "@madonhang", "@makhach" }
+                                                     , new object[] { 12, HttpContext.Current.Session["GIOHANG"], HttpContext.Current.Session["MAKHACH"] });
+
+
+          //  string a = HttpContext.Current.Session["GIOHANG"];
+            HttpContext.Current.Session["GIOHANG"] = null;
+            HttpContext.Current.Session["DANGNHAP"] = null;
+            HttpContext.Current.Session["MAKHACH"] = null;
+            HttpContext.Current.Session.Abandon();
+
+
+
+
+            return "OK";
+        }
+
+        [WebMethod]
+        public static string fChangePassWord(string Old, string New, string Re)
+        {
+            int result = sp.updateTable("SP_HOMEPAGE", new string[] { "@flag", "@Old", "@New","@username" },
+                                        new object[] { 13, Old, New, HttpContext.Current.Session["DANGNHAP"] });
+
+            if (result > 0)
+                return "OK";
+            return "FAIL";
+        }
+
+        [WebMethod]
+        public static DM_KHACHHANG[] fShowDangXuat(string cusID)
+        {
+
+            object customerID = HttpContext.Current.Session["MAKHACH"];
+            DataTable dt_temp = sp.getDataTable("SP_HOMEPAGE", new string[] { "@flag", "@makhach" }, new object[] { 14, customerID });
+            List<DM_KHACHHANG> lst_result = new List<DM_KHACHHANG>();
+            if (dt_temp.Rows.Count> 0)
+            {
+                Function f = new Function();
+                DM_KHACHHANG kh = new DM_KHACHHANG();
+                kh.MAKHACHHANG = f.CString(dt_temp.Rows[0]["MAKHACHHANG"]);
+                kh.TENKHACHHANG = f.CString(dt_temp.Rows[0]["TENKHACHHANG"]);
+                kh.GIOITINH = f.CBool(dt_temp.Rows[0]["GIOITINH"]);
+                kh.NGAYSINH = f.CDateTime(dt_temp.Rows[0]["NGAYSINH"]);
+                kh.SODIENTHOAI = f.CString(dt_temp.Rows[0]["SODIENTHOAI"]);
+                kh.EMAIL = f.CString(dt_temp.Rows[0]["EMAIL"]);
+                kh.TENDANGNHAP = f.CString(dt_temp.Rows[0]["TENDANGNHAP"]);
+                lst_result.Add(kh);
+                return lst_result.ToArray();
+            }
+            return null;
+        }
+
+        [WebMethod]
+        public static string fUpdateInfo(string fullname, string sex,string birthday, string phone, string email)
+        {
+            object customerID = HttpContext.Current.Session["MAKHACH"];
+
+            int result = sp.updateTable("SP_HOMEPAGE", new string[] { "@flag", "@fullname", "@sex", "@birthday", "@phone", "@email","@makhach" },
+                                                      new object[] { 15, fullname, bool.Parse(sex), DateTime.Parse(birthday), phone, email,customerID });
+            if (result > -1)
+                return "OK";
+            return "FAIL";
         }
         #endregion
 
@@ -232,7 +350,7 @@ namespace SaleWeb.FRONT_END
         protected void pnlSanPham_Load(object sender, EventArgs e)
         {
             string manhom = "NHH_001";
-            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "fLoadSanPham("+'"'+manhom+'"'+")", true);
+            ScriptManager.RegisterStartupScript(this, Page.GetType(), "Script", "fLoadSanPham("+'"'+manhom+'"'+","+'"'+""+'"'+")", true);
         }
     }
 }

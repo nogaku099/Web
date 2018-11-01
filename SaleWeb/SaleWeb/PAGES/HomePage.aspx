@@ -124,7 +124,7 @@
                                     </div>
 
                                     <div class="row" style="text-align: center; margin-left: 10px; margin-right: 10px;">
-                                        <button type="button" class="btn" style="background-color: #960b0b; width: 100%; color: white;">Đăng ký ngay</button>
+                                        <button type="button" class="btn" style="background-color: #960b0b; width: 100%; color: white;" onclick="fShowReg();">Đăng ký ngay</button>
                                     </div>
 
                                     <div class="row" style="margin-left: 10px; margin-right: 10px; text-align: center; margin-top: 5px;">
@@ -148,14 +148,150 @@
                 <div class="modal-dialog" style="width: 80%">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" style="color: white;">Thông tin tài khoản</h4>
+                            <h3 class="modal-title" style="color: white;">Account</h3>
+                        </div>
+
+                        <div class="modal-body" style="height:300px;">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Full name</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="text" class=" txtInfo" id="txtFullName" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                       <label class="radSex">Male  </label><input  type="radio" id="radMale" name="G1"/>
+                                         <label class="radSex">FeMale  </label><input  type="radio" id="radFeMale" name ="G1"/>
+                                    </div>
+
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">BirthDay</label>
+                                    </div>
+
+                                     <div class="col-xs-3">
+                                        <label class="txtInfo" style="padding-left: 0;margin-right:-30px;border-bottom-right-radius:0px;border-top-right-radius:0;" id="lblDate">00/00/0000</label>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <input type="date" class="txtInfo" style="margin-left: -20px;width: 115%;font-size: 18px;height: 28px;" id="txtDate" />
+                                    </div>
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Phone</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="text" class=" txtInfo" id="txtPhone" />
+                                    </div>
+                                </div>
+
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Email</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="text" class="txtInfo" id="txtEmail" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                     <input type="button" class="btnInfo" value="Update" onclick="fUpdateInfo();"/>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                               <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Old Password</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="password" class="txtInfo" id="txtOldPass" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">New Password</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="password" class="txtInfo" id="txtNewPass" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <label class=" lblInfo">Re Password</label>
+                                    </div>
+
+                                    <div class="col-xs-7">
+                                        <input type="password" class="txtInfo" id="txtRetypePass" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                        <input type="button" class="btnInfo" id="txtChangePass" value="Change Password" onclick="fChangePassWord();" />
+                                </div>
+
+
+
+                                 <div class="row">
+                                        <input type="button" class="btnInfo" id="txtLogOutPass" value="Log out" onclick="fLogOut();"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                       
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalReg" role="dialog" style="display: none">
+                <div class="modal-dialog" style="width: 80%">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" style="color: white;">Account registration</h3>
                         </div>
 
                         <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <label class="lblReg">User name</label>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <input type ="text" class="txtReg"  id="txtUserNameReg" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <label class="lblReg">Password</label>
+                                </div>
+
+                                <div class="col-xs-7">
+                                    <input type ="password" class="txtReg"  id="txtPassWordReg" />
+                                </div>
+                            </div>
+
+                            <div class="row" style="text-align:center;">
+                                <input type="button" id="btnReg" class="btn btnReg" value="Submit" onclick="fReg();" />
+                            </div>
                         </div>
 
-                        <div class="modal-footer">
-                        </div>
+                        
                     </div>
                 </div>
             </div>

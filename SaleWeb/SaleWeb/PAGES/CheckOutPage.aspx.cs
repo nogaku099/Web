@@ -220,7 +220,7 @@ namespace SaleWeb.PAGES
             {
                 return false;
             }
-            THE cardPay = new THE();
+            DM_THE cardPay = new DM_THE();
             if (dt.Rows.Count > 0)
             {
                 //THE cardPay = new THE();

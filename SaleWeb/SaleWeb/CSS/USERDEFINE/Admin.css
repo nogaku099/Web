@@ -1,0 +1,38 @@
+﻿.loginbox {
+    height:300px;
+    width:600px;
+    margin:auto;
+    background-color:#960b0b;
+    margin-top:100px;
+    border-radius:5px;
+}
+.lblLog{
+    background-color:#960b0b;
+    color:white;
+    font-size:30px;
+    border-bottom-left-radius:10px;
+    border-top-left-radius:10px;
+    width:100%;
+    padding-left:10px;
+    margin-left:30px;
+}
+.txtLog{
+    background-color:whitesmoke;
+    color:#960b0b;
+    font-size:30px;
+    border-bottom-right-radius:10px;
+    border-top-right-radius:10px;
+    width:95%;
+    padding-left:10px;
+    border:none;
+}
+.btnAdLog{
+    background-color:white;
+    color:#960b0b;
+    width:70%;
+    font-size:40px;
+    border-radius:10px;
+    margin-top:10px;
+    margin-left:80px;
+    border:none;
+}

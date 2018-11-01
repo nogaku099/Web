@@ -14,10 +14,10 @@ namespace SaleWeb
     
     public partial class DM_KHACHHANG_DIACHI
     {
-        public string MADIACHI { get; set; }
         public string MAKHACHHANG { get; set; }
         public string DIACHI { get; set; }
         public Nullable<bool> MACDINH { get; set; }
+        public string MADIACHI { get; set; }
         public string TENNGUOINHAN { get; set; }
         public string SDTNGUOINHAN { get; set; }
     }

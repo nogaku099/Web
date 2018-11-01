@@ -331,6 +331,8 @@ function loadCart() {
                                     imageFolder = "KHAC";
                                 }
 
+                                imageFolder = "ALL";
+
                                 lstHtml += "<img src='../IMAGES/" + imageFolder + "/" + result.d[i].MASANPHAM.toString() + ".png" + " ' height='40px'/>";
 
                                 lstHtml += "</div>";

@@ -10,7 +10,7 @@
 namespace SaleWeb.PAGES {
     
     
-    public partial class CartPage {
+    public partial class Admin {
         
         /// <summary>
         /// form1 control.
@@ -22,48 +22,30 @@ namespace SaleWeb.PAGES {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// dropdownMenuTaiKhoan control.
+        /// txtAdLog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dropdownMenuTaiKhoan;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAdLog;
         
         /// <summary>
-        /// cartHere control.
+        /// txtPassAdLog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel cartHere;
+        protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtPassAdLog;
         
         /// <summary>
-        /// hdfMaNhom control.
+        /// btnAdLog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfMaNhom;
-        
-        /// <summary>
-        /// hdfG control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfG;
-        
-        /// <summary>
-        /// language control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField language;
+        protected global::System.Web.UI.WebControls.Button btnAdLog;
     }
 }

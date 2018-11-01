@@ -10,7 +10,7 @@
 namespace SaleWeb.PAGES {
     
     
-    public partial class CartPage {
+    public partial class AdminManager {
         
         /// <summary>
         /// form1 control.
@@ -22,48 +22,75 @@ namespace SaleWeb.PAGES {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// dropdownMenuTaiKhoan control.
+        /// FileUpload1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dropdownMenuTaiKhoan;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// cartHere control.
+        /// lblGroupCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel cartHere;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblGroupCode;
         
         /// <summary>
-        /// hdfMaNhom control.
+        /// lblImageCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfMaNhom;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblImageCode;
         
         /// <summary>
-        /// hdfG control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdfG;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// language control.
+        /// pnlProduct control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField language;
+        protected global::System.Web.UI.WebControls.Panel pnlProduct;
+        
+        /// <summary>
+        /// FileUpload2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload2;
+        
+        /// <summary>
+        /// btnUpdateImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateImage;
+        
+        /// <summary>
+        /// pnlOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlOrder;
     }
 }

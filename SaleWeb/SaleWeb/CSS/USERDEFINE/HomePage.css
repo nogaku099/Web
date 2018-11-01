@@ -97,6 +97,13 @@
     width:100%;
     border-radius:12px;
 }
+
+.productFlavour{
+    height: 100%;
+    width: 100%;
+    margin-bottom: 0px;
+    cursor:pointer;
+}
 .productColor{
     font-size:0px;
     border:20px;
@@ -147,4 +154,70 @@
     width: 25px;
     text-align:center;
     display:none;
+}
+.btnReg{
+    background-color:#960b0b;
+    color:white;
+    width:70%;
+    font-size:40px;
+    border-radius:10px;
+    margin-top:10px;
+}
+.txtReg{
+    background-color:whitesmoke;
+    color:#960b0b;
+    font-size:30px;
+    border-bottom-right-radius:10px;
+    border-top-right-radius:10px;
+    width:100%;
+    padding-left:10px;
+    border:none;
+}
+.lblReg{
+    background-color:#960b0b;
+    color:white;
+    font-size:30px;
+    border-bottom-left-radius:10px;
+    border-top-left-radius:10px;
+    width:100%;
+    padding-left:10px;
+    margin-left:30px;
+}
+.lblInfo{
+    background-color:#960b0b;
+    color:white;
+     width:100%;
+    padding-left:10px;
+    margin-left:30px;
+    font-size:20px;
+    border-bottom-left-radius:10px;
+    border-top-left-radius:10px;
+}
+.txtInfo{
+    background-color:whitesmoke;
+    color:#960b0b;
+    font-size:20px;
+    border-bottom-right-radius:10px;
+    border-top-right-radius:10px;
+    width:100%;
+    padding-left:10px;
+    border:none;
+    margin-bottom:10px;
+}
+.radSex{
+     color:#960b0b;
+      margin-left:40px;
+      font-size:20px;
+}
+.btnInfo {
+    color: #960b0b;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    height:50px;
+   border:solid 1px #960b0b;
+    font-weight:bold;
+    margin-bottom:10px;
+    margin-left:35px;
+    font-size:20px;
 }
