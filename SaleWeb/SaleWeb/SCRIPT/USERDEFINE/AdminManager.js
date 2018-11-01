@@ -13,7 +13,7 @@ function alertCustom(title, mess) {
 function fUpLoadProduct() {
     var cbbgroup = document.getElementById("cbbgroup");
     var groupID = cbbgroup.options[cbbgroup.selectedIndex].value;
-    
+
     var productName = document.getElementById("txtName").value;
     var productDes = document.getElementById("txtDes").value;
     var productUnit = document.getElementById("txtUnit").value;
@@ -44,10 +44,10 @@ function fUpLoadProduct() {
         type: 'POST',
         contentType: 'application/json;charset:utf-8',
         dataType: 'json',
-        data:variable,
+        data: variable,
         url: 'AdminManager.aspx/fUpLoadProduct',
         success: function (result) {
-             if(result.d ==null) {
+            if (result.d == null) {
                 alertCustom("WEBSALE:", "Product has already. Choose another detail");
             }
             else if (result.d.length > 0) {
@@ -60,7 +60,7 @@ function fUpLoadProduct() {
                     message: "Do you want to upload image for this product",
                     buttons: [{
                         label: "YES",
-                        
+
                         action: function (Itself) {
                             Itself.close();
                             $("#modalUpImage").modal();
@@ -101,14 +101,14 @@ function fReLoad() {
                 alertCustom("Warning", "Something went wrong...or there is no product to display");
                 document.getElementById("pnlProduct").innerHTML = "";
             } else {
-                for (i = 0 ; i < result.d.length; i++) {
-                    lst_sp += "<div class='row itemrow animated bounceIn' id='" + result.d[i].MASANPHAM + "-" + result.d[i].SIZE + "-" + result.d[i].MAU + "-" + result.d[i].MUIHUONG + "-" + result.d[i].DUNGTICH + "'onclick='fGetInFo("+ '"'+ result.d[i].MASANPHAM + '"' + "," + '"' + result.d[i].SIZE + '"' + "," + '"' + result.d[i].MAU + '"' + "," + '"' + result.d[i].MUIHUONG + '"' + "," + '"' + result.d[i].DUNGTICH + '"' + ");' >";
+                for (i = 0; i < result.d.length; i++) {
+                    lst_sp += "<div class='row itemrow animated bounceIn' id='" + result.d[i].MASANPHAM + "-" + result.d[i].SIZE + "-" + result.d[i].MAU + "-" + result.d[i].MUIHUONG + "-" + result.d[i].DUNGTICH + "'onclick='fGetInFo(" + '"' + result.d[i].MASANPHAM + '"' + "," + '"' + result.d[i].SIZE + '"' + "," + '"' + result.d[i].MAU + '"' + "," + '"' + result.d[i].MUIHUONG + '"' + "," + '"' + result.d[i].DUNGTICH + '"' + ");' >";
 
                     lst_sp += "<div class='col-xs-2' style='text-align:center;'>";
                     lst_sp += "<label  class='lblIFo' id ='Name-" + result.d[i].MASANPHAM + "-" + result.d[i].SIZE + "-" + result.d[i].MAU + "-" + result.d[i].MUIHUONG + "-" + result.d[i].DUNGTICH + "'>" + result.d[i].TENSANPHAM + "</label>";
                     lst_sp += "</div>";
 
-                   
+
                     lst_sp += "<div class='col-xs-2' style='text-align:center;'>";
                     lst_sp += "<label  class='lblIFo' id ='Size-" + result.d[i].MASANPHAM + "-" + result.d[i].SIZE + "-" + result.d[i].MAU + "-" + result.d[i].MUIHUONG + "-" + result.d[i].DUNGTICH + "'>" + result.d[i].SIZE + "</label>";
                     lst_sp += "</div>";
@@ -140,15 +140,15 @@ function fReLoad() {
         }
 
     });
-    
+
 }
 
 function fShowEdit() {
-    
+
     $('html,body').animate({
         scrollTop: $("#editrow").offset().top
     }, 'slow');
-    
+
 }
 
 function fShowOS() {
@@ -156,7 +156,7 @@ function fShowOS() {
         scrollTop: $("#OS").offset().top
     }, 'slow');
 
-   
+
 }
 
 function fShowOrder() {
@@ -172,8 +172,8 @@ function fShowOrder() {
             if (result.d == null) {
 
             } else {
-                for (i = 0 ; i < result.d.length; i++) {
-                    lst_sp += "<div class='row order animated flipInX' id=" + result.d[i].MADONHANG + " onclick='fShowUpdateStatus();'>";
+                for (i = 0; i < result.d.length; i++) {
+                    lst_sp += "<div class='row order animated flipInX' id=" + result.d[i].MADONHANG + " onclick='fShowUpdateStatus(this.id);'>";
 
                     lst_sp += "<div class='col-xs-2' style='text-align:center;'>";
                     lst_sp += "<label class='lblOrder' id='ID-" + result.d[i].MADONHANG + "'>" + result.d[i].MADONHANG + "</label>"
@@ -269,14 +269,14 @@ function fGetInFo(productID, size, color, flavour, capacity) {
                 }
                 var src = "../IMAGES/" + folder + "/" + productID + ".png";
                 document.getElementById("imgProduct").src = src;
-                
+
             }
         }, error: function (result) {
             alert("ERROR: fGetInFo");
         }
     });
 
-    
+
 
 }
 
@@ -314,8 +314,8 @@ function fDeleteProduct() {
 
             action: function (Itself) {
                 Itself.close();
-                
-               
+
+
                 var variable = "{id:'" + id + "'";
                 variable += ",size:'" + size + "'";
                 variable += ",color:'" + color + "'";
@@ -336,7 +336,7 @@ function fDeleteProduct() {
                         } else {
                             alertCustom("Warning", "Something went wrong...");
                         }
-                       
+
                     }, error: function (result) {
                         alert("ERROR: fDeleteProduct");
                     }
@@ -362,12 +362,12 @@ function fUpdateProduct() {
     var capa = document.getElementById('lblCAPACUR').innerHTML;
 
     var newName = document.getElementById('txtNameEdit').value;
-    var newDes = document.getElementById('txtDesEdit').value ;
-    var newPrice = document.getElementById('txtPriceEdit').value ;
+    var newDes = document.getElementById('txtDesEdit').value;
+    var newPrice = document.getElementById('txtPriceEdit').value;
 
     var cbbSex = document.getElementById("txtSex");
     var newSex = cbbSex.options[cbbSex.selectedIndex].value;
-    
+
     var cbbGroupEdit = document.getElementById("cbbGroupEdit");
     var groupID = cbbGroupEdit.options[cbbGroupEdit.selectedIndex].value;
 
@@ -413,10 +413,257 @@ function fUpdateProduct() {
 
 }
 
-function fShowUpdateStatus() {
-    $("#modalUpdateStatus").modal();
-}
+function fShowUpdateStatus(orderCode) {
 
+    $("#modalUpdateStatus").modal();
+    var variable = "{orderCode:'" + orderCode +"'}";
+    var lstHtml = "";
+    
+    $.ajax({
+
+        type: 'POST',
+        contentType: 'application/json;charset:utf-8',
+        dataType: 'json',
+        data: variable,
+        url: 'AdminManager.aspx/fLoadStatus',
+        success: function (result) {
+            if (result.d == null) {
+                alertCustom("Error:", "Cant get status of this order");
+                
+            } else {
+                var status = parseFloat(result.d.MATRANGTHAI);
+                lstHtml += "<div class='row'>";
+                switch (status) {
+                    
+                    case 0:
+                        lstHtml += "<div class='col-xs-2'>";
+                        lstHtml += "<input type='button' value='ordering' disabled id='ordering' style='border: 1px solid red; background-color: white; font-weight: bold; color:grey' onclick='changeStatus(this.id,orderCode)' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='ordered' id='ordered' style='border: none; background-color: white; font-weight: bold; color: black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='confirmed' id='confirmed' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='delivering' id='delivering' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2'>"
+                        lstHtml += "<input type='button' value='delivered'  id='delivered' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='complete' id='complete' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "</div>";
+
+                        document.getElementById('loadStatus').innerHTML = lstHtml;
+                        break;
+                    case 1:
+                        lstHtml += "<div class='col-xs-2'>";
+                        lstHtml += "<input type='button' value='ordering' disabled id='ordering' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='ordered' disabled id='ordered' style='border: 1px solid red; background-color: white; font-weight: bold; color:grey; ' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='confirmed' id='confirmed' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='delivering' id='delivering' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2'>"
+                        lstHtml += "<input type='button' value='delivered'  id='delivered' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='complete' id='complete' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "</div>";
+
+                        document.getElementById('loadStatus').innerHTML = lstHtml;
+                        break;
+                    case 2:
+                        lstHtml += "<div class='col-xs-2'>";
+                        lstHtml += "<input type='button' value='ordering' disabled id='ordering' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='ordered' disabled id='ordered' style='border: none; background-color: white; font-weight: bold; color:grey; ' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='confirmed' disabled id='confirmed' style='border: 1px solid red; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='delivering' id='delivering' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2'>"
+                        lstHtml += "<input type='button' value='delivered'  id='delivered' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='complete' id='complete' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "</div>";
+
+                        document.getElementById('loadStatus').innerHTML = lstHtml;
+                        break;
+                    case 3:
+                        lstHtml += "<div class='col-xs-2'>";
+                        lstHtml += "<input type='button' value='ordering' disabled id='ordering' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='ordered' disabled id='ordered' style='border: none; background-color: white; font-weight: bold; color:grey; ' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='confirmed' disabled id='confirmed' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='delivering' disabled id='delivering' style='border: 1px solid red; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2'>"
+                        lstHtml += "<input type='button' value='delivered'  id='delivered' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='complete' id='complete' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "</div>";
+
+                        document.getElementById('loadStatus').innerHTML = lstHtml;
+                        break;
+                    case 4:
+                        lstHtml += "<div class='col-xs-2'>";
+                        lstHtml += "<input type='button' value='ordering' disabled id='ordering' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='ordered' disabled id='ordered' style='border: none; background-color: white; font-weight: bold; color:grey; ' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='confirmed' disabled id='confirmed' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='delivering' disabled id='delivering' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2'>"
+                        lstHtml += "<input type='button' value='delivered' disabled id='delivered' style='border: 1px solid red; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='complete' id='complete' style='border: none; background-color: white; font-weight: bold; color:black' onclick='changeStatus(this.id,orderCode)'/>";
+                        lstHtml += "</div>";
+                        lstHtml += "</div>";
+
+                        document.getElementById('loadStatus').innerHTML = lstHtml;
+                        break;
+                    case 5:
+                        lstHtml += "<div class='col-xs-2'>";
+                        lstHtml += "<input type='button' value='ordering' disabled id='ordering' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='ordered' disabled id='ordered' style='border: none; background-color: white; font-weight: bold; color:grey; ' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='confirmed' disabled id='confirmed' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='delivering' disabled id='delivering' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2'>"
+                        lstHtml += "<input type='button' value='delivered' disabled  id='delivered' style='border: none; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "<div class='col-xs-2' >";
+                        lstHtml += "<input type='button' value='complete' disabled id='complete' style='border: 1px solid red; background-color: white; font-weight: bold; color:grey' />";
+                        lstHtml += "</div>";
+                        lstHtml += "</div>";
+
+                        document.getElementById('loadStatus').innerHTML = lstHtml;
+                        break;
+                    
+                }
+                
+                
+            }
+            document.getElementById('loadStatus').innerHTML = lstHtml;
+            return;
+        }, error: function (result) {
+            alert("ERROR: fLoadStatus");
+        }
+
+    });
+    
+    
+    
+    //lstHtml += "<input type='button' value='Default' disabled " + "id='def_" + addressCode + "'" + " style='border: none; background-color: white; font-weight: bold; color:grey' />";
+}
+function changeStatus(idStatus, orderCode) {
+    var status = 0;
+    if (idStatus == "ordering")
+        status = 0;
+    else if (idStatus == "ordered")
+        status = 1;
+    else if (idStatus == "confirmed")
+        status = 2;
+    else if (idStatus == "delivering")
+        status = 3;
+    else if (idStatus == "delivered")
+        status = 4;
+    else if (idStatus == "complete")
+        status = 5;
+    BootstrapDialog.show({
+        title: "WEBSALE:",
+        message: "Do you want to change status of this order? This action can not undo and you cant change status to lower!",
+        buttons: [{
+            label: "Yes",
+            action: function (Itself) {
+                Itself.close();
+
+
+                var variable = "{orderCode:'" + BootstrapDialog.show({
+                    title: "WEBSALE:",
+                    message: "Do you want to delete this product? This action can not undo!",
+                    buttons: [{
+                        label: "Yes",
+
+                        action: function (Itself) {
+                            Itself.close();
+
+                            var variable = "{status:'" + status + "'";
+                            variable += ",orderCode:'" + orderCode + "'}";
+
+                            $.ajax({
+                                type: 'POST',
+                                contentType: 'application/json;charset:utf-8',
+                                dataType: 'json',
+                                data: variable,
+                                url: 'AdminManager.aspx/fUpdateStatus',
+                                success: function (result) {
+                                    if (result.d == "OK") {
+                                        alertCustom("WEBSALE:", "Order status updated");
+                                        
+                                    } else {
+                                        alertCustom("Warning", "Something went wrong...");
+                                    }
+
+                                }, error: function (result) {
+                                    alert("ERROR: fUpdateStatus");
+                                }
+                            });
+
+
+
+                        }
+                    }, {
+                        label: "No",
+                        action: function (Itself) {
+                            Itself.close();
+                        }
+                    }]
+                }); 
+
+            }
+        }, {
+            label: "No",
+            action: function (Itself) {
+                Itself.close();
+            }
+        }]
+    });
+}
 function ToJavaScriptDate(value) {
     var pattern = /Date\(([^)]+)\)/;
     var results = pattern.exec(value);
@@ -445,9 +692,9 @@ function handleFileSelect(evt) {
                 document.getElementById('list').innerHTML = "";
                 var span = document.createElement('span');
                 span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                                  '" title="', escape(theFile.name), '"/>'].join('');
+                    '" title="', escape(theFile.name), '"/>'].join('');
                 document.getElementById('list').insertBefore(span, null);
-                
+
             };
         })(f);
 

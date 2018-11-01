@@ -57,25 +57,12 @@ function confirmOrder() {
                 if (result.d == null) {
                     alertCustom("Error", "Cant Order");
                 }
-                alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
-                $.ajax({
-                    type: 'POST',
-                    url: 'CheckOutPage.aspx/clearSS',
-                    success: function (result) {
-                        if (result.d == null) {
-                            alertCustom("Error", "Cant Order");
-                        }
-                        alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
-            
-                    }, error: function (result) {
-                        alert(result.responseText);
-
-                    }
-                });
+                clearSS();
+                
                 window.onunload = function () {
                     alert('Bye.');
                 }
-                window.location.replace("HomePage.aspx");
+                
                 return;
             }, error: function (result) {
                 alert(result.responseText);
@@ -90,7 +77,26 @@ function confirmOrder() {
     }
     
 }
+function clearSS() {
+    var dataUpdate = "{customerCode:'" + 1 + "'";
+    $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        data: dataUpdate,
+        url: 'CheckOutPage.aspx/fclearSS',
+        success: function (result) {
+            if (result.d == "OK") {
+                window.location.replace("HomePage.aspx");
+            }
+            //alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
+            //location.reload(true);
+            
+        }, error: function (result) {
+            alert("clearSS");
 
+        }
+    });
+}
 function payByCard() {
     var cardHolderName = document.getElementById('cardHolderName').value;
     var cardNumber = document.getElementById('cardNumber').value;
@@ -141,19 +147,19 @@ function payByCard() {
                     if (result.d == null) {
                         alertCustom("Error", "Cant Order");
                     }
-                    sessionStorage.clear();
+                    
                     
                 }, error: function (result) {
                     alert(result.responseText);
 
                 }
             });
-            alertCustom("Thank you!", "We received your order, please hold on we will contact you late. Thank you!");
+            clearSS();
             window.onunload = function () {
                 alert('Bye.');
             }
             //sessionStorage.removeItem('GIOHANG');
-            window.location.replace("HomePage.aspx");
+            
             return;
             
         }, error: function (result) {

@@ -220,12 +220,12 @@ namespace SaleWeb.PAGES
                 for(int i = 0; i < dt_temp.Rows.Count; i++)
                 {
                     DM_DONHANG dh = new DM_DONHANG();
-                    dh.MADONHANG = f.CString(dt_temp.Rows[0]["MADONHANG"]);
-                    dh.MAKHACHHANG = f.CString(dt_temp.Rows[0]["TENKHACHHANG"]);
-                    dh.NGAYLAP = f.CDateTime(dt_temp.Rows[0]["NGAYLAP"]);
-                    dh.TONGTIEN = f.CFloat(dt_temp.Rows[0]["TONGTIEN"]);
-                    dh.MATRANGTHAI = f.CString(dt_temp.Rows[0]["TENTRANGTHAI"]);
-                    dh.MAHINHTHUCTHANHTOAN = f.CString(dt_temp.Rows[0]["TENHTTT"]);
+                    dh.MADONHANG = f.CString(dt_temp.Rows[i]["MADONHANG"]);
+                    dh.MAKHACHHANG = f.CString(dt_temp.Rows[i]["TENKHACHHANG"]);
+                    dh.NGAYLAP = f.CDateTime(dt_temp.Rows[i]["NGAYLAP"]);
+                    dh.TONGTIEN = f.CFloat(dt_temp.Rows[i]["TONGTIEN"]);
+                    dh.MATRANGTHAI = f.CString(dt_temp.Rows[i]["TENTRANGTHAI"]);
+                    dh.MAHINHTHUCTHANHTOAN = f.CString(dt_temp.Rows[i]["TENHTTT"]);
 
 
                     lst_result.Add(dh);
@@ -234,7 +234,38 @@ namespace SaleWeb.PAGES
             }
             return null;
         }
-
+        [WebMethod]
+        public static string fLoadStatus(string orderCode)
+        {
+            string status = "";
+            DataTable dt = sp.getDataTable("SP_CHECKOUT", new string[] { "@flag","@maDon" }, new object[] { 7, orderCode });
+            if(dt == null)
+            {
+                return null;
+            }
+            if(dt.Rows.Count > 0)
+            {
+                status = f.CString(dt.Rows[0]["MATRANGTHAI"]);
+            }
+            if (status != null)
+            {
+                return status;
+            }
+            else return null;
+            
+        }
+        [WebMethod]
+        public static string fUpdateStatus(int status, string orderCode)
+        {
+            int result = 0;
+            result = sp.updateTable("SP_CHECKOUT", new string[] { "@flag","status", "@maDon" }, new object[] { 8, status, orderCode });
+            if (result != -1)
+            {
+                return "OK";
+            }
+            else return "Fail";
+            
+        }
         protected void Button1_Click(object sender, EventArgs e)
         {
            

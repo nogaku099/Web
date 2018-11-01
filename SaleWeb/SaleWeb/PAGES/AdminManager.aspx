@@ -416,7 +416,9 @@
                         </div>
 
                         <div class="modal-body">
-                            
+                           <asp:Panel runat="server" ID="loadStatus">
+
+                           </asp:Panel>
                         </div>
 
                         
